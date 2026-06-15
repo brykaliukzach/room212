@@ -93,6 +93,7 @@
       overflow-x: auto;
       scrollbar-width: none;
       padding: 0 40px;
+      
     }
     .tab-bar::-webkit-scrollbar { display: none; }
 
@@ -287,6 +288,9 @@
   </div>
 </header>
 
+<div class="tab-bar-wrap">
+  <div class="tab-bar">
+
 <button class="tab active" data-panel="home" data-color="#7cf57a" role="tab">Home</button>
 <button class="tab" data-panel="compsci20s" data-color="#CE92FF" role="tab">20S Comp Sci</button>
 <button class="tab" data-panel="compsci30s" data-color="#45D8FF" role="tab">30S Comp Sci</button>
@@ -295,6 +299,9 @@
 <button class="tab" data-panel="compsci42s" data-color="#FF2821" role="tab">42S AP Comp Sci</button>
 <button class="tab" data-panel="gamedev" data-color="#f97316" role="tab">3D Game Development</button>
 <button class="tab" data-panel="web" data-color="#FFA719" role="tab">Web Design</button>
+
+</div>
+</div>
 
 <div class="panel active" id="panel-home">
   <div class="showcase">
@@ -584,8 +591,14 @@ tabs.forEach(tab => {
       const id = panelMap[tab.dataset.panel];
       document.getElementById(id).classList.add('active');
       document.documentElement.style.setProperty('--accent', tab.dataset.color);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+
     });
+});
+
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    window.scrollTo({ top: 450, behavior: 'smooth' });
+  });
 });
 </script>
 </body>
