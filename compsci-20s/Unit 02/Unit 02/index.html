@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Room 212 — 20S CS · Unit 02</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #e8e4de;
+      --paper: #141210;
+      --surface: #1c1a17;
+      --surface2: #242118;
+      --border: rgba(255,255,255,0.07);
+      --accent: #CE92FF;
+      --muted: #6b6560;
+      --lesson-color: #60a5fa;
+      --checkpoint-color: #f97316;
+      --project-color: #7cf57a;
+      --enrichment-color: rgb(249, 220, 0);
+
+    }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    /* ── BREADCRUMB ── */
+    .breadcrumb {
+      padding: 20px 64px;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+     background: var(--surface);
+      border-bottom: 1px solid var(--border);
+    }
+    .breadcrumb a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .breadcrumb a:hover { color: var(--ink); }
+    .breadcrumb span { color: rgba(255,255,255,0.15); }
+    .breadcrumb .current { color: var(--ink); font-weight: 500; }
+
+    /* ── UNIT HEADER ── */
+    .unit-header {
+      background: #0a0908;
+      padding: 52px 64px;
+      border-bottom: 3px solid var(--accent);
+    }
+
+    .unit-header-eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      margin-bottom: 12px;
+    }
+
+    .unit-header-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 14px;
+    }
+
+    .unit-header-title em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .unit-header-desc {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.45);
+      font-weight: 300;
+      max-width: 580px;
+      line-height: 1.7;
+    }
+
+    .unit-header-meta {
+      display: flex;
+      gap: 32px;
+      margin-top: 28px;
+    }
+
+    .unit-meta-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+    }
+
+    .unit-meta-pill .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+    .dot-lesson   { background: var(--lesson-color); }
+    .dot-checkpoint    { background: var(--checkpoint-color); }
+    .dot-project { background: var(--project-color); }
+    .dot-enrichment { background: var(--enrichment-color); }
+
+    /* ── LESSONS LIST ── */
+    .lessons-wrap {
+      max-width: 860px;
+      margin: 52px auto 80px;
+      padding: 0 32px;
+    }
+
+    .lessons-heading {
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.25);
+      margin-bottom: 20px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .lessons { display: flex; flex-direction: column; gap: 8px; }
+
+    .lesson-card {
+      display: flex;
+      align-items: center;
+      padding: 22px 32px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s;
+      gap: 20px;
+    }
+
+    .lesson-card:hover {
+      transform: translateX(4px);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      border-color: rgba(208, 122, 245, 0.15);
+    }
+
+    /* ── CHECKMARK ── */
+    .lesson-check {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.15);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      font-size: 0.7rem;
+      color: transparent;
+    }
+
+    .lesson-check.done {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: #111;
+    }
+
+    .lesson-card.done {
+      background: #281e2a;
+      border-color: rgba(235, 122, 245, 0.12);
+    }
+
+    .lesson-card.done .lesson-title {
+      color: rgba(255,255,255,0.3);
+    }
+
+    /* ── TYPE TAGS ── */
+    .lesson-type-tag {
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 2px;
+      flex-shrink: 0;
+      width: 100px;
+      text-align: center;
+    }
+
+    .tag-lesson   { background: rgba(96,165,250,0.12);  color: var(--lesson-color); }
+    .tag-checkpoint    { background: rgba(249,115,22,0.12);   color: var(--checkpoint-color); }
+    .tag-project { background: rgba(124,245,122,0.12);  color: var(--project-color); }
+    .tag-enrichment {
+    background: rgba(255, 251, 0, 0.12);
+    color: var(--enrichment-color);
+    animation: enrichment-glow 2s ease-in-out infinite;
+}
+
+@keyframes enrichment-glow {
+    0%, 100% { box-shadow: 0 0 4px rgba(255, 251, 0, 0.2); }
+    50%       { box-shadow: 0 0 10px rgba(255, 251, 0, 0.6); }
+}
+
+    .lesson-title {
+      flex: 1;
+      font-size: 0.95rem;
+      font-weight: 400;
+      color: var(--ink);
+      transition: color 0.2s;
+    }
+
+    .lesson-arrow {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.1);
+      transition: color 0.2s, transform 0.2s;
+      flex-shrink: 0;
+    }
+    .lesson-card:hover .lesson-arrow {
+      color: var(--accent);
+      transform: translateX(3px);
+    }
+
+    
+
+    /* ── FOOTER ── */
+    footer {
+      background: #0a0908;
+      color: rgba(255,255,255,0.2);
+      text-align: center;
+      padding: 32px;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 768px) {
+      .breadcrumb { padding: 16px 20px; }
+      .unit-header { padding: 36px 24px; }
+      .lessons-wrap { padding: 0 16px; margin: 32px auto 60px; }
+      .lesson-card { padding: 18px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── BREADCRUMB ── -->
+<nav class="breadcrumb">
+  <a href="/index.html">Room 212</a>
+  <span>/</span>
+  <a href="/compsci20.html">20S Comp Sci</a>
+  <span>/</span>
+  <span class="current">Unit 02</span>
+</nav>
+
+<!-- ── UNIT HEADER ── -->
+<div class="unit-header">
+  <p class="unit-header-eyebrow">20S Computer Science · Unit 02</p>
+  <h1 class="unit-header-title">Variables</h1>
+  <p class="unit-header-desc">Create variables to store logic and utilize user input</p>
+  <div class="unit-header-meta">
+    <div class="unit-meta-pill"><span class="dot dot-lesson"></span> 9 Lessons</div>
+    <div class="unit-meta-pill"><span class="dot dot-checkpoint"></span> 4 Checkpoints</div>
+    <div class="unit-meta-pill"><span class="dot dot-project"></span> 8 Projects</div>
+    <div class="unit-meta-pill"><span class="dot dot-enrichment"></span> 2 Enrichments</div>
+  </div>
+</div>
+
+<!-- ── LESSONS ── -->
+<div class="lessons-wrap">
+  <p class="lessons-heading">23 Modules</p>
+  <div class="lessons">
+
+    <a href="01 Variables/index.html" class="lesson-card" data-lesson="01">
+      <span class="lesson-check">✓</span>
+      <span class="lesson-type-tag tag-lesson">Lesson</span>
+      <span class="lesson-title">Variables</span>
+      <span class="lesson-arrow">→</span>
+    </a>
+
+    <a href="02 checkpoint variables/index.html" class="lesson-card" data-lesson="02">
+      <span class="lesson-check">✓</span>
+      <span class="lesson-type-tag tag-checkpoint">Checkpoint</span>
+      <span class="lesson-title">Checkpoint</span>
+      <span class="lesson-arrow">→</span>
+    </a>
+
+      <a href="03 Storing User Input/index.html" class="lesson-card" data-lesson="03">
+      <span class="lesson-check">✓</span>
+      <span class="lesson-type-tag tag-lesson">Lesson</span>
+      <span class="lesson-title">Storing User Input</span>
+      <span class="lesson-arrow">→</span>
+    </a>
+
+       <a href="04 Project 01/index.html" class="lesson-card" data-lesson="04">
+      <span class="lesson-check">✓</span>
+      <span class="lesson-type-tag tag-project">Project</span>
+      <span class="lesson-title">Character Creator</span>
+      <span class="lesson-arrow">→</span>
+    </a>
+
+         <a href="05 Setting Variables/index.html" class="lesson-card" data-lesson="05">
+      <span class="lesson-check">✓</span>
+      <span class="lesson-type-tag tag-lesson">Lesson</span>
+      <span class="lesson-title">Setting Variables</span>
+      <span class="lesson-arrow">→</span>
+    </a>
+
+         <a href="06 Project 02/index.html" class="lesson-card" data-lesson="06">
+      <span class="lesson-check">✓</span>
+      <span class="lesson-type-tag tag-project">Project</span>
+      <span class="lesson-title">Character Creator v2</span>
+      <span class="lesson-arrow">→</span>
+    </a>
+  
+       <a href="07 Integers/index.html" class="lesson-card" data-lesson="03">
+      <span class="lesson-check">✓</span>
+      <span class="lesson-type-tag tag-lesson">Lesson</span>
+      <span class="lesson-title">Integers</span>
+      <span class="lesson-arrow">→</span>
+    </a>
+
+
+      <a href="08 Checkpoint after integers/index.html" class="lesson-card" data-lesson="04">
+      <span class="lesson-check">✓</span>
+      <span class="lesson-type-tag tag-checkpoint">Checkpoint</span>
+      <span class="lesson-title">Checkpoint</span>
+      <span class="lesson-arrow">→</span>
+    </a>
+
+         <a href="09 Project 03/index.html" class="lesson-card" data-lesson="04">
+      <span class="lesson-check">✓</span>
+      <span class="lesson-type-tag tag-project">Project</span>
+      <span class="lesson-title">Volume</span>
+      <span class="lesson-arrow">→</span>
+    </a>
+
+   
+
+    <a href="10 Parsing/index.html" class="lesson-card" data-lesson="06">
+      <span class="lesson-check">✓</span>
+      <span class="lesson-type-tag tag-lesson">Lesson</span>
+      <span class="lesson-title">Parsing</span>
+      <span class="lesson-arrow">→</span>
+    </a>
+
+       <a href="11 Variable Math/index.html" class="lesson-card" data-lesson="06">
+      <span class="lesson-check">✓</span>
+      <span class="lesson-type-tag tag-lesson">Lesson</span>
+      <span class="lesson-title">Variable Math</span>
+      <span class="lesson-arrow">→</span>
+    </a>
+
+         <a href="12 checkpoint after variable math/index.html" class="lesson-card" data-lesson="04">
+      <span class="lesson-check">✓</span>
+      <span class="lesson-type-tag tag-checkpoint">Checkpoint</span>
+      <span class="lesson-title">Checkpoint</span>
+      <span class="lesson-arrow">→</span>
+    </a>
+
+          <a href="13 Project 04/index.html" class="lesson-card" data-lesson="04">
+      <span class="lesson-check">✓</span>
+      <span class="lesson-type-tag tag-project">Project</span>
+      <span class="lesson-title">Dive</span>
+      <span class="lesson-arrow">→</span>
+    </a>
+
+              <a href="14 Project 05/index.html" class="lesson-card" data-lesson="04">
+      <span class="lesson-check">✓</span>
+      <span class="lesson-type-tag tag-project">Project</span>
+      <span class="lesson-title">Health</span>
+      <span class="lesson-arrow">→</span>
+    </a>
+
+         <a href="06 RGB Colours/index.html" class="lesson-card" data-lesson="06">
+      <span class="lesson-check">✓</span>
+      <span class="lesson-type-tag tag-lesson">Lesson</span>
+      <span class="lesson-title">Enter & TextChanged Events</span>
+      <span class="lesson-arrow">→</span>
+    </a>
+
+              <a href="05 Project 01/index.html" class="lesson-card" data-lesson="04">
+      <span class="lesson-check">✓</span>
+      <span class="lesson-type-tag tag-project">Project</span>
+      <span class="lesson-title">Pizza</span>
+      <span class="lesson-arrow">→</span>
+    </a>
+
+            <a href="06 RGB Colours/index.html" class="lesson-card" data-lesson="06">
+      <span class="lesson-check">✓</span>
+      <span class="lesson-type-tag tag-lesson">Lesson</span>
+      <span class="lesson-title">Doubles</span>
+      <span class="lesson-arrow">→</span>
+    </a>
+
+                <a href="06 RGB Colours/index.html" class="lesson-card" data-lesson="06">
+      <span class="lesson-check">✓</span>
+      <span class="lesson-type-tag tag-lesson">Lesson</span>
+      <span class="lesson-title">Constants</span>
+      <span class="lesson-arrow">→</span>
+    </a>
+
+             <a href="04 checkpoint after if statements/index.html" class="lesson-card" data-lesson="04">
+      <span class="lesson-check">✓</span>
+      <span class="lesson-type-tag tag-checkpoint">Checkpoint</span>
+      <span class="lesson-title">Checkpoint</span>
+      <span class="lesson-arrow">→</span>
+    </a>
+
+                  <a href="05 Project 01/index.html" class="lesson-card" data-lesson="04">
+      <span class="lesson-check">✓</span>
+      <span class="lesson-type-tag tag-project">Project</span>
+      <span class="lesson-title">Converter</span>
+      <span class="lesson-arrow">→</span>
+    </a>
+
+                    <a href="06 RGB Colours/index.html" class="lesson-card" data-lesson="06">
+      <span class="lesson-check">✓</span>
+      <span class="lesson-type-tag tag-lesson">Lesson</span>
+      <span class="lesson-title">ToString Method</span>
+      <span class="lesson-arrow">→</span>
+    </a>
+
+                  <a href="05 Project 01/index.html" class="lesson-card" data-lesson="04">
+      <span class="lesson-check">✓</span>
+      <span class="lesson-type-tag tag-project">Project</span>
+      <span class="lesson-title">Checkout</span>
+      <span class="lesson-arrow">→</span>
+    </a>
+
+
+     <a href="23 Project 09/index.html" class="lesson-card" data-lesson="21">
+      <span class="lesson-check">✓</span>
+      <span class="lesson-type-tag tag-enrichment">Enrichment</span>
+      <span class="lesson-title">Trivia</span>
+      <span class="lesson-arrow">→</span>
+    </a>
+
+       <a href="24 Project 10/index.html" class="lesson-card" data-lesson="22">
+      <span class="lesson-check">✓</span>
+      <span class="lesson-type-tag tag-enrichment">enrichment</span>
+      <span class="lesson-title">Target Game</span>
+      <span class="lesson-arrow">→</span>
+    </a>
+ 
+
+  </div>
+</div>
+
+<footer>
+  &copy; 2026 · Zach Brykaliuk · Computer Science/Mathematics Teacher
+</footer>
+
+<script>
+  const STORAGE_KEY = 'room212-unit1-progress';
+
+  const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+  saved.forEach(lessonNum => {
+    const card = document.querySelector(`.lesson-card[data-lesson="${lessonNum}"]`);
+    if (card) {
+      card.classList.add('done');
+      card.querySelector('.lesson-check').classList.add('done');
+    }
+  });
+
+  document.querySelectorAll('.lesson-check').forEach(check => {
+    check.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      const card = check.closest('.lesson-card');
+      const lessonNum = card.dataset.lesson;
+      const isDone = card.classList.toggle('done');
+      check.classList.toggle('done');
+
+      let progress = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+      if (isDone) {
+        if (!progress.includes(lessonNum)) progress.push(lessonNum);
+      } else {
+        progress = progress.filter(n => n !== lessonNum);
+      }
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(progress));
+    });
+  });
+</script>
+
+</body>
+</html>

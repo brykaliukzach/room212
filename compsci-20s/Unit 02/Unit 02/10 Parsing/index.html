@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Room 212 — Parsing</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #e8e4de;
+      --paper: #141210;
+      --surface: #1c1a17;
+      --surface2: #242118;
+      --border: rgba(255,255,255,0.07);
+      --accent: #CE92FF;
+      --muted: #6b6560;
+      --video-color: #60a5fa;
+      --quiz-color: #f97316;
+      --project-color: #7cf57a;
+    }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    /* ── BREADCRUMB ── */
+    .breadcrumb {
+      padding: 20px 64px;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+     background: var(--surface);
+      border-bottom: 1px solid var(--border);
+    }
+    .breadcrumb a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .breadcrumb a:hover { color: var(--ink); }
+    .breadcrumb span { color: rgba(255,255,255,0.15); }
+    .breadcrumb .current { color: var(--ink); font-weight: 500; }
+
+    /* ── LESSON HEADER ── */
+    .lesson-header {
+        background: #0a0908;
+      padding: 52px 64px;
+      border-bottom: 3px solid var(--accent);
+    }
+
+    .lesson-meta {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .lesson-type-badge {
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      background: rgba(47,106,200,0.2);
+      color: #7aacf5;
+      border-radius: 2px;
+    }
+
+    .lesson-number {
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+    }
+
+    .lesson-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.1;
+    }
+
+    /* ── VIDEO SECTION ── */
+   .video-section {
+  background: #1C1A17;
+  padding: 48px 64px;
+}
+
+.video-outer {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.video-wrap {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  height: 0;
+  overflow: hidden;
+  background: #111;
+}
+.video-wrap iframe {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  border: none;
+}
+
+    /* placeholder when no video is set */
+    .video-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.3);
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      gap: 12px;
+    }
+    .video-placeholder .play-icon {
+      font-size: 3rem;
+      opacity: 0.3;
+    }
+
+    /* ── ARTICLE BODY ── */
+    .article {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 64px 32px 80px;
+    }
+
+    /* Intro paragraph */
+    .article-intro {
+      font-size: 1.15rem;
+      line-height: 1.8;
+      color: #9E9790;
+      font-weight: 300;
+      margin-bottom: 48px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+
+    /* Section headings */
+    .article h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #CE92FF;
+      margin-bottom: 16px;
+      margin-top: 48px;
+    }
+
+    .article h3 {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+      margin-top: 36px;
+    }
+
+    /* Body text */
+    .article p {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: #9E9790;
+      font-weight: 300;
+      margin-bottom: 20px;
+    }
+
+    /* Code blocks */
+    .article pre {
+      background:#0A0908;
+      color: #CE92FF;
+      font-family: 'Courier New', monospace;
+      font-size: 0.88rem;
+      line-height: 1.7;
+      padding: 28px 32px;
+      margin: 24px 0;
+      overflow-x: auto;
+      border-left: 3px solid var(--accent);
+    }
+
+    .article code {
+      background: rgba(39,134,32,0.1);
+      color: var(--accent);
+      font-family: 'Courier New', monospace;
+      font-size: 0.88em;
+      padding: 2px 7px;
+      border-radius: 2px;
+    }
+
+    /* Images */
+    .article-img {
+      width: 100%;
+      margin: 32px 0;
+      overflow: hidden;
+    }
+
+    .article-img img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .article-img figcaption {
+      font-size: 0.78rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      margin-top: 10px;
+      font-style: italic;
+    }
+
+    /* Callout / key takeaway box */
+    .callout {
+      background: #0A0908;
+      border-left: 4px solid var(--accent);
+      padding: 24px 28px;
+      margin: 32px 0;
+    }
+
+    .callout-label {
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .callout p {
+      margin-bottom: 0;
+      font-size: 0.95rem;
+      color: var(--ink);
+      font-weight: 400;
+    }
+
+    /* Key takeaways list */
+    .takeaways {
+      background: #0A0908;
+      padding: 36px 40px;
+      margin: 48px 0 0;
+    }
+
+    .takeaways-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 20px;
+    }
+
+    .takeaways ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .takeaways li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.75);
+      font-weight: 300;
+      line-height: 1.5;
+    }
+
+    .takeaways li::before {
+      content: '→';
+      color: #CE92FF;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* ── BACK BUTTON ── */
+    /* ── BACK BUTTON ── */
+  .back-wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 32px 64px;
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      background: var(--surface);
+      border: 1px solid #383633;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s, color 0.2s;
+    }
+    .back-btn:hover { background: var(--accent); color: #0a0908; transform: translateX(-3px); border-color: var(--accent); }
+    /* ── FOOTER ── */
+    footer {
+      background: #0a0908;
+      color: rgba(255,255,255,0.2);
+      text-align: center;
+      padding: 32px;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 768px) {
+      .breadcrumb { padding: 16px 20px; }
+      .lesson-header { padding: 36px 24px; }
+      .video-section { padding: 32px 0; }
+      .article { padding: 40px 20px 60px; }
+      .back-wrap { padding: 0 20px 48px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── BREADCRUMB ── -->
+<nav class="breadcrumb">
+  <a href="index.html">Room 212</a>
+  <span>/</span>
+  <a href="compsci20.html">20S Comp Sci</a>
+  <span>/</span>
+  <a href="../index.html">Unit 02</a>
+  <span>/</span>
+  <span class="current">Lesson 05</span>
+</nav>
+
+<!-- ── LESSON HEADER ── -->
+<div class="lesson-header">
+  <div class="lesson-meta">
+    <span class="lesson-type-badge">Video Lesson</span>
+    <span class="lesson-number">Unit 02 · Lesson 05</span>
+  </div>
+  <h1 class="lesson-title">Parsing</h1>
+</div>
+
+<!-- ── VIDEO ── -->
+<div class="video-section">
+  <div class="video-outer">
+    <div class="video-wrap">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/zBDXJQ9TuPE?si=4TxxYlRdSVowPl3Q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+  </div>
+</div>
+
+<!-- ── ARTICLE BODY ── -->
+<article class="article">
+
+  <p class="article-intro">
+    Just like with <code>string</code> variables, we may want to get values from the user. Values that they type into a textbox. But for <code>integers</code>, there's one extra step when getting numerical input from a user.
+  </p>
+
+  <h2>Parsing</h2>
+  <p>
+    <code>Parsing</code> means <code>converting</code>. So whenever you write <code>Parse</code> in code, you are really saying <code>convert</code>. Now what could we possibly need to convert?
+  </p>
+
+  <pre>txbAge.Text</pre>
+
+    <p>
+    Above, when you are getting text from a textbox, your computer is expecting words and letters - NOT numbers. But if you're expecting the user to give you a number, this will cause a problem.
+  </p>
+
+  <pre>int age;
+age = txbAge.Text; // THIS DOES NOT WORK</pre>
+ 
+  <p>
+    If I want the user to enter their age, I know that age is a number. Therefore I have created an <code>int</code> variable to store the number they give me. But any <code>.Text</code> from a textbox will be treated as letters, not numbers, also known as a <code>string</code>. So your computer is trying to put a <code>string</code> into an <code>int</code> variable. This is no good.
+  </p>
+
+  <p>We have to take the string text, and convert it to an integer. This will allow us to store it in the integer variable</p>
+
+    <pre>int age;
+age = int.Parse(txbAge.Text);</pre>
+
+<p>
+    Above, I am converting the text to an integer, before I try to store it in my integer variable.
+</p>
+
+<p>
+    This is the extra step required when storing numerical input from a textbox into an integer variable
+</p>
+
+
+  <!-- Key takeaways -->
+  <div class="takeaways">
+    <p class="takeaways-label">Key Takeaways</p>
+    <ul>
+      <li>the <code>.Text</code> of a textbox is always treated as a <code>string</code>.</li>
+      <li>We have to <code>Parse</code> numerical textbox text into an <code>integer</code>.</li>
+      <li><code>Parse</code> is just a fancy word for "convert".</li>
+    </ul>
+  </div>
+
+
+</article>
+
+<!-- ── BACK BUTTON ── -->
+<div class="back-wrap">
+  <a href="../09 Project 03/index.html" class="back-btn">← Previous page</a>
+   <a href="../11 Variable Math/index.html" class="back-btn">Next Page →</a>
+</div>
+
+<footer>
+  &copy; 2026 · Zach Brykaliuk · Computer Science/Mathematics Teacher
+</footer>
+
+</body>
+</html>
