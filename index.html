@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Room 212 - Computer Science Courses</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="icon" href="images/logo3.png">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #e8e6e1;
+      --paper: #1a1a1a;
+      --surface: #222222;
+      --surface2: #2a2a2a;
+      --border: rgba(255,255,255,0.07);
+      --accent: #7cf57a;
+      --muted: rgba(255, 255, 255, 0.634);
+      --tab-h: 52px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    .site-header {
+      position: relative;
+      width: 100%;
+      height: 60vh;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+      padding: 56px 64px;
+    }
+
+    .header-bg {
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(to bottom, rgba(10,10,10,0.3) 0%, rgba(10, 10, 10, 0.93) 100%),
+        url('images/header_bg2.png') center/cover no-repeat;
+      transform: scale(1.04);
+      transition: transform 12s ease;
+    }
+    .site-header:hover .header-bg { transform: scale(1); }
+
+    .header-content { position: relative; z-index: 2; }
+
+    .header-eyebrow {
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      font-size: 0.78rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.634);
+      margin-bottom: 12px;
+    }
+
+    .header-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.6rem, 6vw, 4.4rem);
+      font-weight: 900;
+      color: #fff;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+    }
+
+    .header-title span { color: var(--accent); }
+
+    .header-sub {
+      margin-top: 14px;
+      font-size: 1.05rem;
+      color:rgba(255, 255, 255, 0.634);
+      font-weight: 300;
+    }
+
+    .tab-bar-wrap {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: #111111;
+      border-bottom: 2px solid var(--accent);
+    }
+
+    .tab-bar {
+      display: flex;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding: 0 40px;
+    }
+    .tab-bar::-webkit-scrollbar { display: none; }
+
+    .tab {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      height: var(--tab-h);
+      padding: 0 22px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.634);
+      text-decoration: none;
+      border-bottom: 3px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+      white-space: nowrap;
+      cursor: pointer;
+      background: none;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .tab:hover { color: #fff; }
+    .tab.active { color: #fff; border-bottom-color: var(--accent); }
+
+    .panel { display: none; }
+    .panel.active { display: block; }
+
+    .showcase { width: 100%; }
+
+    .work-block {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 52vh;
+      border-bottom: 1px solid var(--border);
+      overflow: hidden;
+    }
+
+    .work-block:nth-child(even) .work-img { order: 2; }
+    .work-block:nth-child(even) .work-text { order: 1; }
+
+    .work-img {
+      position: relative;
+      overflow: hidden;
+      min-height: 380px;
+    }
+
+    .work-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.6s ease;
+    }
+    .work-block:hover .work-img img { transform: scale(1.04); }
+
+    .work-img-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(124,245,122,0.08), transparent);
+      pointer-events: none;
+    }
+
+    .work-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 64px 72px;
+      background: var(--surface);
+    }
+    .work-block:nth-child(even) .work-text { background: var(--surface2); }
+
+    .work-tag {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    .work-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 2.5vw, 2.4rem);
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--ink);
+      margin-bottom: 20px;
+    }
+
+    .work-desc {
+      font-size: 1rem;
+      line-height: 1.75;
+      color: var(--muted);
+      font-weight: 300;
+      max-width: 480px;
+    }
+
+    .work-meta {
+      margin-top: 28px;
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .work-date {
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+    }
+
+    .work-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      color: var(--ink);
+      text-decoration: none;
+      border-bottom: 1.5px solid rgba(255,255,255,0.2);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .work-btn:hover { color: var(--accent); border-color: var(--accent); }
+
+    .course-hero {
+      background: #111111;
+      color: #fff;
+      padding: 52px 72px;
+      border-bottom: 3px solid var(--accent);
+    }
+
+    .course-hero-title a {
+      color: inherit;
+      text-decoration: none;
+    }
+    .course-hero-title a:hover { color: var(--accent); }
+
+    .course-hero-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      margin-bottom: 10px;
+    }
+
+    .course-hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+    }
+
+    .course-hero-title em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    footer {
+      background: #111111;
+      color: rgba(255, 255, 255, 0.634);
+      text-align: center;
+      padding: 32px;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 768px) {
+      .site-header { height: 340px; padding: 36px 28px; }
+      .tab { padding: 0 14px; font-size: 0.74rem; }
+      .tab-bar { padding: 0 8px; }
+      .work-block { grid-template-columns: 1fr; }
+      .work-block:nth-child(even) .work-img { order: 1; }
+      .work-block:nth-child(even) .work-text { order: 2; }
+      .work-text { padding: 40px 28px; }
+      .course-hero { padding: 36px 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="header-bg"></div>
+  <div class="header-content">
+    <p class="header-eyebrow">2025 – 2026 Academic Year</p>
+    <h1 class="header-title">Room <span>212</span><br> Coursework</h1>
+    <p class="header-sub">Online courses for all things computer science</p>
+  </div>
+</header>
+
+<button class="tab active" data-panel="home" data-color="#7cf57a" role="tab">Home</button>
+<button class="tab" data-panel="compsci20s" data-color="#CE92FF" role="tab">20S Comp Sci</button>
+<button class="tab" data-panel="compsci30s" data-color="#45D8FF" role="tab">30S Comp Sci</button>
+<button class="tab" data-panel="compsci40s" data-color="#10BE00" role="tab">40S Comp Sci</button>
+<button class="tab" data-panel="compsci32s" data-color="#BC2092" role="tab">32S Pre Ap Comp Sci</button>
+<button class="tab" data-panel="compsci42s" data-color="#FF2821" role="tab">42S AP Comp Sci</button>
+<button class="tab" data-panel="gamedev" data-color="#f97316" role="tab">3D Game Development</button>
+<button class="tab" data-panel="web" data-color="#FFA719" role="tab">Web Design</button>
+
+<div class="panel active" id="panel-home">
+  <div class="showcase">
+
+    <article class="work-block">
+      <div class="work-img">
+        <img src="images/coding_language_card.png" alt="Course Flowchart"/>
+        <div class="work-img-overlay"></div>
+      </div>
+      <div class="work-text">
+        <p class="work-tag">Structured Learning Path</p>
+        <h2 class="work-title">Computer Science Curriculum</h2>
+        <p class="work-desc">A structured computer science learning platform that guides you through a complete programming pathway—from fundamentals to advanced topics—designed for both high school classroom use and independent learners.</p>
+        <div class="work-meta">
+          <span class="work-date">35 modules</span>
+          <a href="/Comp Sci 20S/index.html" class="work-btn">Begin Course →</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="work-block">
+      <div class="work-img">
+        <img src="images/flowchart.png" alt="C# Windows Forms Game Project"/>
+        <div class="work-img-overlay"></div>
+      </div>
+      <div class="work-text">
+        <p class="work-tag">Flowchart</p>
+        <h2 class="work-title">Course Pathways</h2>
+        <p class="work-desc">These courses provide a structured learning pathway across 7 progressive computer science classes, as outlined in the flowchart. The program includes three core programming courses, along with elective and advanced modules designed to build more specialized skills. Together, they take you from foundational programming concepts to a level of proficiency that prepares you for university-level computer science.</p>
+        <div class="work-meta">
+          <span class="work-date">2026</span>
+          <a href="#" class="work-btn">Student Work →</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="work-block">
+      <div class="work-img">
+        <img src="images/card3.png" alt="Math work"/>
+        <div class="work-img-overlay"></div>
+      </div>
+      <div class="work-text">
+        <p class="work-tag">Planned Content</p>
+        <h2 class="work-title">Expanding CS Curriculum</h2>
+        <p class="work-desc">This platform is actively expanding. Courses are actively being developed to extend learning from foundational programming into advanced topics, frameworks, and real-world applications.</p>
+        <div class="work-meta">
+          <span class="work-date">2026</span>
+          <a href="#" class="work-btn">Development Plans →</a>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</div>
+
+
+<div class="panel" id="panel-compsci20s">
+  <div class="course-hero">
+    <p class="course-hero-label">Course</p>
+    <h2 class="course-hero-title">
+      <a href="Comp Sci 20S/index.html"><em>20s </em>Computer Science</a>
+    </h2>
+  </div>
+  <div class="showcase">
+
+    <article class="work-block">
+      <div class="work-img">
+        <img src="images/grade_10_card3.png" alt="Student working at computer"/>
+        <div class="work-img-overlay"></div>
+      </div>
+      <div class="work-text">
+        <p class="work-tag">Learn to Program · C#</p>
+        <h2 class="work-title">Start Your Coding Career</h2>
+        <p class="work-desc">Learn to program in this introductory coding course, where you'll explore the fundamental concepts of coding. Perfect for those who enjoy problem-solving and using their creativity and critical thinking skills.</p>
+        <div class="work-meta">
+          <span class="work-date">35 modules</span>
+          <a href="/Comp Sci 20S/index.html" class="work-btn">Begin Course →</a>
+        </div>
+      </div>
+    </article>
+
+    <article class="work-block">
+      <div class="work-img">
+        <img src="images/grade_10_card_2.png" alt="C# Windows Forms Game Project"/>
+        <div class="work-img-overlay"></div>
+      </div>
+      <div class="work-text">
+        <p class="work-tag">Controls · Variables · Decision Making</p>
+        <h2 class="work-title">Using C# Forms</h2>
+        <p class="work-desc">Use Windows Forms GUIs to bring your code to life by creating programs ranging from practical real-world applications to fun and interactive games, from simple projects to more advanced software.</p>
+        <div class="work-meta">
+          <span class="work-date">November 2024</span>
+          <a href="#" class="work-btn">Student Work →</a>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</div>
+
+
+<div class="panel" id="panel-compsci30s">
+  <div class="course-hero">
+    <p class="course-hero-label">Course</p>
+    <h2 class="course-hero-title"><em>30s </em>Computer Science</h2>
+  </div>
+  <div class="showcase">
+
+    <article class="work-block">
+      <div class="work-img">
+        <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=900&q=80" alt="30S Comp Sci"/>
+        <div class="work-img-overlay"></div>
+      </div>
+      <div class="work-text">
+        <p class="work-tag">30S · Highlight</p>
+        <h2 class="work-title">Replace with a 30S highlight</h2>
+        <p class="work-desc">Add your 30S course content here — a project showcase, a concept overview, or a unit highlight. Swap the image for something relevant to your course.</p>
+        <div class="work-meta">
+          <span class="work-date">2025</span>
+          <a href="#" class="work-btn">View →</a>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</div>
+
+
+<div class="panel" id="panel-compsci40s">
+  <div class="course-hero">
+    <p class="course-hero-label">Course</p>
+    <h2 class="course-hero-title"><em>40s </em>Computer Science</h2>
+  </div>
+  <div class="showcase">
+
+    <article class="work-block">
+      <div class="work-img">
+        <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=900&q=80" alt="30S Comp Sci"/>
+        <div class="work-img-overlay"></div>
+      </div>
+      <div class="work-text">
+        <p class="work-tag">40S · Highlight</p>
+        <h2 class="work-title">Replace with a 30S highlight</h2>
+        <p class="work-desc">Add your 30S course content here — a project showcase, a concept overview, or a unit highlight. Swap the image for something relevant to your course.</p>
+        <div class="work-meta">
+          <span class="work-date">2025</span>
+          <a href="#" class="work-btn">View →</a>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</div>
+
+
+<div class="panel" id="panel-compsci32s">
+  <div class="course-hero">
+    <p class="course-hero-label">Course</p>
+    <h2 class="course-hero-title"><em>32s Pre AP </em>Computer Science</h2>
+  </div>
+  <div class="showcase">
+
+    <article class="work-block">
+      <div class="work-img">
+        <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=900&q=80" alt="32S Comp Sci"/>
+        <div class="work-img-overlay"></div>
+      </div>
+      <div class="work-text">
+        <p class="work-tag">32S · Highlight</p>
+        <h2 class="work-title">Replace with a 32S highlight</h2>
+        <p class="work-desc">Add your 32S course content here. Swap in a project, a student example, or a unit overview.</p>
+        <div class="work-meta">
+          <span class="work-date">2025</span>
+          <a href="#" class="work-btn">See Work →</a>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</div>
+
+
+<div class="panel" id="panel-compsci42s">
+  <div class="course-hero">
+    <p class="course-hero-label">Course</p>
+    <h2 class="course-hero-title"><em>42s AP </em>Computer Science</h2>
+  </div>
+  <div class="showcase">
+
+    <article class="work-block">
+      <div class="work-img">
+        <img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=900&q=80" alt="32S Comp Sci"/>
+        <div class="work-img-overlay"></div>
+      </div>
+      <div class="work-text">
+        <p class="work-tag">32S · Highlight</p>
+        <h2 class="work-title">Replace with a 32S highlight</h2>
+        <p class="work-desc">Add your 32S course content here. Swap in a project, a student example, or a unit overview.</p>
+        <div class="work-meta">
+          <span class="work-date">2025</span>
+          <a href="#" class="work-btn">See Work →</a>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</div>
+
+
+<div class="panel" id="panel-gamedev">
+  <div class="course-hero">
+    <p class="course-hero-label">Course</p>
+    <h2 class="course-hero-title"><em>Game Dev </em>3D Modelling & Animation</h2>
+  </div>
+  <div class="showcase">
+
+    <article class="work-block">
+      <div class="work-img">
+        <img src="https://images.unsplash.com/photo-1593508512255-86ab42a8e620?w=900&q=80" alt="Game Dev"/>
+        <div class="work-img-overlay"></div>
+      </div>
+      <div class="work-text">
+        <p class="work-tag">Game Dev · Highlight</p>
+        <h2 class="work-title">Replace with a Game Dev highlight</h2>
+        <p class="work-desc">Add a project or unit highlight from your 3D Modelling & Animation course here. Screenshots of student work look great in this section.</p>
+        <div class="work-meta">
+          <span class="work-date">2025</span>
+          <a href="#" class="work-btn">View →</a>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</div>
+
+
+<div class="panel" id="panel-web">
+  <div class="course-hero">
+    <p class="course-hero-label">Course</p>
+    <h2 class="course-hero-title"><em>Web </em>Design</h2>
+  </div>
+  <div class="showcase">
+
+    <article class="work-block">
+      <div class="work-img">
+        <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=900&q=80" alt="web"/>
+        <div class="work-img-overlay"></div>
+      </div>
+      <div class="work-text">
+        <p class="work-tag">Web · Highlight</p>
+        <h2 class="work-title">Replace with an ICT highlight</h2>
+        <p class="work-desc">Add your ICT course content here — a project showcase, assignment example, or unit overview. Swap the image for something relevant.</p>
+        <div class="work-meta">
+          <span class="work-date">2025</span>
+          <a href="#" class="work-btn">Explore →</a>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</div>
+
+<footer>
+  &copy; 2026 · Zach Brykaliuk · Computer Science/Mathematics Teacher
+</footer>
+
+<script>
+  const tabs = document.querySelectorAll('.tab');
+  const panels = document.querySelectorAll('.panel');
+
+  const panelMap = {
+    home: 'panel-home',
+    compsci20s: 'panel-compsci20s',
+    compsci30s: 'panel-compsci30s',
+    compsci40s: 'panel-compsci40s',
+    compsci32s: 'panel-compsci32s',
+    compsci42s: 'panel-compsci42s',
+    gamedev: 'panel-gamedev',
+    web: 'panel-web',
+  };
+
+tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      const id = panelMap[tab.dataset.panel];
+      document.getElementById(id).classList.add('active');
+      document.documentElement.style.setProperty('--accent', tab.dataset.color);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+});
+</script>
+</body>
+</html>
