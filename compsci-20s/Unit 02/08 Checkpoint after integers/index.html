@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Room 212 — Checkpoint</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --accent: #278620;
+      --muted: #7a7470;
+      --quiz-color: #CE92FF;
+      --correct: #81ff78;
+      --wrong: #c84b2f;
+
+       --ink: #e8e4de;
+      --paper: #141210;
+      --accent: #CE92FF;
+      --muted: #6b6560;
+      --project-color: #CE92FF;
+      --surface: #1c1a17;
+      --surface-2: #242118;
+      --border: rgba(255,255,255,0.07);
+      --border-strong: rgba(255,255,255,0.12);
+    }
+
+     pre {
+      background: #0a0908;
+      color:#CE92FF;
+      font-family: 'Courier New', monospace;
+      font-size: 0.88rem;
+      line-height: 1.7;
+      padding: 24px 28px;
+      margin: 16px 0 24px;
+      overflow-x: auto;
+      border-left: 3px solid var(--accent);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+    }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    /* ── BREADCRUMB ── */
+    .breadcrumb {
+      padding: 20px 64px;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #1C1A17;
+       border-bottom: 1px solid var(--border);
+    }
+    .breadcrumb a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .breadcrumb a:hover { color: var(--ink); }
+    .breadcrumb span { color: rgba(255,255,255,0.15);}
+    .breadcrumb .current { color: var(--ink); font-weight: 500; }
+
+    /* ── LESSON HEADER ── */
+    .lesson-header {
+      background: #0A0908;
+      padding: 48px 64px;
+      border-bottom: 3px solid var(--quiz-color);
+    }
+
+    .lesson-meta {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .lesson-type-badge {
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      background: rgba(200,75,47,0.2);
+      color: #f5a07a;
+      border-radius: 2px;
+    }
+
+    .lesson-number {
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+    }
+
+    .lesson-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .lesson-subtitle {
+      margin-top: 10px;
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.45);
+      font-weight: 300;
+    }
+
+    /* ── QUIZ WRAP ── */
+    .quiz-wrap {
+      max-width: 720px;
+      margin: 52px auto 80px;
+      padding: 0 32px;
+    }
+
+    /* ── QUESTION CARD ── */
+    .question-card {
+      background: #252321;
+      border: 1px solid #5d5852;
+      padding: 36px 40px;
+      margin-bottom: 20px;
+    }
+
+    .question-num {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--quiz-color);
+      margin-bottom: 10px;
+    }
+
+    .question-text {
+   
+      font-size: 1.15rem;
+      font-weight: 400;
+      color: var(--ink);
+      line-height: 1.4;
+      margin-bottom: 24px;
+    }
+
+    
+
+    /* ── OPTIONS ── */
+    .options { display: flex; flex-direction: column; gap: 10px; }
+
+    .option {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 20px;
+      border: 1.5px solid #5d5852;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+      user-select: none;
+    }
+
+    .option:hover { border-color: var(--accent); background: rgba(0,0,0,0.02); }
+
+    .option input[type="radio"] { display: none; }
+
+    .option-bubble {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 2px solid rgba(0,0,0,0.2);
+      flex-shrink: 0;
+      transition: border-color 0.15s, background 0.15s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .option.selected .option-bubble {
+      border-color: var(--paper);
+      background: var(--accent);
+    }
+    .option.selected .option-bubble::after {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--paper);
+    }
+
+
+    .option.selected{
+      background:   rgba(128, 72, 133, 0.546);
+    }
+    .option-text {
+      font-size: 0.95rem;
+      color: var(--ink);
+      font-weight: 300;
+      line-height: 1.4;
+    }
+
+    /* ── RESULT STATES ── */
+    .option.correct {
+      border-color: var(--correct);
+      background: rgba(39,134,32,0.06);
+    }
+    .option.correct .option-bubble {
+      border-color: var(--correct);
+      background: var(--correct);
+    }
+    .option.correct .option-text { color: var(--correct); font-weight: 500; }
+
+    .option.wrong {
+      border-color: var(--wrong);
+      background: rgba(200,75,47,0.06);
+    }
+    .option.wrong .option-bubble {
+      border-color: var(--wrong);
+      background: var(--wrong);
+    }
+    .option.wrong .option-text { color: var(--wrong); }
+
+    .option.show-correct {
+      border-color: var(--correct);
+      background: rgba(39,134,32,0.04);
+    }
+    .option.show-correct .option-text { color: var(--correct); font-weight: 500; }
+
+    /* ── SUBMIT BUTTON ── */
+   .submit-wrap {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 32px;
+}
+
+    .submit-btn {
+      padding: 16px 40px;
+      background: var(--surface);
+      color: #fff;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+         border: 1px solid var(--border-strong);
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .submit-btn:hover { background: var(--accent); color: #0A0908; }
+    .submit-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    .previous-btn {
+      padding: 16px 40px;
+      background: var(--surface);
+      color: #fff;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+         border: 1px solid var(--border-strong);
+      cursor: pointer;
+      transition: background 0.2s;
+      text-decoration: none;
+    }
+    .previous-btn:hover { background: var(--accent); color: #0A0908; }
+    .previous-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    /* ── SCORE PANEL ── */
+    .score-panel {
+      display: none;
+      background: #0A0908;
+      padding: 48px 40px;
+      margin-top: 40px;
+      text-align: center;
+      border: 1px solid var(--accent);
+    }
+
+    .score-panel.visible { display: block; }
+
+    .score-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 16px;
+    }
+
+    .score-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 5rem;
+      font-weight: 900;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .score-number.perfect { color: #7cf57a; }
+    .score-number.good    { color: #f5c97a; }
+    .score-number.retry   { color: #f5a07a; }
+
+    .score-message {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.55);
+      font-weight: 300;
+      margin-bottom: 32px;
+    }
+
+    .score-actions {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .retake-btn {
+      padding: 14px 32px;
+      background: none;
+      border: 1.5px solid rgba(255,255,255,0.3);
+      color: rgba(255,255,255,0.7);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+     .retake-btn:hover { border-color: var(--accent); background-color: var(--accent); color: #0A0908; ; }
+
+   .nextpage-btn {
+      padding: 14px 32px;
+      background: none;
+      border: 1.5px solid rgba(255,255,255,0.3);
+      color: rgba(255,255,255,0.7);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .nextpage-btn:hover { border-color: var(--accent); background-color: var(--accent); color: #0A0908; ; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #0A0908;
+      color: rgba(176, 176, 176, 0.35);
+      text-align: center;
+      padding: 32px;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+    }
+
+    @media (max-width: 768px) {
+      .breadcrumb { padding: 16px 20px; }
+      .lesson-header { padding: 36px 24px; }
+      .quiz-wrap { padding: 0 16px; margin: 32px auto 60px; }
+      .question-card { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── BREADCRUMB ── -->
+<nav class="breadcrumb">
+  <a href="index.html">Room 212</a>
+  <span>/</span>
+  <a href="compsci20.html">20S Comp Sci</a>
+  <span>/</span>
+  <a href="../index.html">Unit 02</a>
+  <span>/</span>
+  <span class="current">Checkpoint</span>
+</nav>
+
+<!-- ── LESSON HEADER ── -->
+<div class="lesson-header">
+  <div class="lesson-meta">
+    <span class="lesson-type-badge">Checkpoint</span>
+    <span class="lesson-number">Unit 02 · Checkpoint 02</span>
+  </div>
+  <h1 class="lesson-title">Checkpoint</h1>
+  <p class="lesson-subtitle">A quick review of Integers. Score 100% to move on — you can retake as many times as you like.</p>
+</div>
+
+<!-- ── QUIZ ── -->
+<div class="quiz-wrap">
+  <div class="questions" id="questions">
+
+    <!-- ═══ QUESTION 1 ═══
+         correct: index of the correct answer (0-based)
+         Change the question text, options, and correct index to match your content.
+    -->
+    <div class="question-card" data-correct="0">
+      <p class="question-num">Question 1</p>
+      <p class="question-text">Which type of variable should be used to store letters, words, and/or text</p>
+      <div class="options">
+        <label class="option"><input type="radio" name="q1" value="0"><div class="option-bubble"></div><span class="option-text">string</span></label>
+        <label class="option"><input type="radio" name="q1" value="1"><div class="option-bubble"></div><span class="option-text">int</span></label>
+         <label class="option"><input type="radio" name="q1" value="1"><div class="option-bubble"></div><span class="option-text">variable</span></label>
+      </div>
+    </div>
+
+    <!-- ═══ QUESTION 2 ═══ -->
+    <div class="question-card" data-correct="0">
+      <p class="question-num">Question 2</p>
+      <p class="question-text">Which type of variable should be used to store numbers?</p>
+      <div class="options">
+        <label class="option"><input type="radio" name="q2" value="0"><div class="option-bubble"></div><span class="option-text">int</span></label>
+        <label class="option"><input type="radio" name="q2" value="1"><div class="option-bubble"></div><span class="option-text">string</span></label>
+        <label class="option"><input type="radio" name="q2" value="2"><div class="option-bubble"></div><span class="option-text">variable</span></label>
+      </div>
+    </div>
+
+     <!-- ═══ QUESTION 3 ═══ -->
+    <div class="question-card" data-correct="0">
+      <p class="question-num">Question 3</p>
+      <p class="question-text">You can store numbers in string variables, but you can't do any math with those numbers</p>
+      <div class="options">
+        <label class="option"><input type="radio" name="q3" value="0"><div class="option-bubble"></div><span class="option-text">True</span></label>
+        <label class="option"><input type="radio" name="q3" value="1"><div class="option-bubble"></div><span class="option-text">False</span></label>
+     
+      </div>
+    </div>
+
+    <!-- ═══ QUESTION 4 ═══ -->
+    <div class="question-card" data-correct="0">
+      <p class="question-num">Question 4</p>
+      <p class="question-text">What is wrong with the below line of code?</p>
+      <pre>
+int studentsInClass = "25";</pre>
+      <div class="options">
+        <label class="option"><input type="radio" name="q4" value="0"><div class="option-bubble"></div><span class="option-text">You don't use double quotations when setting integer variables</span></label>
+        <label class="option"><input type="radio" name="q4" value="1"><div class="option-bubble"></div><span class="option-text">You must use the full word integer, not just int</span></label>
+          <label class="option"><input type="radio" name="q4" value="1"><div class="option-bubble"></div><span class="option-text">Not a good name for the variable</span></label>
+      </div>
+    </div>
+
+      <div class="question-card" data-correct="0">
+      <p class="question-num">Question 4</p>
+      <p class="question-text">What is wrong with the below line of code?</p>
+      <pre>
+int health = 100.5;</pre>
+      <div class="options">
+        <label class="option"><input type="radio" name="q4" value="0"><div class="option-bubble"></div><span class="option-text">You can't store decimals with integers</span></label>
+        <label class="option"><input type="radio" name="q4" value="1"><div class="option-bubble"></div><span class="option-text">health should have a capital "H"</span></label>
+      </div>
+    </div>
+
+     <div class="question-card" data-correct="0">
+      <p class="question-num">Question 5</p>
+      <p class="question-text">What is the final value of health?</p>
+      <pre>
+int health = 100;
+health += 25;</pre>
+      <div class="options">
+        <label class="option"><input type="radio" name="q4" value="0"><div class="option-bubble"></div><span class="option-text">125</span></label>
+        <label class="option"><input type="radio" name="q4" value="1"><div class="option-bubble"></div><span class="option-text">75</span></label>
+          <label class="option"><input type="radio" name="q4" value="1"><div class="option-bubble"></div><span class="option-text">25</span></label>
+           <label class="option"><input type="radio" name="q4" value="1"><div class="option-bubble"></div><span class="option-text">100</span></label>
+      </div>
+    </div>
+
+
+    <!--
+      ═══ ADD MORE QUESTIONS ═══
+      Copy and paste a question-card block above.
+      - Change data-correct="N" to the index of the correct answer (0, 1, 2, or 3)
+      - Change the name="qN" on each radio to the next number (q6, q7, etc.)
+      - Change each value="0/1/2/3" to match the option's position
+    -->
+
+  </div>
+
+  <div class="submit-wrap">
+   <a class="previous-btn" id="previous-btn" href="../07 Integers/index.html">← Previous Page</a>
+    <button class="submit-btn" id="submit-btn">Submit Quiz</button>
+   
+  </div>
+
+  <!-- ── SCORE PANEL ── -->
+  <div class="score-panel" id="score-panel">
+    <p class="score-label">Your Score</p>
+    <div class="score-number" id="score-number"></div>
+    <p class="score-message" id="score-message"></p>
+    <div class="score-actions">
+      <button class="retake-btn" id="retake-btn">↺ Retake Quiz</button>
+      <a href="../03 Storing User Input/index.html" class="nextpage-btn">Next Page →</a>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  &copy; 2026 · Zach Brykaliuk · Computer Science/Mathematics Teacher
+</footer>
+
+<script>
+  // ── Shuffle helper (Fisher-Yates) ──
+  function shuffle(arr) {
+    for (let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }
+
+  // ── Shuffle options within each question ──
+  document.querySelectorAll('.question-card').forEach(card => {
+    const container = card.querySelector('.options');
+    if (!container) return;
+    const opts = [...container.querySelectorAll('.option')];
+    shuffle(opts).forEach(opt => container.appendChild(opt));
+  });
+
+  // ── Option selection ──
+  document.querySelectorAll('.option').forEach(opt => {
+    opt.addEventListener('click', () => {
+      const card = opt.closest('.question-card');
+      card.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+      opt.classList.add('selected');
+      opt.querySelector('input[type="radio"]').checked = true;
+    });
+  });
+
+    // ── Submit ──
+  document.getElementById('submit-btn').addEventListener('click', () => {
+    const cards = document.querySelectorAll('.question-card');
+    let answered = 0;
+    const total = cards.length;
+
+    // count answers first, before doing anything
+    cards.forEach(card => {
+      if (card.querySelector('.option.selected')) answered++;
+    });
+
+    if (answered < total) {
+      alert(`Please answer all ${total} questions before submitting.`);
+      return;
+    }
+
+    // only reaches here if all questions are answered
+    let correct = 0;
+
+    document.getElementById('retake-btn').style.display = 'none';
+    document.querySelector('.nextpage-btn').style.display = 'none';
+
+    cards.forEach(card => {
+      const selected = card.querySelector('.option.selected');
+      const selectedVal = parseInt(selected.querySelector('input').value);
+      const correctVal  = parseInt(card.dataset.correct);
+      const options     = card.querySelectorAll('.option');
+
+      options.forEach(o => {
+        o.style.pointerEvents = 'none';
+        o.classList.remove('selected');
+      });
+
+      if (selectedVal === correctVal) {
+        options[selectedVal].classList.add('correct');
+        correct++;
+      } else {
+        options[selectedVal].classList.add('wrong');
+      }
+    });
+
+    const pct = Math.round((correct / total) * 100);
+    const scoreEl   = document.getElementById('score-number');
+    const msgEl     = document.getElementById('score-message');
+    const panel     = document.getElementById('score-panel');
+    const submitBtn = document.getElementById('submit-btn');
+
+    scoreEl.textContent = pct + '%';
+    scoreEl.className = 'score-number';
+
+    if (pct === 100) {
+      scoreEl.classList.add('perfect');
+      msgEl.textContent = `Perfect score! ${correct} / ${total} correct. You're ready to move on.`;
+      document.querySelector('.nextpage-btn').style.display = '';
+    } else if (pct >= 60) {
+      scoreEl.classList.add('good');
+      msgEl.textContent = `${correct} / ${total} correct. Good effort — review the highlighted answers and try again for 100%.`;
+      document.getElementById('retake-btn').style.display = '';
+    } else {
+      scoreEl.classList.add('retry');
+      msgEl.textContent = `${correct} / ${total} correct. Review the questions above and give it another shot.`;
+      document.getElementById('retake-btn').style.display = '';
+    }
+
+    panel.classList.add('visible');
+    submitBtn.disabled = true;
+    panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  // ── Retake ──
+  document.getElementById('retake-btn').addEventListener('click', () => {
+    document.querySelectorAll('.option').forEach(opt => {
+      opt.classList.remove('selected', 'correct', 'wrong', 'show-correct');
+      opt.style.pointerEvents = '';
+      opt.querySelector('input[type="radio"]').checked = false;
+    });
+
+    const panel = document.getElementById('score-panel');
+    panel.classList.remove('visible');
+    document.getElementById('submit-btn').disabled = false;
+    document.getElementById('retake-btn').style.display = '';
+    document.querySelector('.nextpage-btn').style.display = 'none';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+</script>
+
+</body>
+</html>
