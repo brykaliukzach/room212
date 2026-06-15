@@ -10,14 +10,18 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --ink: #e8e6e1;
-      --paper: #1a1a1a;
-      --surface: #222222;
-      --surface2: #2a2a2a;
+        --ink: #e8e4de;
+      --paper: #141210;
+      --surface: #1c1a17;
+      --surface2: #242118;
       --border: rgba(255,255,255,0.07);
-      --accent: #ce92ff;
-      --muted: rgba(255, 255, 255, 0.634);
-      --tab-h: 52px;
+      --accent: #CE92FF;
+      --muted: #6b6560;
+      --lesson-color: #60a5fa;
+      --checkpoint-color: #f97316;
+      --project-color: #7cf57a;
+      --enrichment-color: rgb(249, 220, 0);
+
     }
 
     html { scroll-behavior: smooth; font-size: 16px; }
@@ -29,6 +33,28 @@
       overflow-x: hidden;
     }
 
+      /* ── BREADCRUMB ── */
+    .breadcrumb {
+      padding: 20px 64px;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #1C1A17;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+     background: #1C1A17;
+      border-bottom: 1px solid var(--border);
+    }
+    .breadcrumb a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .breadcrumb a:hover { color: var(--ink); }
+    .breadcrumb span { color: rgba(255, 255, 255, 0.144);}
+    .breadcrumb .current { color: var(--ink); font-weight: 500; }
+
     /* ── HEADER ── */
     .site-header {
       position: relative;
@@ -38,16 +64,16 @@
       display: flex;
       align-items: flex-end;
       padding: 52px 64px;
+     
     }
 
     .header-bg {
       position: absolute;
       inset: 0;
-      background:
-        linear-gradient(to bottom, rgba(10,10,10,0.3) 0%, rgba(36, 36, 36, 0.88) 100%),
-        url('') center/cover no-repeat;
+      background: #0A0908;
       transform: scale(1.04);
       transition: transform 12s ease;
+       border-bottom: 7px solid var(--accent);
     }
     .site-header:hover .header-bg { transform: scale(1); }
 
@@ -55,20 +81,19 @@
 
     .header-eyebrow {
       font-size: 0.78rem;
-      font-weight: 500;
+   
       letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.634);
+      color: rgba(255,255,255,0.3);
       margin-bottom: 12px;
     }
 
     .header-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.2rem, 5vw, 3.8rem);
+        font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
       font-weight: 900;
       color: #fff;
-      line-height: 1.05;
-      letter-spacing: -0.02em;
+      margin-bottom: 14px;
     }
 
     .header-title em {
@@ -77,10 +102,12 @@
     }
 
     .header-sub {
-      margin-top: 14px;
-      font-size: 1rem;
-      color: rgba(255, 255, 255, 0.634);
+       font-size: 1rem;
+      color: rgba(255,255,255,0.45);
       font-weight: 300;
+      max-width: 580px;
+     margin-top: 18px;
+
     }
 
     /* ── TAB BAR ── */
@@ -138,7 +165,7 @@
 
     .units-extra {
     font-style: italic;
-    color: rgba(255,255,255,0.25);
+    color: rgba(255, 255, 255, 0.149);
     font-weight: 300;
     align-items: end;
 }
@@ -262,10 +289,24 @@
       transform: translateX(5px);
     }
 
+    .unit-label.enrichment {
+  color: #ffd900;;
+  animation: glow-yellow 1s ease-in-out infinite alternate;
+}
+
+@keyframes glow-yellow {
+  from {
+    text-shadow: 0 0 4px #fff200, 0 0 8px #fff200;
+  }
+  to {
+    text-shadow: 0 0 10px #fff200, 0 0 10px #fff200, 0 0 10px #fff200;
+  }
+}
+
     /* ── FOOTER ── */
     footer {
-      background: #111111;
-      color: rgba(255, 255, 255, 0.634);
+      background: #0a0908;
+      color: rgba(255,255,255,0.2);
       text-align: center;
       padding: 32px;
       font-size: 0.78rem;
@@ -276,6 +317,7 @@
     /* ── RESPONSIVE ── */
     @media (max-width: 768px) {
       .site-header { padding: 36px 28px; }
+         .breadcrumb { padding: 16px 20px; }
       .tab { padding: 0 14px; font-size: 0.74rem; }
       .tab-bar { padding: 0 8px; }
       .course-intro { flex-direction: column; padding: 32px 28px; gap: 24px; }
@@ -287,39 +329,44 @@
 </head>
 <body>
 
+  <!-- ── BREADCRUMB ── -->
+<nav class="breadcrumb">
+  <a href="../../index.html">Room 212</a>
+  <span>/</span>
+  <a href="../index.html">20S Comp Sci</a>
+</nav>
+
 <!-- ── HEADER ── -->
 <header class="site-header">
   <div class="header-bg"></div>
   <div class="header-content">
-    <p class="header-eyebrow">Room 212 · 2025–2026</p>
-    <h1 class="header-title"><em>20s</em> Computer Science</h1>
+    <p class="header-eyebrow">20S Computer Science</p>
+    <h1 class="header-title">20s Computer Science</h1>
     <p class="header-sub">An introduction to programming through C# and Windows Forms</p>
   </div>
 </header>
 
-<!-- ── TAB BAR ── -->
-<div class="tab-bar-wrap">
-  <nav class="tab-bar" role="tablist">
-    <a class="tab" href="/index.html">Home</a>
-    <a class="tab active" href="/compsci20.html">20S Comp Sci</a>
-    <a class="tab" href="/compsci30.html">30S Comp Sci</a>
-    <a class="tab" href="/compsci32.html">32S Comp Sci</a>
-    <a class="tab" href="/gamedev.html">3D Game Development</a>
-    <a class="tab" href="/ict.html">ICT</a>
-  </nav>
-</div>
+
 
 <!-- ── COURSE INTRO BAND ── -->
 <div class="course-intro">
   <div class="course-intro-text">
-    <p>20S · Intro to Programming</p>
-    <h2>Computer Science — Grade 10</h2>
+    <p>Intro to Programming</p>
+    <h2>Course Breakdown</h2>
   </div>
+
   <div class="course-meta">
     <div class="course-meta-item">
-      <div class="number">5</div>
+      <div class="number">3</div>
       <div class="label">Units</div>
     </div>
+
+    <div class="course-meta-item">
+      <div class="number">2</div>
+      <div class="label">Enrichment <br>Units</div>
+    </div>
+    
+    
     <div class="course-meta-item">
       <div class="number">35</div>
       <div class="label">Modules</div>
@@ -333,7 +380,7 @@
 
 <!-- ── UNITS ── -->
 <div class="units-wrap">
-  <p class="units-heading">Course Units <span class="units-extra">Extra units denoted with *</span></p>
+  <p class="units-heading">Course Units <span class="units-extra">Enrichment units denoted with *</span></p>
   <div class="units">
 
     <a href="/Comp Sci 20S/Unit 01/index.html" class="unit-card">
@@ -365,7 +412,7 @@
 
     <a href="/compsci20/unit4/index.html" class="unit-card">
       <div class="unit-info">
-        <p class="unit-label">*Unit 4</p>
+        <p class="unit-label enrichment">Unit 4</p>
         <h2 class="unit-title">GUI Game Development</h2>
         <p class="unit-desc">Develop GUI-based game development skills by building simple Windows Forms games within platform constraints.</p>
       </div>
@@ -374,7 +421,7 @@
 
     <a href="/compsci20/unit5/index.html" class="unit-card">
       <div class="unit-info">
-        <p class="unit-label">*Unit 5</p>
+        <p class="unit-label enrichment">Unit 5</p>
         <h2 class="unit-title">File I/O</h2>
         <p class="unit-desc">Learn the basics of file input and output by reading from and writing to text files.</p>
       </div>
