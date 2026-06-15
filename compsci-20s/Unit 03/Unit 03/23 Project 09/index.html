@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Room 212 — Project</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #e8e4de;
+      --paper: #141210;
+      --accent: #CE92FF;
+      --muted: #6b6560;
+      --project-color: #CE92FF;
+      --surface: #1c1a17;
+      --surface-2: #242118;
+      --border: rgba(255,255,255,0.07);
+      --border-strong: rgba(255,255,255,0.12);
+    }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    /* ── BREADCRUMB ── */
+    .breadcrumb {
+      padding: 20px 64px;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+    }
+    .breadcrumb a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .breadcrumb a:hover { color: var(--ink); }
+    .breadcrumb span { color: rgba(255,255,255,0.15); }
+    .breadcrumb .current { color: var(--ink); font-weight: 500; }
+
+    /* ── LESSON HEADER ── */
+    .lesson-header {
+      background: #0a0908;
+      padding: 48px 64px;
+      border-bottom: 3px solid var(--project-color);
+    }
+
+    .lesson-meta {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .lesson-type-badge {
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      background: rgba(76,175,69,0.15);
+      color: #ffd900;
+      border-radius: 2px;
+       animation: enrichment-glow 2s ease-in-out infinite;
+    }
+
+       
+
+
+@keyframes enrichment-glow {
+    0%, 100% { box-shadow: 0 0 4px rgba(255, 251, 0, 0.2); }
+    50%       { box-shadow: 0 0 10px rgba(255, 251, 0, 0.6); }
+}
+
+    .lesson-number {
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.25);
+    }
+
+    .lesson-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.1;
+    }
+
+    .lesson-subtitle {
+      margin-top: 10px;
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.35);
+      font-weight: 300;
+    }
+
+    /* ── MAIN LAYOUT ── */
+    .project-layout {
+      max-width: 1100px;
+      margin: 52px auto 80px;
+      padding: 0 32px;
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 40px;
+      align-items: start;
+    }
+
+    /* ── VIDEO ── */
+    .project-video-wrap {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      background: #000;
+      margin-bottom: 36px;
+    }
+
+    .project-video-wrap iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: none;
+    }
+
+    .video-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.2);
+      font-size: 0.82rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      gap: 12px;
+      background: #0d0c0a;
+      border: 1px solid var(--border);
+    }
+    .video-placeholder .play-icon { font-size: 2.5rem; opacity: 0.2; }
+
+    .video-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    /* ── DESCRIPTION ── */
+    .project-desc-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 16px;
+    }
+
+    .project-desc-section p {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: #9e9790;
+      font-weight: 300;
+      margin-bottom: 20px;
+    }
+
+    .project-desc-section h3 {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 32px 0 12px;
+    }
+
+    /* Code blocks */
+    .project-desc-section pre {
+      background: #0a0908;
+      color:#CE92FF;
+      font-family: 'Courier New', monospace;
+      font-size: 0.88rem;
+      line-height: 1.7;
+      padding: 24px 28px;
+      margin: 16px 0 24px;
+      overflow-x: auto;
+      border-left: 3px solid var(--accent);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+    }
+
+    .project-desc-section code {
+      background: rgba(76,175,69,0.12);
+      color: var(--accent);
+      font-family: 'Courier New', monospace;
+      font-size: 0.88em;
+      padding: 2px 7px;
+      border-radius: 2px;
+    }
+
+    /* Images in description */
+    .project-desc-section figure {
+      margin: 24px 0;
+    }
+    .project-desc-section figure img {
+      width: 100%;
+      display: block;
+    }
+    .project-desc-section figcaption {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 8px;
+      font-style: italic;
+    }
+
+    /* ── SIDEBAR ── */
+    .project-sidebar { display: flex; flex-direction: column; gap: 20px; }
+
+    .sidebar-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 28px;
+    }
+
+    .sidebar-card-label {
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    /* Requirements checklist */
+    .requirements { display: flex; flex-direction: column; gap: 10px; }
+
+    .req-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 0.88rem;
+      color: var(--ink);
+      font-weight: 300;
+      line-height: 1.5;
+    }
+
+    .req-check {
+      width: 18px;
+      height: 18px;
+      border: 1.5px solid rgba(255,255,255,0.15);
+      flex-shrink: 0;
+      margin-top: 1px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      color: var(--accent);
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .req-check.checked {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: #0a0908;
+    }
+
+    /* Details list */
+    .detail-list { display: flex; flex-direction: column; gap: 12px; }
+
+    .detail-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    .detail-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .detail-item .detail-key { color: var(--muted); font-weight: 300; }
+    .detail-item .detail-val { font-weight: 500; color: var(--ink); }
+
+    /* ── DOWNLOADS CARD ── */
+    .download-list { display: flex; flex-direction: column; gap: 14px; }
+
+    .download-item {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .download-item-label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .download-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      background: var(--surface-2);
+      border: 1px solid var(--border-strong);
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 400;
+      transition: background 0.15s, border-color 0.15s, color 0.15s;
+    }
+    .download-link:hover {
+      background: rgba(76,175,69,0.1);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .download-link .dl-icon {
+      font-size: 1rem;
+      flex-shrink: 0;
+      opacity: 0.6;
+    }
+    .download-link:hover .dl-icon { opacity: 1; }
+
+    .download-none {
+      font-size: 0.85rem;
+      color: var(--muted);
+      font-style: italic;
+      padding: 4px 0;
+    }
+
+    .download-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 2px 0;
+    }
+
+    /* ── BACK BUTTON ── */
+  .back-wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 32px 64px;
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      background: var(--surface);
+      border: 1px solid var(--border-strong);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s, color 0.2s;
+    }
+    .back-btn:hover { background: var(--accent); color: #0a0908; transform: translateX(-3px); border-color: var(--accent); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #0a0908;
+      color: rgba(255,255,255,0.2);
+      text-align: center;
+      padding: 32px;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      border-top: 1px solid var(--border);
+    }
+
+    /* Base link styling */
+a {
+  color: #ffffff;              /* Gold accent — swap for your brand color */
+  text-decoration: none;
+  font-weight: 600;
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+/* Option 1: Animated underline slide-in */
+a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: currentColor;
+  transition: width 0.25s ease;
+}
+a:hover::after {
+  width: 100%;
+}
+
+    @media (max-width: 900px) {
+      .project-layout { grid-template-columns: 1fr; }
+      .project-sidebar { order: -1; }
+    }
+    @media (max-width: 768px) {
+      .breadcrumb { padding: 16px 20px; }
+      .lesson-header { padding: 36px 24px; }
+      .project-layout { padding: 0 16px; margin: 32px auto 60px; }
+      .back-wrap { padding: 0 16px 48px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── BREADCRUMB ── -->
+<nav class="breadcrumb">
+  <a href="index.html">Room 212</a>
+  <span>/</span>
+  <a href="compsci20.html">20S Comp Sci</a>
+  <span>/</span>
+  <a href="../index.html">Unit 03</a>
+  <span>/</span>
+  <span class="current">Blackjack</span>
+</nav>
+
+<!-- ── LESSON HEADER ── -->
+<div class="lesson-header">
+  <div class="lesson-meta">
+    <span class="lesson-type-badge">Enrichment</span>
+    <span class="lesson-number">Unit 03 · Project 09</span>
+  </div>
+  <h1 class="lesson-title">Blackjack</h1>
+  <p class="lesson-subtitle">Re create a classic card game in its' entirety (well almost)</p>
+</div>
+
+<!-- ── PROJECT LAYOUT ── -->
+<div class="project-layout">
+
+  <!-- ── MAIN COLUMN ── -->
+  <div class="project-main">
+
+    <!-- Walkthrough video -->
+ 
+
+
+    <!-- Description -->
+    <div class="project-desc-section">
+
+      <h2>Project Overview</h2>
+      <p>
+
+      </p>
+      <p>
+        
+      </p>
+
+      <h3>Getting Started</h3>
+      <p>
+        Blackjack is a card game where the objective is to get as close to 21 as possible. You flip cards one-by-one, your score adding up with each flip. But be careful, as if you go over 21, you lose. Face cards (jacks, queens, kings) are worth 10, the rest of the cards are worth their respective values.
+      </p>
+
+
+
+      <h3>PHASE 1 - Setup</h3>
+     
+      <p>
+        Let's not worry about game rules just yet - let's get the initial setup done first. Create your form with 5 overlapping pictureboxes, you can name them <code>picCard1</code> through 5. These pictureboxes aren't showing any image just yet, and they are invisible. I also have a label, you can erase the text inside yours and call it <code>lblOutput</code>. And a button to draw a card named <code>btnDraw</code>
+      </p>
+
+      <figure>
+        <img src="phase1.png" alt="Description of image" />
+        <!-- <figcaption>Optional caption text here.</figcaption> -->
+      </figure>
+
+       <p>
+        We will also need to keep track of some information, so let's create some variables. Let's also include our Random tool (class)
+      </p>
+
+       <pre>
+//Random tool
+Random rand = new Random();
+
+//Hold the total score (what the cards are adding up to)
+int score;
+
+//Which card we're about to flip (more on this later . . .)
+int cardIndex = 0;
+</pre>
+
+   <h3>PHASE 2 - Generating Cards</h3>
+     
+      <p>
+        As you can imagine, there are a lot of cards that could be flipped in this game. Therefore, that would mean a lot of code. So it would be nice if we could write the code once, and re use that code. Thankfully we can - using a <code>function</code>!
+      </p>
+
+      <p>
+        Let's create a function called <code>FlipCard</code>. Anywhere in your program (outside of any existing event blocks), create this function.
+
+      </p>
+
+<pre>
+private Image DrawCard()
+{
+
+}
+</pre>
+
+      <p>
+      <code>DrawCard</code> is the name of this function. <code>Image</code> is what the function sends back to wherever we call it. <code>private</code>, you don't have to worry about.
+      </p>
+
+
+      <p>
+        Inside this function, you will need to generate a random number from 1-13 (for each of the 13 possible cards), and store this number in a variable. You will also need to create a <code>switch statement</code> that handles each case for each possible card (number)
+      </p>
+
+<pre>
+private Image DrawCard()
+{
+    //Generate a random number from 1 - 13 (you do this)
+
+    //increase the score by the random number generated (you do this)
+    //WATCH OUT FOR FACE CARDS - JACK QUEEN KING are only worth 10
+
+    switch (randomNum)
+    {
+        case 1: return Properties.Resources.card_1;
+        ...
+        ...
+        ... end with a default case for card 13
+    }
+}
+</pre>
+     <figcaption>Functions are a topic covered in a later course, so don't feel bad if you're struggling to fully understand how they work</figcaption>
+
+<h3>PHASE 3 - Drawing Cards</h3>
+     
+      <p>
+        Ok, so how do we use this function? Well, we want to use this function (that draws a card), when we click the <code>btnDraw</code> button - obviously. So let's go inside our ClickEvent for the button, and see what we can do.
+      </p>
+
+      <pre>
+private void btnDraw_Click(object sender, EventArgs e)
+{
+    if(cardIndex == 0)
+    {
+        picCard1.Image = DrawCard();
+        picCard1.Visible = true;
+    }
+    //. . . complete the rest of the if statements and increment the cardIndex variable
+
+    // also update the label to show your current score
+}
+</pre>
+
+  <p>
+        If all is well, you should be at this point. You can draw up to 5 cards and the score is updating properly
+      </p>
+ <figure>
+        <img src="phase3.png" alt="Description of image" />
+        <!-- <figcaption>Optional caption text here.</figcaption> -->
+      </figure>
+
+<h3>PHASE 4 - Game Over</h3>
+     
+      <p>
+        Right now, the player can draw up to 5 cards, even if they're over a score of 21. The player needs to lose if they go over 21. We should keep track of this loss, and allow the player to reset for another hand.
+      </p>
+
+      <pre>
+int losses;
+</pre>
+
+<p>
+        So, in the <code>ClickEvent</code> for your <code>btnDraw</code>, after all of that code that "flips a card" we should check to see <code>If</code> the player has lost (are they over a a score of 21). This is a simple <code>if statement</code>
+      </p>
+
+ 
+
+      <pre>
+if (condition)
+{
+      // game over code, and let the player play again
+}
+</pre>
+
+   <p>
+        For <code>Game Over</code>, we have to show a new PlayAgain button, and make the btnDrawCard invisible
+      </p>
+
+         <p>
+        For <code>Play Again</code>, we have to reset a bunch of our starting variables, like score, and the ard values. We have to set the pictureboxes to show null images, and bring back the <code>btnDraw</code> button. Some other little things as well
+      </p>
+
+            <p>
+        Click <a href="Blackjack phase 4.exe">here</a>  to download my game, to see where you should be at.
+      </p>
+
+      <h3>PHASE 5 - Hold/Dealer Setup</h3>
+     
+      <p>
+        We need to give the player the option to hold, and therefore allow the dealer to try and beat us. The player locks in their current score, and the dealer will try to get a higher score than the player (also without going over 21)
+      </p>
+
+         <p>
+        Create a <code>btnHold</code> button. I'm running out of space, so I put it overlapping the <code>btnPlay</code> button. You should have 3 total buttons at this point.
+      </p>
+
+       <p>
+        When the player holds, let's make the dealer play. To do this, let's use a <code>timer</code>, where each tick of the timer, is the dealer playing a card. Will give it more of a "game feel". So bring in a timer, and the <code>interval</code> is how quickly your dealer will deal their cards.
+      </p>
+
+           <p>
+    The easy part, when the <code>btnHold</code> is clicked, simply make the draw button invisible, and start the timer
+      </p>
+
+      <pre>
+btnDraw.Visible = false;
+tmrDealer.Enabled = true;
+</pre>
+
+        <p>
+    Now would be a good time to give your dealer 5 of their own pictureboxes.
+      </p>
+
+       <figure>
+        <img src="phase5.png" alt="Description of image" />
+        <!-- <figcaption>Optional caption text here.</figcaption> -->
+      </figure>
+
+        <h3>PHASE 6 - Hold/Dealer Logic</h3>
+     
+      <p>
+        This is the hardest part of the project. When the timer ticks, we need to draw cards in an almost identical way to how the player drew cards. To do that, we'll need a couple more variables.
+      </p>
+
+            <pre>
+int cardIndexDealer = 0;
+int scoreDealer = 0;
+</pre>
+
+   <p>
+        Inside the <code>tick</code> event for the timer, we're going to do a very similar thing as we did for the player. And we're going to reuse our <code>DrawCard</code> function
+      </p>
+
+                  <pre>
+private void tmrDealer_Tick(object sender, EventArgs e)
+{
+    if (cardIndexDealer == 0)
+    { 
+          picDealerCard1.Image = DrawCard();
+    }
+    /// continue for the other 4 cards...
+
+    cardIndexDealer ++;
+}    
+</pre>
+
+ <p>
+        You should have your dealer playing 5 cards when you press the hold button. Click <a href="Blackjack phase 6.exe">here</a> to see where you should be at. It looks like all is well! But it is not. Look inside your <code>DrawCard</code> function, and try to find what the issue with your DEALER using the same function is . . .
+      </p>
+
+
+       <p>
+        Did you find it?
+      </p>
+
+       <p>
+        The <code>DrawCard</code> function is adding up the player's <code>score</code>. So when the dealer uses this function, the cards are getting added to the player's score, not the dealer's score.
+      </p>
+         <figcaption>Functions should really just do one specific task. The fact that our function updates graphics, and updates score is not really good. In the future this function should be split into separate functions, but we'll learn all about that in later courses<br><br>
+       </figcaption>
+
+        <p>
+        To fix this, let's make a boolean variable called <code>playerTurn</code>
+      </p>
+
+                        <pre>
+bool playerTurn = true;
+</pre>
+
+<p>
+        It starts as true because when the game starts, it's the player who first plays. However, we know it's the dealer's turn when the user has pressed the <code>btnHold</code> button. So let's turn this boolean variable to false in the <code>ClickEvent</code> for the hold button
+      </p>
+
+                              <pre>
+bool playerTurn = false;
+</pre>
+
+<p>
+        Now we can correctly modify or <code>DrawCard</code> function. <code>IF</code> it is the player's turn, we're increase the player's score variable. <code>ELSE</code> we'll update the dealer's score variable.
+      </p>
+
+                                    <pre>
+if(playerTurn == true)
+{
+  // increase score
+}
+else 
+{
+  // increase dealer's score
+}
+</pre>
+
+ <p>Now we can update your <code>lblOutput</code> to show the dealer's score when it's their turn to flip cards.</p>
+ <p>Click <a href="Blackjack  phase 6 part 2.exe">here</a> to see where you should be at. 
+      </p>
+
+       <h3>PHASE 7 - Dealer Win</h3>
+     
+      <p>
+        If the dealer's score is higher than he player's score && the dealer is 21 or below - they win. They should stop drawing cards, the player gets a loss, the tmrDealer stops and the <code>btnPlayAgain</code> button should be visible.
+      </p>
+
+          <p>
+        Create this logic at the bottom of your timer's <code>tick</code> event
+      </p>
+
+        <figure>
+        <img src="phsae 7.png" alt="Description of image" />
+        <!-- <figcaption>Optional caption text here.</figcaption> -->
+      </figure>
+
+       <p>
+        You need a second <code>IF statement</code> to check if the dealer has lost. Well, one way the dealer can win is if they went over 21.
+      </p>
+
+       <figure>
+        <img src="phase 7 part 2.png" alt="Description of image" />
+        <!-- <figcaption>Optional caption text here.</figcaption> -->
+      </figure>
+
+       <p>
+        And finally, the last thing - if the dealer has used up their 5 cards, they can't play anymore. So make a third <code>IF statement</code> to check for this scenario, and determine who wins or loses at this point.
+      </p>
+
+       <p>Click <a href="Blackjack phase 7.exe">here</a> to see where you should be at. 
+      </p>
+      
+
+
+       <h3>PHASE 8 - Final Polish</h3>
+          <p>
+        Now you need to update the playAgain button to reset more variables and change the boolean to complete the gameplay loop. You should show total wins and losses. You can do other small things, like make sure the player can't draw another card if they've already used up their 5 cards.
+      </p>
+
+      
+
+      <!--
+      <figure>
+        <img src="images/project-example-output.png" alt="Example output"/>
+        <figcaption>An example of what the finished program's console output might look like.</figcaption>
+      </figure>
+      -->
+
+      <!-- <h3>Hints</h3>
+      <p>
+        Don't forget to turn off your timer, and reset the counter, once the <code>counter</code> has reached your <code>IF condition</code>
+      </p> -->
+
+    
+    </div>
+  </div>
+
+  <!-- ── SIDEBAR ── -->
+  <aside class="project-sidebar">
+
+    <!-- Project details -->
+    <div class="sidebar-card">
+      <p class="sidebar-card-label">Project Details</p>
+      <div class="detail-list">
+        <div class="detail-item">
+          <span class="detail-key">Unit</span>
+          <span class="detail-val">Unit 3</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-key">Language</span>
+          <span class="detail-val">C#</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-key">Type</span>
+          <span class="detail-val">Windows Form App</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-key">Difficulty</span>
+          <span class="detail-val">Very Hard</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Downloads card -->
+    <div class="sidebar-card">
+      <p class="sidebar-card-label">Downloads</p>
+      <div class="download-list">
+
+        <div class="download-item">
+         
+          
+    
+            
+            <a href="Blackjack.exe" class="download-link" download>
+              <span class="dl-icon">⬇</span>
+             Sample Program
+            </a>
+
+            <!-- OPTION B — no file this project:
+            <span class="download-none">None</span> -->
+          
+
+                 <div class="download-item">
+          <span class="download-item-label">Resources</span>
+        
+            <!-- OPTION A — link to a zip: -->
+            <a href="Card Pictures.zip" class="download-link" download>
+              <span class="dl-icon">⬇</span>
+              Card Pictures
+            </a>
+
+            <!-- OPTION B — no file this project:
+            <span class="download-none">None</span>
+          
+         <span class="download-none">None</span>  -->
+        </div>
+         
+        </div>
+
+        <!-- <hr class="download-divider"/>
+
+        <!-- <div class="download-item">
+          <span class="download-item-label">Resources</span>
+        
+            OPTION A — link to a zip: -->
+            <!-- <a href="Goblin Pictures.zip" class="download-link" download>
+              <span class="dl-icon">⬇</span>
+              Goblin Pictures
+            </a> -->
+
+            <!-- OPTION B — no file this project:
+            <span class="download-none">None</span>
+          
+         <span class="download-none">None</span>  -->
+        
+
+      </div>
+    </div>
+
+    <!-- Requirements checklist — students can check off as they go -->
+    <div class="sidebar-card">
+      <p class="sidebar-card-label">Requirements</p>
+      <div class="requirements">
+
+        <div class="req-item">
+          <div class="req-check" onclick="toggleCheck(this)">✓</div>
+          <span>Gameloop completed</span>
+        </div>
+
+        <div class="req-item">
+          <div class="req-check" onclick="toggleCheck(this)">✓</div>
+          <span>Functions Utilized</span>
+        </div>
+
+        <div class="req-item">
+          <div class="req-check" onclick="toggleCheck(this)">✓</div>
+          <span>Win/Loss logic</span>
+        </div>
+
+
+
+        
+        
+      </div>
+    </div>
+
+  </aside>
+</div>
+
+<!-- ── BACK BUTTON ── -->
+<div class="back-wrap">
+  <a href="../22 Project 08/index.html" class="back-btn">← Previous page</a>
+   <a href="../24 Project 10/index.html" class="back-btn">Next Page →</a>
+</div>
+
+<footer>
+  &copy; 2026 · Zach Brykaliuk · Computer Science/Mathematics Teacher
+</footer>
+
+<script>
+  function toggleCheck(el) {
+    el.classList.toggle('checked');
+  }
+</script>
+
+</body>
+</html>
