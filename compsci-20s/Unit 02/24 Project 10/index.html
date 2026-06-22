@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Room 212 — Project 10</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #e8e4de;
+      --paper: #141210;
+      --accent: #CE92FF;
+      --muted: #6b6560;
+      --project-color: #CE92FF;
+      --surface: #1c1a17;
+      --surface-2: #242118;
+      --border: rgba(255,255,255,0.07);
+      --border-strong: rgba(255,255,255,0.12);
+    }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    /* ── BREADCRUMB ── */
+    .breadcrumb {
+      padding: 20px 64px;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+    }
+    .breadcrumb a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .breadcrumb a:hover { color: var(--ink); }
+    .breadcrumb span { color: rgba(255,255,255,0.15); }
+    .breadcrumb .current { color: var(--ink); font-weight: 500; }
+
+    /* ── LESSON HEADER ── */
+    .lesson-header {
+      background: #0a0908;
+      padding: 48px 64px;
+      border-bottom: 3px solid var(--project-color);
+    }
+
+    .lesson-meta {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .lesson-type-badge {
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      background: rgba(76,175,69,0.15);
+      color: #ffd900;
+      border-radius: 2px;
+       animation: enrichment-glow 2s ease-in-out infinite;
+    }
+
+       
+
+
+@keyframes enrichment-glow {
+    0%, 100% { box-shadow: 0 0 4px rgba(255, 251, 0, 0.2); }
+    50%       { box-shadow: 0 0 10px rgba(255, 251, 0, 0.6); }
+}
+
+    .lesson-number {
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.25);
+    }
+
+    .lesson-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.1;
+    }
+
+    .lesson-subtitle {
+      margin-top: 10px;
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.35);
+      font-weight: 300;
+    }
+
+    /* ── MAIN LAYOUT ── */
+    .project-layout {
+      max-width: 1100px;
+      margin: 52px auto 80px;
+      padding: 0 32px;
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 40px;
+      align-items: start;
+    }
+
+    /* ── VIDEO ── */
+    .project-video-wrap {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+   
+      margin-bottom: 36px;
+    }
+
+.project-video-wrap img {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  object-fit: fill;
+}
+
+    .video-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.2);
+      font-size: 0.82rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      gap: 12px;
+      background: #0d0c0a;
+      border: 1px solid var(--border);
+    }
+    .video-placeholder .play-icon { font-size: 2.5rem; opacity: 0.2; }
+
+    .video-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    /* ── DESCRIPTION ── */
+    .project-desc-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 16px;
+    }
+
+    .project-image-wrap {
+  margin-bottom: 36px;
+}
+.project-image-wrap img {
+  width: 100%;
+  display: block;
+}
+
+    .project-desc-section p {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: #9e9790;
+      font-weight: 300;
+      margin-bottom: 20px;
+    }
+
+    .project-desc-section h3 {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin: 32px 0 12px;
+    }
+
+    /* Code blocks */
+    .project-desc-section pre {
+      background: #0a0908;
+      color:#CE92FF;
+      font-family: 'Courier New', monospace;
+      font-size: 0.88rem;
+      line-height: 1.7;
+      padding: 24px 28px;
+      margin: 16px 0 24px;
+      overflow-x: auto;
+      border-left: 3px solid var(--accent);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+    }
+
+    .project-desc-section code {
+      background: rgba(76,175,69,0.12);
+      color: var(--accent);
+      font-family: 'Courier New', monospace;
+      font-size: 0.88em;
+      padding: 2px 7px;
+      border-radius: 2px;
+    }
+
+    /* Images in description */
+    .project-desc-section figure {
+      margin: 24px 0;
+    }
+    .project-desc-section figure img {
+      width: 100%;
+      display: block;
+    }
+    .project-desc-section figcaption {
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 8px;
+      font-style: italic;
+    }
+
+    /* ── SIDEBAR ── */
+    .project-sidebar { display: flex; flex-direction: column; gap: 20px; }
+
+    .sidebar-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 28px;
+    }
+
+    .sidebar-card-label {
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+    }
+
+    /* Requirements checklist */
+    .requirements { display: flex; flex-direction: column; gap: 10px; }
+
+    .req-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 0.88rem;
+      color: var(--ink);
+      font-weight: 300;
+      line-height: 1.5;
+    }
+
+    .req-check {
+      width: 18px;
+      height: 18px;
+      border: 1.5px solid rgba(255,255,255,0.15);
+      flex-shrink: 0;
+      margin-top: 1px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      color: var(--accent);
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .req-check.checked {
+      border-color: var(--accent);
+      background: var(--accent);
+      color: #0a0908;
+    }
+
+    /* Details list */
+    .detail-list { display: flex; flex-direction: column; gap: 12px; }
+
+    .detail-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+    .detail-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .detail-item .detail-key { color: var(--muted); font-weight: 300; }
+    .detail-item .detail-val { font-weight: 500; color: var(--ink); }
+
+    /* ── DOWNLOADS CARD ── */
+    .download-list { display: flex; flex-direction: column; gap: 14px; }
+
+    .download-item {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .download-item-label {
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .download-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      background: var(--surface-2);
+      border: 1px solid var(--border-strong);
+      color: var(--ink);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 400;
+      transition: background 0.15s, border-color 0.15s, color 0.15s;
+    }
+    .download-link:hover {
+      background: rgba(76,175,69,0.1);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .download-link .dl-icon {
+      font-size: 1rem;
+      flex-shrink: 0;
+      opacity: 0.6;
+    }
+    .download-link:hover .dl-icon { opacity: 1; }
+
+    .download-none {
+      font-size: 0.85rem;
+      color: var(--muted);
+      font-style: italic;
+      padding: 4px 0;
+    }
+
+    .download-divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 2px 0;
+    }
+
+    /* ── BACK BUTTON ── */
+  .back-wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 32px 64px;
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      background: var(--surface);
+      border: 1px solid var(--border-strong);
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s, color 0.2s;
+    }
+    .back-btn:hover { background: var(--accent); color: #0a0908; transform: translateX(-3px); border-color: var(--accent); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #0a0908;
+      color: rgba(255,255,255,0.2);
+      text-align: center;
+      padding: 32px;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      border-top: 1px solid var(--border);
+    }
+
+    /* Base link styling */
+.project-desc-section a {
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 600;
+  position: relative;
+  transition: color 0.2s ease;
+}
+
+.project-desc-section a::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: currentColor;
+  transition: width 0.25s ease;
+}
+.project-desc-section a:hover::after {
+  width: 100%;
+}
+
+    @media (max-width: 900px) {
+      .project-layout { grid-template-columns: 1fr; }
+      .project-sidebar { order: -1; }
+    }
+    @media (max-width: 768px) {
+      .breadcrumb { padding: 16px 20px; }
+      .lesson-header { padding: 36px 24px; }
+      .project-layout { padding: 0 16px; margin: 32px auto 60px; }
+      .back-wrap { padding: 0 16px 48px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── BREADCRUMB ── -->
+<nav class="breadcrumb">
+  <a href="../../../index.html">Room 212</a>
+  <span>/</span>
+  <a href="../../index.html">20S Comp Sci</a>
+  <span>/</span>
+  <a href="../index.html">Unit 02</a>
+  <span>/</span>
+  <span class="current">Arena Fight</span>
+</nav>
+
+<!-- ── LESSON HEADER ── -->
+<div class="lesson-header">
+  <div class="lesson-meta">
+    <span class="lesson-type-badge">Enrichment</span>
+    <span class="lesson-number">Unit 02 · Project 10</span>
+  </div>
+  <h1 class="lesson-title">Arena Fight</h1>
+  <p class="lesson-subtitle">Create a fighter with attributes to see if you can survive the arena!</p>
+</div>
+
+<!-- ── PROJECT LAYOUT ── -->
+<div class="project-layout">
+
+  <!-- ── MAIN COLUMN ── -->
+  <div class="project-main">
+
+    <!-- Walkthrough video -->
+    <p class="video-label">Project Walkthrough</p>
+
+  <div class="project-image-wrap">
+    <img src="1.png" alt="Example program output"/>
+  </div>
+
+    <!-- Description -->
+    <div class="project-desc-section">
+
+ 
+        
+  
+
+      <h3>Part 1 - Setup</h3>
+      <p>
+        To start, create a new program that looks like mine above. My form has a background image, a picturebox, 4 labels, 1 textbox and 1 button. I have some image resources you can download, where you can choose from some already created characters. My characters have three different poses each, one for idle, idle_attack, and attack. Whatever character you choose, choose the <code>idle</code> image to start.
+      </p>
+
+      <p>ALSO CHANGE THE <code>DoubleBuffered</code> property of your form to be <code>TRUE</code>. This makes your form a lot less laggy!</p>
+
+          <h3>Part 2 - Trackbars</h3>
+      <p>
+        As you can see, our character has three attributes - <code>Strength</code>, <code>Agility</code>, and <code>Vitality</code>. More on these attributes later, but first we need to give our user a way to set these attributes.
+      </p>
+
+    
+      <p>We're gonna use something new - <code>Trackbars.</code> Add three trackbar controls to your program. I have also added three more labels to show the values of each trackbar.
+      </p>
+
+       <div class="project-image-wrap">
+    <img src="2.png" alt="Example program output"/>
+  </div>
+
+      <p>We can also change the following properties of these trackbars:</p>
+      <p><code>Maximum</code> - set to 100</p>
+      <p><code>Minimum</code> - set to 0</p>
+      <p><code>TickStyle</code> - set to none</p>
+       <p><code>Name</code> - use <code>tb</code> as the prefix</p>
+
+      <p>What these trackbars do is allow the user to slide to a value between our minimum and maximum. In this case, our min is 0 and our max is 100 - so they can choose any value between 0 and 100.</p>
+
+      <h3>Part 3 - Variables</h3>
+      <p>We're going to need a lot of variables, but let's start simple - the 3 attributes. These are whole numbers from 0-100, so choose the appropriate variable type, and create three variables for <code>strength</code>, <code>agility</code>, and <code>vitality</code>. They should be set to 0. I guess you can also create one for the <code>characterName</code>.</p>
+
+            <h3>Part 4 - Scroll Event</h3>
+      <p>When the user "scrolls", we must store that number into the correct attribute variable. So if they scroll to <code>80</code> on the strength trackbar, our strength variable must be set to 80. Double click your trackbar to add a scroll event. </p>
+
+      <pre>private void tbStrength_Scroll(object sender, EventArgs e)
+{
+
+}</pre>
+
+<p>Inside out code event, we need two lines of code, but you have to come up with them yourself.</p>
+
+      <pre>private void tbStrength_Scroll(object sender, EventArgs e)
+{
+  // set the value of strength to be equal to the .Value of the trackbar.
+  // update the label to show the value of our strength variable.
+}</pre>
+
+<p>Do this for each of the three trackbars. Your program should function like <a href="sample after part 4.exe">THIS</a> when you are done.</p>
+
+<h3>Part 5 - Constraints</h3>
+<p>Now what fun would this program be if the user was free to set the attributes as they pleased - they'd always set them to 100. Let's only give them 150 points to spend, so they have to be smart with their choices. Let's create an <code>attributePointsLeft</code> variable and set it equal to 150. You might not see it yet, but you will need this constant to help you with the next part's math.</p>
+
+<pre>int attributePointsLeft = 150;
+const int INITIAL_ATTRIBUTE_POINTS = 150;
+</pre>
+
+<p>Now back in your trackbar scroll events, you have to come up with a way to accurately update this <code>attributePointsLeft</code> variable. You will need to perform some math, using almost all of the variables we have created so far. This is tricky, but a good problem for you to solve on your own. Good luck.</p>
+
+<p>You can also create a new label to update and showcase this information to the user.</p>
+
+     <div class="project-image-wrap">
+    <img src="3.png" alt="Example program output"/>
+  </div>
+
+  <h3>Part 6 - Negative Attribute Points</h3>
+  <p>Once you figure out the previous part, you run into a new issue. The <code>attributePointsLeft</code> variable can be negative. This is no good. So in each of the three scroll events, we're going to use an <code>if statement</code> to fix this. <code>If Statements</code> are a topic in next unit, so we'll dive more into them later, but for now we can do this.</p>
+
+  <p>At the bottom of each trackbar scroll event, you'll need something like this:</p>
+
+  <pre>if (attributePointsLeft >= 0)
+{
+    // show how many attribute points they have left like you did before.
+    // make the FIGHT button visible.
+}
+
+if (attributePointsLeft < 0)
+{
+    // tell the user they have spent too many attribute points.
+    // mnake the FIGHT button invisible.
+}
+  </pre>
+
+  <p>Your program should work like <a href="sample after part 6.exe">THIS</a> when you are complete.</p>
+
+  <h3>Part 7 - Attributes to Combat Stats</h3>
+  <p>We've got these attributes, but they don't really mean to much to us. In a fighting game, stats like these mean more:</p>
+
+  <pre>int playerDamage;
+int playerAttackSpeed;
+int playerHealth;</pre>
+
+<p>Add these variables at the top of your program. What we now need to do, is use our previous attributes to calculate values for these new variables. We will do this when the user clicks the FIGHT button.</p>
+
+<p>Sometimes good code doesn't equate to good game logic. So I will show you my calculations for deriving game stats from these attributes</p>
+
+<pre>playerDamage = 10 + (int) ((strength * 0.7) + (agility * 0.3));
+playerAttackSpeed = 1000 - (agility * 5) - (strength * 2);
+playerHealth = 100 + (vitality * 8) + (strength * 2);</pre>
+
+<p>What I'm trying to do here, is end up with a health around 1000, an attack speed around 1000 (one second), and a maxHealth around 100. BUT how the user chooses their attributes will affect these numbers, giving some deviation between different builds.</p>
+
+<p>This is a simple way MMORPG games can take attributes and calculate combat stats from them. Pretty cool!</p>
+
+<p>Our enemy, we can just hard code its' combat stats, since they're not creating their own character.</p>
+
+<pre>// Add these variables back at the top under the Partial class
+enemyAttackSpeed = 1000;
+enemyHealth = 800;
+enemyDamage = 90;
+</pre>
+
+
+<h3>Part 8 - Fight Setup</h3>
+
+<p>Now that our calculations and character creation is complete, let's get the fight ready. First, we are going to need to make a bunch of controls invisible, while making some new controls visible.</p>
+
+<p>A bit of a pain, but make all those controls on your screen invisible. You'll also need to create some new pictureboxes, one for the player's <code>character_attack_idle</code> pose and one for the enemy you have chosen. You'll also need to show the health of the player and enemy, showing the correct health from the previous variables.</p>
+
+    <div class="project-image-wrap">
+    <img src="4.png" alt="Example program output"/>
+  </div>
+
+<h3>Part 9 - The Fight</h3>
+
+<p>To simulate the fight, we will need two timers. a <code>tmrPlayer</code> and a <code>tmrEnemy</code>. Turn these timers on at the bottom of your FIGHT button event, and set their <code>intervals</code> to the player's attackSpeed, and the enemyAttackspeed. Also remember to enable the timers!</p> 
+
+<p>The timer tick events work very similar. For example, in <code>tmrPlayer</code>, each time it ticks you will need to decrease the enemy health by the damage of the player. Then update the label to show the new health of the enemy. Do the exact same, but opposite for the <code>tmrEnemy</code></p>
+
+<p>Your program should function like <a href="sample after part 9.exe">THIS</a> when you are done.</p>
+
+<h3>Part 10 - Who Wins</h3>
+
+<p>At the bottom of each timer tick event, you need to check if the OTHER opponent has been defeated. We can do this with a simple <code>If Statement</code></p>
+
+<p>For example, in <code>tmrPlayer</code> we can check if we've defeated the enemy</p>
+
+<pre>if (enemyHealth <= 0)
+{
+    // The enemy has died.
+    // Put code in here to stop the timers.
+    // Put code in here to hide the enemy, and let the user know they won
+    // Hide labels, show labels, change image back to idle
+}</pre>
+
+<p>Your program should function like <a href="sample after part 10.exe">THIS</a> when you are done.</p>
+
+<h3>Final Touches</h3>
+
+<p>I want to show you one last thing you can do to improve the visuals of your game. Create two new timers, and call them <code>tmrPlayerHitFX</code>, and <code>tmrEnemyHitFX</code>. We're going to use these timers to update the graphical effects of our game. Set the <code>intervals</code> of each timer to <code>300</code></p>
+
+<p>We're also going to use some "Hit Splats" - to show how much damage each opponent is doing. Create two new labels and call them <code>lblPlayerHitSplat</code> and <code>lblEnemyHitSplat</code></p>
+
+
+    <div class="project-image-wrap">
+    <img src="5.png" alt="Example program output"/>
+  </div>
+
+  <p>In your main <code>tmrPlayer</code>, at the bottom of the tick event (BUT BEFORE THE IF STATEMENT), We will need 5 more lines of code:</p>
+  
+<pre>
+private void tmrPlayer_Tick(object sender, EventArgs e)
+{
+        // you already coded this
+        enemyHealth -= playerDamage;
+        lblEnemyHealth.Text = "Health: " + enemyHealth;
+
+        // IN HERE COPY ...
+            // Change the picture of the player to the _attack pose
+            // Change the text of the enemyhitsplat to the player's damage
+            // Turn the visibility of the enemyhitsplat label on
+            // lblEnemyHitSplat.BringToFront();  <- add this line of code
+            // Turn the enemy hit FX timer on
+        // ... UNTIL HERE
+
+        if (enemyHealth <= 0)
+        {
+          // you already coded this
+        }
+}</pre>
+
+  <p>Then go inside your tick event for the <code>tmrEnemyHitFX</code>, turn the visibility of the enemy hit splat back to false, and turn the <code>tmrEnemyHitFX</code> timer back off. Reset your player's image to the <code>player_attack_idle</code> pose</p>
+
+  <p>So what we've done, is we've shown some new visuals, and used our new FX timers to make the visuals go away.</p>
+
+  <p>You're going to have to repeat the same process, except do the opposite for the enemy now - inside <code>tmrEnemy</code> and <code>tmrPlayerHITFX</code>.</p>
+
+  <p>If you made it this far, congratulations on creating a VERY HARD program! Now all that's left to do is defeat the enemy!</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      <!--
+      <figure>
+        <img src="images/project-example-output.png" alt="Example output"/>
+        <figcaption>An example of what the finished program's console output might look like.</figcaption>
+      </figure>
+      -->
+
+
+
+    </div>
+  </div>
+
+  <!-- ── SIDEBAR ── -->
+  <aside class="project-sidebar">
+
+    <!-- Project details -->
+    <div class="sidebar-card">
+      <p class="sidebar-card-label">Project Details</p>
+      <div class="detail-list">
+        <div class="detail-item">
+          <span class="detail-key">Unit</span>
+          <span class="detail-val">Unit 02</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-key">Language</span>
+          <span class="detail-val">C#</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-key">Type</span>
+          <span class="detail-val">Windows Form App</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-key">Difficulty</span>
+          <span class="detail-val">Very Hard</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Downloads card -->
+    <div class="sidebar-card">
+      <p class="sidebar-card-label">Downloads</p>
+      <div class="download-list">
+
+        <div class="download-item">
+          <span class="download-item-label">Executable</span>
+          <a href="Arena Tournament.exe" class="download-link" download>
+              <span class="dl-icon">⬇</span>
+              Arena Tournament
+            </a>
+
+             <span class="download-item-label">Resources</span>
+          <a href="Arena Resources.zip" class="download-link" download>
+              <span class="dl-icon">⬇</span>
+              Arena Resources
+            </a>
+         
+            
+       
+ <!--
+            OPTION B — no file this project:
+            <span class="download-none">None</span>
+          -->
+         
+        </div>
+
+        <hr class="download-divider"/>
+
+        <!-- <div class="download-item">
+          <span class="download-item-label">Resources</span>
+         
+          
+            <a href="Resources.zip" class="download-link" download>
+              <span class="dl-icon">⬇</span>
+              project-resources.zip
+            </a> 
+
+           
+         
+          
+        </div> -->
+
+      </div>
+    </div>
+
+    <!-- Requirements checklist — students can check off as they go -->
+    <div class="sidebar-card">
+      <p class="sidebar-card-label">Requirements</p>
+      <div class="requirements">
+
+        <div class="req-item">
+          <div class="req-check" onclick="toggleCheck(this)">✓</div>
+          <span>Using trackbar's to set variable values</span>
+        </div>
+
+        <div class="req-item">
+          <div class="req-check" onclick="toggleCheck(this)">✓</div>
+          <span>Performing variable math to create game logic</span>
+        </div>
+
+        <div class="req-item">
+          <div class="req-check" onclick="toggleCheck(this)">✓</div>
+          <span>Using <code>If Statements</code> to determine game logic</span>
+        </div>
+
+
+                   <div class="req-item">
+          <div class="req-check" onclick="toggleCheck(this)">✓</div>
+          <span>Completing the game loop</span>
+        </div>
+
+        </div>
+
+ 
+
+        
+        
+      </div>
+    </div>
+
+  </aside>
+</div>
+
+<!-- ── BACK BUTTON ── -->
+<div class="back-wrap">
+  <a href="../23 Project 09/index.html" class="back-btn">← Previous page</a>
+   <a href="../../index.html" class="back-btn">Next Page →</a>
+</div>
+
+<footer>
+  &copy; 2026 · Zach Brykaliuk · Computer Science/Mathematics Teacher
+</footer>
+
+<script>
+  function toggleCheck(el) {
+    el.classList.toggle('checked');
+  }
+</script>
+
+</body>
+</html>

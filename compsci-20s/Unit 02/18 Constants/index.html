@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Room 212 — Enter & TextChanged Event</title>
+  <title>Room 212 — Constants</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -346,23 +346,23 @@
   <span>/</span>
   <a href="../index.html">Unit 02</a>
   <span>/</span>
-  <span class="current">Lesson 07</span>
+  <span class="current">Lesson 09</span>
 </nav>
 
 <!-- ── LESSON HEADER ── -->
 <div class="lesson-header">
   <div class="lesson-meta">
     <span class="lesson-type-badge">Video Lesson</span>
-    <span class="lesson-number">Unit 02 · Lesson 07</span>
+    <span class="lesson-number">Unit 02 · Lesson 09</span>
   </div>
-  <h1 class="lesson-title">Enter & TextChanged</h1>
+  <h1 class="lesson-title">Constants</h1>
 </div>
 
 <!-- ── VIDEO ── -->
 <div class="video-section">
   <div class="video-outer">
     <div class="video-wrap">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/C5oHcHjZzYE?si=oIQkdkqolaP5OnDx" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/kN7vLz6qK_E?si=ZSmY6k6VxKp-PdKN" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     </div>
   </div>
 </div>
@@ -371,58 +371,72 @@
 <article class="article">
 
   <p class="article-intro">
-    We've really used one main event, and that is the <code>click event</code> - clicking on something. There are many other events. For example, the <code>Enter</code> and <code>TextChanged</code> events are specific to textboxes, and allow us to do some cool things.
+    We've seen <code>strings</code>, <code>integers</code> and <code>doubles</code>. We can do something to these variables if we know their values are NEVER going to change.
   </p>
 
-  <h2>Enter Event</h2>
+  <h2>Constants</h2>
   <p>
-    The <code>Enter</code> event executes code when the textbox receives focus. That is, the user has clicked on it, or has tabbed to it.
-    
+    Sometimes, you will have values in your code that should never change while the program is running. These values are called constants. A constant is a variable whose value is set once and cannot be changed later when our program runs.
   </p>
 
   
-  <pre>private void txbName_Enter(object sender, EventArgs e)
-{
- 
-}</pre>
+  <pre>int hoursInAYear = 8760;</pre>
 
-<p>We can use this event primarily for one "Quality of Life" feature. That is, highlight all the text in the textbox when the user tabs to it. This is achieved with using the <code>SelectAll()</code> method</p>
+<p>Above, I have an integer variable storing the total numebr of hours in a year. This is a perfect situation to use a constant, because this value will never change</p>
 
-  <pre>private void txbName_Enter(object sender, EventArgs e)
-{
-    txbName.SelectAll();
-}</pre>
+<pre>const int HOURS_IN_A_YEAR = 8760;</pre>
 
-  <h2>TextChanged Event</h2>
-  <p>
-    The <code>TextChanged</code> event executes code each time a character is typed or deleted into a textbox.
+<p>Above, I have used the <code>const</code> keyword to make this variable a constant. You will no longer be able to change its' value later on in your code.</p>
+
+<p>Also note the naming difference. You don't need to change the name for this to work, but constants follow a different naming convention than normal variables.</p>
+
+<h2>Screaming Snake Case</h2>
+
+<p>When naming constants, we use <code>SCREAMING_SNAKE_CASE</code>, not <code>camelCase</code>. This means you use ALL_CAPITAL_LETTERS, and you join words with <code>_</code> underscores.</p>
+
+<pre>
+  const int hoursInADay = 24;      // named incorrectly
+  const int HOURS_IN_A_DAY = 24;   // named correctly
+</pre>
+
+<h2>Magic Numbers</h2>
+ <p>
+    Another reason to use constants is to eliminate something called <code>Magic Numbers</code>. Look at the below code:
   </p>
 
-  
-  <pre>private void txbName_TextChanged(object sender, EventArgs e)
-{
-    
-}</pre>
+  <pre>double income = hoursWorked * 20.5;</pre>
 
-<p>This event is quite versatile - we can do a lot with it. But since we're just learning about it, we'll keep it simple.</p>
+   <p>
+    Hopefully you can see that I'm trying to calculate how much money is being made, but maybe you're unsure what the 20.5 is doing.
+  </p>
 
-<p>For now, a nice "Quality of Life" feature is to hide previous outputs when the user types a new input. What I mean by that, is imagine the user has typed in a number in a textbox, you've done a calculation, and output some result to the user. If the user goes back to change the original number they typed, we should probably hide our previous output, because it doesn't match the new input.</p>
+   <p>
+    Sure, you can probably assume that the 20.5 represents how much money is made per hour, but we don't want to assume in programming. We want our code to be clear, readable and understood by ANYONE that looks at it.
+  </p>
 
-  <pre>private void txbName_Enter(object sender, EventArgs e)
-{
-    lblOutput.Text = "";
-}</pre>
+   <pre>double income = hoursWorked * HOULRY_WAGE;</pre>
 
+      <p>
+    Now there's no confusion. I know exactly what's being calculated, and I know what each piece of information in that calculation statement represents.
+  </p>
+
+  <!-- <div class="callout">
+    <p class="callout-label">REMEMBER</p>
+    <p><code>double</code> is the variable type</p>
+     <p><code>cost</code> is the variable name</p>
+      <p><code>89.99</code> is the variable value</p>
+  </div> -->
 
 
   <!-- Key takeaways -->
   <div class="takeaways">
     <p class="takeaways-label">Key Takeaways</p>
     <ul>
-      <li><code>Enter</code> & <code>TextChanged</code> events are for Textboxes</li>
-      <li><code>Enter</code> executes code when the user tabs into a textbox</li>
-       <li><code>TextChanged</code> executes code when the user types or deletes a character into the textbox</li>
-        <li>These two events should be included in all of your future projects that have textboxes</li>
+      <li><code>const</code> makes a variable a constant.</li>
+      <li>Constants cannot change value once they're set</li>
+      <li>Use constants if you have a variable that won't change value</li>
+      <li>Use constants to replace Magic Numbers in your code (Numbers without meaning)</li>
+      <li>Constants make your code easier to read and easier to change</li>
     </ul>
   </div>
 
@@ -431,8 +445,8 @@
 
 <!-- ── BACK BUTTON ── -->
 <div class="back-wrap">
-  <a href="../14 Project 05/index.html" class="back-btn">← Previous page</a>
-   <a href="../16 Project 06/index.html" class="back-btn">Next Page →</a>
+  <a href="../17 Doubles/index.html" class="back-btn">← Previous page</a>
+   <a href="../19 Checkpoint after constants/index.html" class="back-btn">Next Page →</a>
 </div>
 
 <footer>
