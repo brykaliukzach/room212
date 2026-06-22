@@ -3,23 +3,24 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Room 212 — 20S CS · Unit 1</title>
+  <title>Room 212 — 20S CS · Unit 01</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
-  <link rel="icon" href="/images/favicon.png">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --ink: #ffffff;
-      --paper: #1a1a1a;
-      --surface: #222222;
-      --surface2: #2a2a2a;
+      --ink: #e8e4de;
+      --paper: #141210;
+      --surface: #1c1a17;
+      --surface2: #242118;
       --border: rgba(255,255,255,0.07);
       --accent: #CE92FF;
-      --muted: rgba(255,255,255,0.4);
-      --video-color: #3574c0;
-      --quiz-color: #d43b3b;
-      --project-color: #2d952b;
+      --muted: #6b6560;
+      --lesson-color: #60a5fa;
+      --checkpoint-color: #f97316;
+      --project-color: #7cf57a;
+      --enrichment-color: rgb(249, 220, 0);
+
     }
 
     html { font-size: 16px; scroll-behavior: smooth; }
@@ -41,7 +42,7 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      background: #111111;
+     background: var(--surface);
       border-bottom: 1px solid var(--border);
     }
     .breadcrumb a {
@@ -50,14 +51,12 @@
       transition: color 0.2s;
     }
     .breadcrumb a:hover { color: var(--ink); }
-    .breadcrumb span { color: rgba(255,255,255,0.4); }
+    .breadcrumb span { color: rgba(255,255,255,0.15); }
     .breadcrumb .current { color: var(--ink); font-weight: 500; }
 
     /* ── UNIT HEADER ── */
     .unit-header {
-     background:
-        linear-gradient(to bottom, rgba(10,10,10,0.3) 0%, rgba(36, 36, 36, 0.88) 100%),
-        url('') center/cover no-repeat;
+      background: #0a0908;
       padding: 52px 64px;
       border-bottom: 3px solid var(--accent);
     }
@@ -66,7 +65,7 @@
       font-size: 0.75rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: A6A6A6;
+      color: rgba(255,255,255,0.3);
       margin-bottom: 12px;
     }
 
@@ -85,7 +84,7 @@
 
     .unit-header-desc {
       font-size: 1rem;
-      color: A6A6A6;
+      color: rgba(255,255,255,0.45);
       font-weight: 300;
       max-width: 580px;
       line-height: 1.7;
@@ -104,7 +103,7 @@
       font-size: 0.75rem;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.45);
+      color: rgba(255,255,255,0.35);
     }
 
     .unit-meta-pill .dot {
@@ -112,9 +111,10 @@
       height: 8px;
       border-radius: 50%;
     }
-    .dot-video   { background: var(--video-color); }
-    .dot-quiz    { background: var(--quiz-color); }
+    .dot-lesson   { background: var(--lesson-color); }
+    .dot-checkpoint    { background: var(--checkpoint-color); }
     .dot-project { background: var(--project-color); }
+    .dot-enrichment { background: var(--enrichment-color); }
 
     /* ── LESSONS LIST ── */
     .lessons-wrap {
@@ -127,7 +127,7 @@
       font-size: 0.72rem;
       letter-spacing: 0.22em;
       text-transform: uppercase;
-      color:rgba(255,255,255,0.45);
+      color: rgba(255,255,255,0.25);
       margin-bottom: 20px;
       padding-bottom: 12px;
       border-bottom: 1px solid var(--border);
@@ -150,7 +150,7 @@
     .lesson-card:hover {
       transform: translateX(4px);
       box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-      border-color: #bba7f4
+      border-color: rgba(208, 122, 245, 0.15);
     }
 
     /* ── CHECKMARK ── */
@@ -176,12 +176,12 @@
     }
 
     .lesson-card.done {
-      background: #a78bfa20;
-      border-color: #a78bfa72;
+      background: #281e2a;
+      border-color: rgba(235, 122, 245, 0.12);
     }
 
     .lesson-card.done .lesson-title {
-      color: rgba(255, 255, 255, 0.298);
+      color: rgba(255,255,255,0.3);
     }
 
     /* ── TYPE TAGS ── */
@@ -193,13 +193,23 @@
       padding: 4px 10px;
       border-radius: 2px;
       flex-shrink: 0;
-      width: 64px;
+      width: 100px;
       text-align: center;
     }
 
-    .tag-video   { background: rgba(96,165,250,0.12);  color: var(--video-color); }
-    .tag-quiz    { background: rgba(249,115,22,0.12);   color: var(--quiz-color); }
+    .tag-lesson   { background: rgba(96,165,250,0.12);  color: var(--lesson-color); }
+    .tag-checkpoint    { background: rgba(249,115,22,0.12);   color: var(--checkpoint-color); }
     .tag-project { background: rgba(124,245,122,0.12);  color: var(--project-color); }
+    .tag-enrichment {
+    background: rgba(255, 251, 0, 0.12);
+    color: var(--enrichment-color);
+    animation: enrichment-glow 2s ease-in-out infinite;
+}
+
+@keyframes enrichment-glow {
+    0%, 100% { box-shadow: 0 0 4px rgba(255, 251, 0, 0.2); }
+    50%       { box-shadow: 0 0 10px rgba(255, 251, 0, 0.6); }
+}
 
     .lesson-title {
       flex: 1;
@@ -220,10 +230,12 @@
       transform: translateX(3px);
     }
 
+    
+
     /* ── FOOTER ── */
     footer {
-      background: #111111;
-      color: rgba(255, 255, 255, 0.496);
+      background: #0a0908;
+      color: rgba(255,255,255,0.2);
       text-align: center;
       padding: 32px;
       font-size: 0.78rem;
@@ -243,309 +255,272 @@
 
 <!-- ── BREADCRUMB ── -->
 <nav class="breadcrumb">
-  <a href="/index.html">Room 212</a>
+  <a href="../../index.html">Room 212</a>
   <span>/</span>
-  <a href="/Comp Sci 20S/index.html">20S Comp Sci</a>
+  <a href="../index.html">20S Comp Sci</a>
   <span>/</span>
-  <span class="current">Unit 1</span>
+  <span class="current">Unit 01</span>
 </nav>
 
 <!-- ── UNIT HEADER ── -->
 <div class="unit-header">
-  <p class="unit-header-eyebrow">20S Computer Science · Unit 1</p>
-  <h1 class="unit-header-title"><em>Controls</em></h1>
-  <p class="unit-header-desc">Design and implement Windows Forms GUIs while learning to add, configure, and manipulate controls.</p>
+  <p class="unit-header-eyebrow">20S Computer Science · Unit 01</p>
+  <h1 class="unit-header-title">Controls</h1>
+  <p class="unit-header-desc">Adding and programming Controls for your forms</p>
   <div class="unit-header-meta">
-    <div class="unit-meta-pill"><span class="dot dot-video"></span> 25 Videos</div>
-    <div class="unit-meta-pill"><span class="dot dot-quiz"></span> 8 Quizzes</div>
-    <div class="unit-meta-pill"><span class="dot dot-project"></span> 7 Projects</div>
+    <div class="unit-meta-pill"><span class="dot dot-lesson"></span> 9 Lessons</div>
+    <div class="unit-meta-pill"><span class="dot dot-checkpoint"></span> 4 Checkpoints</div>
+    <div class="unit-meta-pill"><span class="dot dot-project"></span> 8 Projects</div>
+    <div class="unit-meta-pill"><span class="dot dot-enrichment"></span> 2 Enrichments</div>
   </div>
 </div>
 
 <!-- ── LESSONS ── -->
 <div class="lessons-wrap">
-  <p class="lessons-heading">40 Lessons</p>
+  <p class="lessons-heading">23 Modules</p>
   <div class="lessons">
 
-    <a href="compsci20-unit1-lesson01.html" class="lesson-card" data-lesson="01">
+    <a href="01 Variables/index.html" class="lesson-card" data-lesson="01">
       <span class="lesson-check">✓</span>
-      <span class="lesson-type-tag tag-video">Video</span>
-      <span class="lesson-title">Welcome to Computer Science</span>
+      <span class="lesson-type-tag tag-lesson">Lesson</span>
+      <span class="lesson-title">Creating a Program</span>
       <span class="lesson-arrow">→</span>
     </a>
 
-    <a href="compsci20-unit1-lesson02.html" class="lesson-card" data-lesson="02">
+     <a href="01 Variables/index.html" class="lesson-card" data-lesson="01">
       <span class="lesson-check">✓</span>
-      <span class="lesson-type-tag tag-video">Video</span>
-      <span class="lesson-title">What is a Program?</span>
+      <span class="lesson-type-tag tag-lesson">Lesson</span>
+      <span class="lesson-title">Setting Up a Program</span>
       <span class="lesson-arrow">→</span>
     </a>
 
-    <a href="compsci20-unit1-lesson03.html" class="lesson-card" data-lesson="03">
+    
+     <a href="01 Variables/index.html" class="lesson-card" data-lesson="01">
       <span class="lesson-check">✓</span>
-      <span class="lesson-type-tag tag-video">Video</span>
-      <span class="lesson-title">Setting Up Visual Studio</span>
+      <span class="lesson-type-tag tag-lesson">Lesson</span>
+      <span class="lesson-title">Controls</span>
       <span class="lesson-arrow">→</span>
     </a>
 
-    <a href="compsci20-unit1-lesson04.html" class="lesson-card" data-lesson="04">
+    <a href="02 checkpoint variables/index.html" class="lesson-card" data-lesson="02">
       <span class="lesson-check">✓</span>
-      <span class="lesson-type-tag tag-video">Video</span>
-      <span class="lesson-title">Your First C# Program — Hello World</span>
+      <span class="lesson-type-tag tag-checkpoint">Checkpoint</span>
+      <span class="lesson-title">Checkpoint</span>
       <span class="lesson-arrow">→</span>
     </a>
 
-    <a href="compsci20-unit1-lesson05.html" class="lesson-card" data-lesson="05">
+      <a href="03 Storing User Input/index.html" class="lesson-card" data-lesson="03">
       <span class="lesson-check">✓</span>
-      <span class="lesson-type-tag tag-quiz">Quiz</span>
-      <span class="lesson-title">Checkpoint — Getting Started</span>
+      <span class="lesson-type-tag tag-lesson">Lesson</span>
+      <span class="lesson-title">Control Properties</span>
       <span class="lesson-arrow">→</span>
     </a>
 
-    <a href="compsci20-unit1-lesson06.html" class="lesson-card" data-lesson="06">
-      <span class="lesson-check">✓</span>
-      <span class="lesson-type-tag tag-video">Video</span>
-      <span class="lesson-title">Variables & Data Types</span>
-      <span class="lesson-arrow">→</span>
-    </a>
-
-    <a href="compsci20-unit1-lesson07.html" class="lesson-card" data-lesson="07">
-      <span class="lesson-check">✓</span>
-      <span class="lesson-type-tag tag-video">Video</span>
-      <span class="lesson-title">Integers, Strings & Booleans</span>
-      <span class="lesson-arrow">→</span>
-    </a>
-
-    <a href="compsci20-unit1-lesson08.html" class="lesson-card" data-lesson="08">
-      <span class="lesson-check">✓</span>
-      <span class="lesson-type-tag tag-video">Video</span>
-      <span class="lesson-title">Declaring and Assigning Variables</span>
-      <span class="lesson-arrow">→</span>
-    </a>
-
-    <a href="compsci20-unit1-lesson09.html" class="lesson-card" data-lesson="09">
+       <a href="04 Project 01/index.html" class="lesson-card" data-lesson="04">
       <span class="lesson-check">✓</span>
       <span class="lesson-type-tag tag-project">Project</span>
-      <span class="lesson-title">Project — Mad Libs Generator</span>
+      <span class="lesson-title">Card Flip</span>
       <span class="lesson-arrow">→</span>
     </a>
 
-    <a href="compsci20-unit1-lesson10.html" class="lesson-card" data-lesson="10">
+         <a href="05 Setting Variables/index.html" class="lesson-card" data-lesson="05">
       <span class="lesson-check">✓</span>
-      <span class="lesson-type-tag tag-quiz">Quiz</span>
-      <span class="lesson-title">Checkpoint — Variables & Data Types</span>
+      <span class="lesson-type-tag tag-lesson">Lesson</span>
+      <span class="lesson-title">.Image & .Text Properties</span>
       <span class="lesson-arrow">→</span>
     </a>
 
-    <a href="compsci20-unit1-lesson11.html" class="lesson-card" data-lesson="11">
+        <a href="02 checkpoint variables/index.html" class="lesson-card" data-lesson="02">
       <span class="lesson-check">✓</span>
-      <span class="lesson-type-tag tag-video">Video</span>
-      <span class="lesson-title">Console Input with ReadLine()</span>
+      <span class="lesson-type-tag tag-checkpoint">Checkpoint</span>
+      <span class="lesson-title">Checkpoint</span>
       <span class="lesson-arrow">→</span>
     </a>
 
-    <a href="compsci20-unit1-lesson12.html" class="lesson-card" data-lesson="12">
-      <span class="lesson-check">✓</span>
-      <span class="lesson-type-tag tag-video">Video</span>
-      <span class="lesson-title">Console Output with WriteLine()</span>
-      <span class="lesson-arrow">→</span>
-    </a>
-
-    <a href="compsci20-unit1-lesson13.html" class="lesson-card" data-lesson="13">
-      <span class="lesson-check">✓</span>
-      <span class="lesson-type-tag tag-video">Video</span>
-      <span class="lesson-title">String Concatenation & Interpolation</span>
-      <span class="lesson-arrow">→</span>
-    </a>
-
-    <a href="compsci20-unit1-lesson14.html" class="lesson-card" data-lesson="14">
+         <a href="06 Project 02/index.html" class="lesson-card" data-lesson="06">
       <span class="lesson-check">✓</span>
       <span class="lesson-type-tag tag-project">Project</span>
-      <span class="lesson-title">Project — Personal Info Card</span>
+      <span class="lesson-title">Flags</span>
       <span class="lesson-arrow">→</span>
     </a>
-
-    <a href="compsci20-unit1-lesson15.html" class="lesson-card" data-lesson="15">
+  
+       <a href="07 Integers/index.html" class="lesson-card" data-lesson="03">
       <span class="lesson-check">✓</span>
-      <span class="lesson-type-tag tag-quiz">Quiz</span>
-      <span class="lesson-title">Checkpoint — Input & Output</span>
+      <span class="lesson-type-tag tag-lesson">Lesson</span>
+      <span class="lesson-title">Finding Audio</span>
       <span class="lesson-arrow">→</span>
     </a>
 
-    <a href="compsci20-unit1-lesson16.html" class="lesson-card" data-lesson="16">
+     
+       <a href="07 Integers/index.html" class="lesson-card" data-lesson="03">
       <span class="lesson-check">✓</span>
-      <span class="lesson-type-tag tag-video">Video</span>
-      <span class="lesson-title">Arithmetic Operators</span>
+      <span class="lesson-type-tag tag-lesson">Lesson</span>
+      <span class="lesson-title">Adding Audio To A Project</span>
       <span class="lesson-arrow">→</span>
     </a>
 
-    <a href="compsci20-unit1-lesson17.html" class="lesson-card" data-lesson="17">
+           <a href="07 Integers/index.html" class="lesson-card" data-lesson="03">
       <span class="lesson-check">✓</span>
-      <span class="lesson-type-tag tag-video">Video</span>
-      <span class="lesson-title">Order of Operations in C#</span>
+      <span class="lesson-type-tag tag-lesson">Lesson</span>
+      <span class="lesson-title">Accept Buttons & Cancel Buttons</span>
       <span class="lesson-arrow">→</span>
     </a>
 
-    <a href="compsci20-unit1-lesson18.html" class="lesson-card" data-lesson="18">
+
+      <a href="08 Checkpoint after integers/index.html" class="lesson-card" data-lesson="04">
       <span class="lesson-check">✓</span>
-      <span class="lesson-type-tag tag-video">Video</span>
-      <span class="lesson-title">Math Class & Built-in Functions</span>
+      <span class="lesson-type-tag tag-checkpoint">Checkpoint</span>
+      <span class="lesson-title">Checkpoint</span>
       <span class="lesson-arrow">→</span>
     </a>
 
-    <a href="compsci20-unit1-lesson19.html" class="lesson-card" data-lesson="19">
-      <span class="lesson-check">✓</span>
-      <span class="lesson-type-tag tag-project">Project</span>
-      <span class="lesson-title">Project — Simple Calculator</span>
-      <span class="lesson-arrow">→</span>
-    </a>
-
-    <a href="compsci20-unit1-lesson20.html" class="lesson-card" data-lesson="20">
-      <span class="lesson-check">✓</span>
-      <span class="lesson-type-tag tag-quiz">Quiz</span>
-      <span class="lesson-title">Checkpoint — Arithmetic & Math</span>
-      <span class="lesson-arrow">→</span>
-    </a>
-
-    <a href="compsci20-unit1-lesson21.html" class="lesson-card" data-lesson="21">
-      <span class="lesson-check">✓</span>
-      <span class="lesson-type-tag tag-video">Video</span>
-      <span class="lesson-title">Type Casting & Conversion</span>
-      <span class="lesson-arrow">→</span>
-    </a>
-
-    <a href="compsci20-unit1-lesson22.html" class="lesson-card" data-lesson="22">
-      <span class="lesson-check">✓</span>
-      <span class="lesson-type-tag tag-video">Video</span>
-      <span class="lesson-title">Parsing User Input</span>
-      <span class="lesson-arrow">→</span>
-    </a>
-
-    <a href="compsci20-unit1-lesson23.html" class="lesson-card" data-lesson="23">
-      <span class="lesson-check">✓</span>
-      <span class="lesson-type-tag tag-video">Video</span>
-      <span class="lesson-title">Common Errors & Debugging</span>
-      <span class="lesson-arrow">→</span>
-    </a>
-
-    <a href="compsci20-unit1-lesson24.html" class="lesson-card" data-lesson="24">
+         <a href="09 Project 03/index.html" class="lesson-card" data-lesson="04">
       <span class="lesson-check">✓</span>
       <span class="lesson-type-tag tag-project">Project</span>
-      <span class="lesson-title">Project — Unit Converter</span>
+      <span class="lesson-title">Song</span>
       <span class="lesson-arrow">→</span>
     </a>
 
-    <a href="compsci20-unit1-lesson25.html" class="lesson-card" data-lesson="25">
+   
+
+    <a href="10 Parsing/index.html" class="lesson-card" data-lesson="06">
       <span class="lesson-check">✓</span>
-      <span class="lesson-type-tag tag-quiz">Quiz</span>
-      <span class="lesson-title">Checkpoint — Type Casting & Errors</span>
+      <span class="lesson-type-tag tag-lesson">Lesson</span>
+      <span class="lesson-title">Menustrip & Messageboxes</span>
       <span class="lesson-arrow">→</span>
     </a>
 
-    <a href="compsci20-unit1-lesson26.html" class="lesson-card" data-lesson="26">
+       <a href="11 Variable Math/index.html" class="lesson-card" data-lesson="06">
       <span class="lesson-check">✓</span>
-      <span class="lesson-type-tag tag-video">Video</span>
-      <span class="lesson-title">Comments & Code Readability</span>
+      <span class="lesson-type-tag tag-lesson">Lesson</span>
+      <span class="lesson-title">Application Exit</span>
       <span class="lesson-arrow">→</span>
     </a>
 
-    <a href="compsci20-unit1-lesson27.html" class="lesson-card" data-lesson="27">
-      <span class="lesson-check">✓</span>
-      <span class="lesson-type-tag tag-video">Video</span>
-      <span class="lesson-title">Naming Conventions in C#</span>
-      <span class="lesson-arrow">→</span>
-    </a>
-
-    <a href="compsci20-unit1-lesson28.html" class="lesson-card" data-lesson="28">
-      <span class="lesson-check">✓</span>
-      <span class="lesson-type-tag tag-video">Video</span>
-      <span class="lesson-title">Constants with const</span>
-      <span class="lesson-arrow">→</span>
-    </a>
-
-    <a href="compsci20-unit1-lesson29.html" class="lesson-card" data-lesson="29">
+              <a href="13 Project 04/index.html" class="lesson-card" data-lesson="04">
       <span class="lesson-check">✓</span>
       <span class="lesson-type-tag tag-project">Project</span>
-      <span class="lesson-title">Project — Recipe Cost Calculator</span>
+      <span class="lesson-title">Joke</span>
       <span class="lesson-arrow">→</span>
     </a>
 
-    <a href="compsci20-unit1-lesson30.html" class="lesson-card" data-lesson="30">
+         <a href="15 Enter TextChanged/index.html" class="lesson-card" data-lesson="06">
       <span class="lesson-check">✓</span>
-      <span class="lesson-type-tag tag-quiz">Quiz</span>
-      <span class="lesson-title">Checkpoint — Clean Code & Constants</span>
+      <span class="lesson-type-tag tag-lesson">Lesson</span>
+      <span class="lesson-title">Events</span>
       <span class="lesson-arrow">→</span>
     </a>
 
-    <a href="compsci20-unit1-lesson31.html" class="lesson-card" data-lesson="31">
+             <a href="15 Enter TextChanged/index.html" class="lesson-card" data-lesson="06">
       <span class="lesson-check">✓</span>
-      <span class="lesson-type-tag tag-video">Video</span>
-      <span class="lesson-title">Random Number Generation</span>
+      <span class="lesson-type-tag tag-lesson">Lesson</span>
+      <span class="lesson-title">Form Properties</span>
       <span class="lesson-arrow">→</span>
     </a>
 
-    <a href="compsci20-unit1-lesson32.html" class="lesson-card" data-lesson="32">
+                 <a href="19 Checkpoint after constants/index.html" class="lesson-card" data-lesson="04">
       <span class="lesson-check">✓</span>
-      <span class="lesson-type-tag tag-video">Video</span>
-      <span class="lesson-title">Working with Dates & Time</span>
+      <span class="lesson-type-tag tag-checkpoint">Checkpoint</span>
+      <span class="lesson-title">Checkpoint</span>
       <span class="lesson-arrow">→</span>
     </a>
 
-    <a href="compsci20-unit1-lesson33.html" class="lesson-card" data-lesson="33">
-      <span class="lesson-check">✓</span>
-      <span class="lesson-type-tag tag-video">Video</span>
-      <span class="lesson-title">String Methods — Length, Trim, Replace</span>
-      <span class="lesson-arrow">→</span>
-    </a>
-
-    <a href="compsci20-unit1-lesson34.html" class="lesson-card" data-lesson="34">
-      <span class="lesson-check">✓</span>
-      <span class="lesson-type-tag tag-video">Video</span>
-      <span class="lesson-title">String Methods — ToUpper, ToLower, Contains</span>
-      <span class="lesson-arrow">→</span>
-    </a>
-
-    <a href="compsci20-unit1-lesson35.html" class="lesson-card" data-lesson="35">
-      <span class="lesson-check">✓</span>
-      <span class="lesson-type-tag tag-quiz">Quiz</span>
-      <span class="lesson-title">Checkpoint — Strings & Random</span>
-      <span class="lesson-arrow">→</span>
-    </a>
-
-    <a href="compsci20-unit1-lesson36.html" class="lesson-card" data-lesson="36">
+              <a href="16 Project 06/index.html" class="lesson-card" data-lesson="04">
       <span class="lesson-check">✓</span>
       <span class="lesson-type-tag tag-project">Project</span>
-      <span class="lesson-title">Project — Random Password Generator</span>
+      <span class="lesson-title">Scene</span>
       <span class="lesson-arrow">→</span>
     </a>
 
-    <a href="compsci20-unit1-lesson37.html" class="lesson-card" data-lesson="37">
+            <a href="17 Doubles/index.html" class="lesson-card" data-lesson="06">
       <span class="lesson-check">✓</span>
-      <span class="lesson-type-tag tag-video">Video</span>
-      <span class="lesson-title">Putting It All Together — Review</span>
+      <span class="lesson-type-tag tag-lesson">Lesson</span>
+      <span class="lesson-title">Radio Buttons</span>
       <span class="lesson-arrow">→</span>
     </a>
 
-    <a href="compsci20-unit1-lesson38.html" class="lesson-card" data-lesson="38">
+
+             <a href="19 Checkpoint after constants/index.html" class="lesson-card" data-lesson="04">
       <span class="lesson-check">✓</span>
-      <span class="lesson-type-tag tag-video">Video</span>
-      <span class="lesson-title">Common Beginner Mistakes</span>
+      <span class="lesson-type-tag tag-checkpoint">Checkpoint</span>
+      <span class="lesson-title">Checkpoint</span>
       <span class="lesson-arrow">→</span>
     </a>
 
-    <a href="compsci20-unit1-lesson39.html" class="lesson-card" data-lesson="39">
+
+                    <a href="06 RGB Colours/index.html" class="lesson-card" data-lesson="06">
       <span class="lesson-check">✓</span>
-      <span class="lesson-type-tag tag-quiz">Quiz</span>
-      <span class="lesson-title">Checkpoint — Unit 1 Review</span>
+      <span class="lesson-type-tag tag-lesson">Lesson</span>
+      <span class="lesson-title">Splash Screens</span>
       <span class="lesson-arrow">→</span>
     </a>
 
-    <a href="compsci20-unit1-lesson40.html" class="lesson-card" data-lesson="40">
+                  <a href="05 Project 01/index.html" class="lesson-card" data-lesson="04">
       <span class="lesson-check">✓</span>
       <span class="lesson-type-tag tag-project">Project</span>
-      <span class="lesson-title">Unit 1 Final Project — Console App of Your Choice</span>
+      <span class="lesson-title">Weather</span>
       <span class="lesson-arrow">→</span>
     </a>
+
+                        <a href="06 RGB Colours/index.html" class="lesson-card" data-lesson="06">
+      <span class="lesson-check">✓</span>
+      <span class="lesson-type-tag tag-lesson">Lesson</span>
+      <span class="lesson-title">Textboxes</span>
+      <span class="lesson-arrow">→</span>
+    </a>
+
+                           <a href="06 RGB Colours/index.html" class="lesson-card" data-lesson="06">
+      <span class="lesson-check">✓</span>
+      <span class="lesson-type-tag tag-lesson">Lesson</span>
+      <span class="lesson-title">"THIS" Keyword</span>
+      <span class="lesson-arrow">→</span>
+    </a>
+
+                      <a href="05 Project 01/index.html" class="lesson-card" data-lesson="04">
+      <span class="lesson-check">✓</span>
+      <span class="lesson-type-tag tag-project">Project</span>
+      <span class="lesson-title">Translator</span>
+      <span class="lesson-arrow">→</span>
+    </a>
+
+                              <a href="06 RGB Colours/index.html" class="lesson-card" data-lesson="06">
+      <span class="lesson-check">✓</span>
+      <span class="lesson-type-tag tag-lesson">Lesson</span>
+      <span class="lesson-title">Timers</span>
+      <span class="lesson-arrow">→</span>
+    </a>
+
+                                  <a href="06 RGB Colours/index.html" class="lesson-card" data-lesson="06">
+      <span class="lesson-check">✓</span>
+      <span class="lesson-type-tag tag-lesson">Lesson</span>
+      <span class="lesson-title">Comments</span>
+      <span class="lesson-arrow">→</span>
+    </a>
+
+                 <a href="19 Checkpoint after constants/index.html" class="lesson-card" data-lesson="04">
+      <span class="lesson-check">✓</span>
+      <span class="lesson-type-tag tag-checkpoint">Checkpoint</span>
+      <span class="lesson-title">Checkpoint</span>
+      <span class="lesson-arrow">→</span>
+    </a>
+
+                          <a href="05 Project 01/index.html" class="lesson-card" data-lesson="04">
+      <span class="lesson-check">✓</span>
+      <span class="lesson-type-tag tag-project">Project</span>
+      <span class="lesson-title">Cooker</span>
+      <span class="lesson-arrow">→</span>
+    </a>
+
+
+     <a href="23 Project 09/index.html" class="lesson-card" data-lesson="21">
+      <span class="lesson-check">✓</span>
+      <span class="lesson-type-tag tag-enrichment">Enrichment</span>
+      <span class="lesson-title">Ball Game</span>
+      <span class="lesson-arrow">→</span>
+    </a>
+
+
+ 
 
   </div>
 </div>
