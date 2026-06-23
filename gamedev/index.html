@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Room 212 — Game Dev</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <link rel="icon" href="/images/favicon.png">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+        --ink: #e8e4de;
+      --paper: #141210;
+      --surface: #1c1a17;
+      --surface2: #242118;
+      --border: rgba(255,255,255,0.07);
+      --accent: #f29a01;
+      --muted: #6b6560;
+      --lesson-color: #60a5fa;
+      --checkpoint-color: #f97316;
+      --project-color: #7cf57a;
+      --enrichment-color: rgb(249, 220, 0);
+
+    }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+      /* ── BREADCRUMB ── */
+    .breadcrumb {
+      padding: 20px 64px;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #1C1A17;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+     background: #1C1A17;
+      border-bottom: 1px solid var(--border);
+    }
+    .breadcrumb a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .breadcrumb a:hover { color: var(--ink); }
+    .breadcrumb span { color: rgba(255, 255, 255, 0.144);}
+    .breadcrumb .current { color: var(--ink); font-weight: 500; }
+
+    /* ── HEADER ── */
+    .site-header {
+      position: relative;
+      width: 100%;
+      min-height: 20vh;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+      padding: 52px 64px;
+     
+    }
+
+    .header-bg {
+      position: absolute;
+      inset: 0;
+      background: #0A0908;
+      transform: scale(1.04);
+      transition: transform 12s ease;
+       border-bottom: 7px solid var(--accent);
+    }
+    .site-header:hover .header-bg { transform: scale(1); }
+
+    .header-content { position: relative; z-index: 2; }
+
+    .header-eyebrow {
+      font-size: 0.75rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.3);
+      margin-bottom: 12px;
+    }
+
+    .header-title {
+        font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 900;
+      color: #fff;
+      margin-bottom: 14px;
+    }
+
+    .header-title em {
+      font-style: normal;
+      color: var(--accent);
+    }
+
+    .header-sub {
+       font-size: 1rem;
+      color: rgba(255,255,255,0.45);
+      font-weight: 300;
+      max-width: 580px;
+     margin-top: 18px;
+
+    }
+
+    /* ── TAB BAR ── */
+    .tab-bar-wrap {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: #111111;
+      border-bottom: 2px solid var(--accent);
+    }
+
+    .tab-bar {
+      display: flex;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding: 0 40px;
+    }
+    .tab-bar::-webkit-scrollbar { display: none; }
+
+    .tab {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      height: var(--tab-h);
+      padding: 0 22px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      text-decoration: none;
+      border-bottom: 3px solid transparent;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      transition: color 0.2s, border-color 0.2s;
+      white-space: nowrap;
+      cursor: pointer;
+      background: none;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .tab:hover { color: #fff; }
+    .tab.active { color: #fff; border-bottom-color: var(--accent); }
+
+    /* ── COURSE INTRO BAND ── */
+    .course-intro {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 40px 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+    }
+
+    .units-extra {
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.149);
+    font-weight: 300;
+    align-items: end;
+}
+
+    .course-intro-text p {
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .course-intro-text h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .course-meta { display: flex; gap: 40px; }
+    .course-meta-item { text-align: center; }
+
+    .course-meta-item .number {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .course-meta-item .label {
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    /* ── UNITS ── */
+    .units-wrap {
+      max-width: 860px;
+      margin: 60px auto 80px;
+      padding: 0 32px;
+    }
+
+    .units-heading {
+      font-size: 0.75rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .units { display: flex; flex-direction: column; gap: 12px; }
+
+    .unit-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 36px 48px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    }
+
+    .unit-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+      border-color: #f29a01;
+    }
+
+    .unit-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      font-weight: 900;
+      color: rgba(255,255,255,0.04);
+      margin-right: 32px;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .unit-info { flex: 1; }
+
+    .unit-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .unit-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--ink);
+    }
+
+    .unit-desc {
+      font-size: 0.92rem;
+      color: var(--muted);
+      font-weight: 300;
+      line-height: 1.6;
+    }
+
+    .unit-arrow {
+      font-size: 1.6rem;
+      color: rgba(187, 187, 187, 0.634);
+      margin-left: 32px;
+      transition: color 0.2s, transform 0.2s;
+      flex-shrink: 0;
+    }
+
+    .unit-card:hover .unit-arrow {
+      color: var(--accent);
+      transform: translateX(5px);
+    }
+
+    .unit-label.enrichment {
+  color: #ffd900;;
+  animation: glow-yellow 1s ease-in-out infinite alternate;
+}
+
+@keyframes glow-yellow {
+  from {
+    text-shadow: 0 0 4px #fff200, 0 0 8px #fff200;
+  }
+  to {
+    text-shadow: 0 0 10px #fff200, 0 0 10px #fff200, 0 0 10px #fff200;
+  }
+}
+
+    /* ── FOOTER ── */
+    footer {
+      background: #0a0908;
+      color: rgba(255,255,255,0.2);
+      text-align: center;
+      padding: 32px;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .site-header { padding: 36px 28px; }
+         .breadcrumb { padding: 16px 20px; }
+      .tab { padding: 0 14px; font-size: 0.74rem; }
+      .tab-bar { padding: 0 8px; }
+      .course-intro { flex-direction: column; padding: 32px 28px; gap: 24px; }
+      .units-wrap { padding: 0 20px; margin: 40px auto 60px; }
+      .unit-card { padding: 28px 24px; }
+      .unit-number { font-size: 2rem; margin-right: 20px; }
+    }
+
+        .breadcrumb .current { color: var(--ink); font-weight: 500; }
+  </style>
+</head>
+<body>
+
+  <!-- ── BREADCRUMB ── -->
+<nav class="breadcrumb">
+  <a href="../index.html">Room 212</a>
+  <span>/</span>
+  <span class="current">Game Dev</span>
+</nav>
+
+<!-- ── HEADER ── -->
+<header class="site-header">
+  <div class="header-bg"></div>
+  <div class="header-content">
+    <p class="header-eyebrow">Game Dev</p>
+    <h1 class="header-title">3D Modelling & Animation</h1>
+    <p class="header-sub">Learn to create 3D models and use them to build interactive game worlds.</p>
+  </div>
+</header>
+
+
+
+<!-- ── COURSE INTRO BAND ── -->
+<div class="course-intro">
+  <div class="course-intro-text">
+    <p>Intro to Programming</p>
+    <h2>Course Breakdown</h2>
+  </div>
+
+  <div class="course-meta">
+    <div class="course-meta-item">
+      <div class="number">3</div>
+      <div class="label">Units</div>
+    </div>
+
+    
+    
+    <div class="course-meta-item">
+      <div class="number">35</div>
+      <div class="label">Modules</div>
+    </div>
+    <div class="course-meta-item">
+      <div class="number">C#</div>
+      <div class="label">Language</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── UNITS ── -->
+<div class="units-wrap">
+  <p class="units-heading">Course Units</p>
+  <div class="units">
+
+    <a href="Unit 01/index.html" class="unit-card">
+      <div class="unit-info">
+        <p class="unit-label">Unit 1</p>
+        <h2 class="unit-title">Blender</h2>
+        <p class="unit-desc">Learn the basics of 3D modeling using Blender, including creating and editing shapes, working with meshes, applying materials, and building simple 3D objects</p>
+      </div>
+      <span class="unit-arrow">→</span>
+    </a>
+
+    <a href="Unit 02/index.html" class="unit-card">
+      <div class="unit-info">
+        <p class="unit-label">Unit 2</p>
+        <h2 class="unit-title">Unity</h2>
+        <p class="unit-desc">Learn Unity to turn 3D assets into interactive games. Scene building, basic lighting, player movement, simple scripting and how game systems like UI and physics work.</p>
+      </div>
+      <span class="unit-arrow">→</span>
+    </a>
+
+    <a href="Unit 03/index.html" class="unit-card">
+      <div class="unit-info">
+        <p class="unit-label">Unit 3</p>
+        <h2 class="unit-title">Character Creation</h2>
+        <p class="unit-desc">Learn to design characters by sculpting detailed models, rigging them with a skeleton, and creating animations so they can move naturally in your games</p>
+      </div>
+      <span class="unit-arrow">→</span>
+    </a>
+
+    <!-- <a href="/compsci20/unit4/index.html" class="unit-card">
+      <div class="unit-info">
+        <p class="unit-label enrichment">Unit 4</p>
+        <h2 class="unit-title">GUI Game Development</h2>
+        <p class="unit-desc">Develop GUI-based game development skills by building simple Windows Forms games within platform constraints.</p>
+      </div>
+      <span class="unit-arrow">→</span>
+    </a> -->
+
+
+
+
+
+  </div>
+</div>
+
+<footer>
+  &copy; 2026 · Zach Brykaliuk · Computer Science/Mathematics Teacher
+</footer>
+
+</body>
+</html>
