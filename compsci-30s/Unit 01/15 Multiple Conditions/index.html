@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Room 212 — Console Programming</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #e8e4de;
+      --paper: #141210;
+      --surface: #1c1a17;
+      --surface2: #242118;
+      --border: rgba(255,255,255,0.07);
+      --accent: #45D8FF;
+      --muted: #6b6560;
+      --video-color: #60a5fa;
+      --quiz-color: #f97316;
+      --project-color: #7cf57a;
+    }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    /* ── BREADCRUMB ── */
+    .breadcrumb {
+      padding: 20px 64px;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+     background: var(--surface);
+      border-bottom: 1px solid var(--border);
+    }
+    .breadcrumb a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .breadcrumb a:hover { color: var(--ink); }
+    .breadcrumb span { color: rgba(255,255,255,0.15); }
+    .breadcrumb .current { color: var(--ink); font-weight: 500; }
+
+    /* ── LESSON HEADER ── */
+    .lesson-header {
+        background: #0a0908;
+      padding: 52px 64px;
+      border-bottom: 3px solid var(--accent);
+    }
+
+    .lesson-meta {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .lesson-type-badge {
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      background: rgba(47,106,200,0.2);
+      color: #7aacf5;
+      border-radius: 2px;
+    }
+
+    .lesson-number {
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+    }
+
+    .lesson-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.1;
+    }
+
+    /* ── VIDEO SECTION ── */
+   .video-section {
+  background: #1C1A17;
+  padding: 48px 64px;
+}
+
+.video-outer {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.video-wrap {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  height: 0;
+  overflow: hidden;
+  background: #111;
+}
+.video-wrap iframe {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  border: none;
+}
+
+    /* placeholder when no video is set */
+    .video-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.3);
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      gap: 12px;
+    }
+    .video-placeholder .play-icon {
+      font-size: 3rem;
+      opacity: 0.3;
+    }
+
+    /* ── ARTICLE BODY ── */
+    .article {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 64px 32px 80px;
+    }
+
+    /* Intro paragraph */
+    .article-intro {
+      font-size: 1.15rem;
+      line-height: 1.8;
+      color: #9E9790;
+      font-weight: 300;
+      margin-bottom: 48px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+
+    /* Section headings */
+    .article h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #45D8FF;
+      margin-bottom: 16px;
+      margin-top: 48px;
+    }
+
+    .article h3 {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+      margin-top: 36px;
+    }
+
+    /* Body text */
+    .article p {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: #9E9790;
+      font-weight: 300;
+      margin-bottom: 20px;
+    }
+
+    /* Code blocks */
+    .article pre {
+      background:#0A0908;
+      color: #45D8FF;
+      font-family: 'Courier New', monospace;
+      font-size: 0.88rem;
+      line-height: 1.7;
+      padding: 28px 32px;
+      margin: 24px 0;
+      overflow-x: auto;
+      border-left: 3px solid var(--accent);
+    }
+
+    .article code {
+      background: rgba(39,134,32,0.1);
+      color: var(--accent);
+      font-family: 'Courier New', monospace;
+      font-size: 0.88em;
+      padding: 2px 7px;
+      border-radius: 2px;
+    }
+
+    /* Images */
+    .article-img {
+      width: 100%;
+      margin: 32px 0;
+      overflow: hidden;
+    }
+
+    .article-img img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .article-img figcaption {
+      font-size: 0.78rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      margin-top: 10px;
+      font-style: italic;
+    }
+
+    /* Callout / key takeaway box */
+    .callout {
+      background: #0A0908;
+      border-left: 4px solid var(--accent);
+      padding: 24px 28px;
+      margin: 32px 0;
+    }
+
+    .callout-label {
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .callout p {
+      margin-bottom: 0;
+      font-size: 0.95rem;
+      color: var(--ink);
+      font-weight: 400;
+    }
+
+    /* Key takeaways list */
+    .takeaways {
+      background: #0A0908;
+      padding: 36px 40px;
+      margin: 48px 0 0;
+    }
+
+    .takeaways-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 20px;
+    }
+
+    .takeaways ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .takeaways li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.75);
+      font-weight: 300;
+      line-height: 1.5;
+    }
+
+    .takeaways li::before {
+      content: '→';
+      color: #45D8FF;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* ── BACK BUTTON ── */
+    /* ── BACK BUTTON ── */
+  .back-wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 32px 64px;
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      background: var(--surface);
+      border: 1px solid #383633;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s, color 0.2s;
+    }
+    .back-btn:hover { background: var(--accent); color: #0a0908; transform: translateX(-3px); border-color: var(--accent); }
+    /* ── FOOTER ── */
+    footer {
+      background: #0a0908;
+      color: rgba(255,255,255,0.2);
+      text-align: center;
+      padding: 32px;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 768px) {
+      .breadcrumb { padding: 16px 20px; }
+      .lesson-header { padding: 36px 24px; }
+      .video-section { padding: 32px 0; }
+      .article { padding: 40px 20px 60px; }
+      .back-wrap { padding: 0 20px 48px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── BREADCRUMB ── -->
+<nav class="breadcrumb">
+  <a href="../../../index.html">Room 212</a>
+  <span>/</span>
+  <a href="../../index.html">30S Comp Sci</a>
+  <span>/</span>
+  <a href="../index.html">Unit 01</a>
+  <span>/</span>
+  <span class="current">Lesson 08</span>
+</nav>
+
+<!-- ── LESSON HEADER ── -->
+<div class="lesson-header">
+  <div class="lesson-meta">
+    <span class="lesson-type-badge">Video Lesson</span>
+    <span class="lesson-number">Unit 01 · Lesson 08</span>
+  </div>
+  <h1 class="lesson-title">Multiple Conditions</h1>
+</div>
+
+<!-- ── VIDEO ── -->
+<div class="video-section">
+  <div class="video-outer">
+    <div class="video-wrap">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/nXRsmUIjwAI?si=awhKz8jrb2yqv8pu" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+  </div>
+</div>
+
+<!-- ── ARTICLE BODY ── -->
+<article class="article">
+
+  <p class="article-intro">
+   Sometimes a program needs to check more than one condition before making a decision. Is the user over 18 AND do they have a ticket for the show?
+  </p>
+
+  <h2>The && Operator (AND)</h2>
+  <p>
+    Here we have an if statement checking if one thing is true.
+  </p>
+
+  <pre>if (age >= LEGAL_AGE)
+{
+    
+}</pre>
+
+   <p>
+    But what if I want to check if they have a ticket? Well I can use a boolean variable, and include it in the same if statement. I don't need to make a separate if statement
+  </p>
+
+    <pre>if (age >= LEGAL_AGE && hasTicket == true)
+{
+    
+}</pre>
+
+   <p>
+    Now the if statement is both checking if they are above legal age, AND if they have a ticket to go see the show.
+  </p>
+
+
+
+   <h2>The || Operator (OR)</h2>
+  <p>
+    There's also an OR operator. This allows us to check for multiple conditions as well, but only ONE of them has to be true. One or the other. Not both.
+  </p>
+
+    <pre>if (age >= LEGAL_AGE || hasTicket == true)
+{
+    
+}</pre>
+
+
+<p>So this if statement fires off if one of those two conditions are met. Are you over 18, but don't have a ticket? Sure that's fine. Are you under 18, but you still have a ticket? Sure that's fine too. Just one condition has to be met.</p>
+
+
+  <!-- Key takeaways -->
+  <div class="takeaways">
+    <p class="takeaways-label">Key Takeaways</p>
+    <ul>
+      <li>If statements can check multiple conditions</li>
+      <li><code>&&</code> means AND</li>
+      <li><code>||</code> means OR</li>
+    </ul>
+  </div>
+
+
+</article>
+
+<!-- ── BACK BUTTON ── -->
+<div class="back-wrap">
+  <a href="../14 Checkpoint/index.html" class="back-btn">← Previous page</a>
+   <a href="../16 Project 06/index.html" class="back-btn">Next Page →</a>
+</div>
+
+<footer>
+  &copy; 2026 · Zach Brykaliuk · Computer Science/Mathematics Teacher
+</footer>
+
+</body>
+</html>
