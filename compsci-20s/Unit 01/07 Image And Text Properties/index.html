@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Room 212 — Setting Up A Program</title>
+  <title>Room 212 — Image & Text Properties</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -344,23 +344,23 @@
   <span>/</span>
   <a href="../index.html">Unit 01</a>
   <span>/</span>
-  <span class="current">Lesson 02</span>
+  <span class="current">Lesson 05</span>
 </nav>
 
 <!-- ── LESSON HEADER ── -->
 <div class="lesson-header">
   <div class="lesson-meta">
     <span class="lesson-type-badge">Video Lesson</span>
-    <span class="lesson-number">Unit 01 · Lesson 02</span>
+    <span class="lesson-number">Unit 01 · Lesson 05</span>
   </div>
-  <h1 class="lesson-title">Setting Up a Program</h1>
+  <h1 class="lesson-title">The .Image & .Text Properties</h1>
 </div>
 
 <!-- ── VIDEO ── -->
 <div class="video-section">
   <div class="video-outer">
     <div class="video-wrap">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/-bV3UQqFMlQ?si=nDi2bbyPVGD-FBGT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/GbZDZxPMPlQ?si=7q2P_ySlkuoNJwhD" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     </div>
   </div>
 </div>
@@ -369,30 +369,28 @@
 <article class="article">
 
   <p class="article-intro">
-  Each time you create a new program, there are a few things you should do to setup up each of your projects correctly.
+  Now that we know the process for changing a control's properties with code, let's take a look at two common properties we will change - a Picturebox's <code>.Image</code> property, and a label's <code>.Text</code> property
   </p>
 
-  <h2>Form Rename</h2>
+  <h2>Project's Resources</h2>
   <p>
-    The FIRST thing you must do is change your <code>Form1.cs</code> name. You should rename it to what your program is about. You should also be re naming it in CamelCase form - which means no spaces, and capital letters separting each word. An example would be <code>DiceGame.cs</code> or <code>TaxCalculator.cs</code>
+    To change a picturebox's Image, we need to first import all the images we may need into our program. This can be done by dragging your images into your project's resources. Found by going to <code>Project -> Properties -> Resources</code>
   </p>
 
-    <h2>Form .Text Property</h2>
-  <p>
-    You should also click on your form and change the <code>.Text</code> property. This is the title of your form that you see when your program runs. You don't need to use CamelCase for this.
-  </p>
+ <p>Once you have all of your images imported into your project, we can change which image a picturebox is showing with code.</p>
 
-      <h2>Icon</h2>
-  <p>
-    Your form's icon is the small image associated with the form window. This image must be an <code>.ico</code> file. JPEGs, PNGs will not work. You'll need to find an image to represent your program. There are two ways to do this:
-  </p>
+  <pre>picMain.Image = Properties.Resources.name_of_your_image;</pre>
 
-  <p>Use a website like <code>Icon-icons.com</code> to find images already in <code>.ico</code> file formats. </p>
+  <p>As you can see, we're changing the <code>.Image</code> property of our picturebox control. What are we changing it to? Well we're changing it to whatever image we want that's been imported into our resources. So to go there, we set it equal to <code>= Properties.Resouces.name_of_image;</code></p>
 
-  <p>OR find an image off google, and use a "PNG to ICO" converter website. A website like <code>CloudCovert.com</code> works well for me. </p>
+  
+  <h2>Changing Text</h2>
 
-  <p>Change the form's Icon property to this image, THEN go into <code>Project -> Properties</code> and change the Icon there as well</p>
+  <p>To change the text of a label (or any other control), it's more straight forward</p>
 
+  <pre>lblMain.Text = "I am changing the text to this!";</pre>
+
+  <p>Here, we are changing the <code>.Text</code> of a label control. The one thing to watch out for is the text your setting it equal to must be inside a pair of double quotations <code>"  "</code>.</p>
 
      <!-- <div class="callout">
     <p class="callout-label">NOTE</p>
@@ -408,20 +406,20 @@ string playerAttackSpeed;
   <div class="takeaways">
     <p class="takeaways-label">Key Takeaways</p>
     <ul>
-      <li>You must do these three things everytime you create a program</li>
-      <li>Change the <code>Form1.cs</code> name</li>
-      <li>Change the form's <code>.Text</code> property</li>
-      <li>Find a <code>.ico</code> image to use as your form's icon</li>
+      <li>Your images can be dropped into your Project's Resources</li>
+      <li>Change a picturebox's image by setting it equal to an image in your resources.</li>
+      <li>Change the text property by setting it equal to words between double quotations</li>
     </ul>
   </div>
+  
 
 
 </article>
 
 <!-- ── BACK BUTTON ── -->
 <div class="back-wrap">
-  <a href="../01 Creating a Program/index.html" class="back-btn">← Previous page</a>
-   <a href="../03 Controls/index.html" class="back-btn">Next Page →</a>
+  <a href="../06 Project 01/index.html" class="back-btn">← Previous page</a>
+   <a href="../08 Checkpoint/index.html" class="back-btn">Next Page →</a>
 </div>
 
 <footer>
