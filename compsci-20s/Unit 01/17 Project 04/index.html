@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Room 212 — Flags Project</title>
+  <title>Room 212 — Joke Project</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -392,17 +392,17 @@
   <span>/</span>
   <a href="../index.html">Unit 01</a>
   <span>/</span>
-  <span class="current">Flags Project</span>
+  <span class="current">Joke Project</span>
 </nav>
 
 <!-- ── LESSON HEADER ── -->
 <div class="lesson-header">
   <div class="lesson-meta">
     <span class="lesson-type-badge">Project</span>
-    <span class="lesson-number">Unit 01 · Project 02</span>
+    <span class="lesson-number">Unit 01 · Project 04</span>
   </div>
-  <h1 class="lesson-title">Flags</h1>
-  <p class="lesson-subtitle">Display the flags of different countries</p>
+  <h1 class="lesson-title">Joke</h1>
+  <p class="lesson-subtitle">Make your users laugh with a joke</p>
 </div>
 
 <!-- ── PROJECT LAYOUT ── -->
@@ -414,10 +414,8 @@
     <!-- Walkthrough video -->
     <p class="video-label">Project Walkthrough</p>
     <div class="project-video-wrap">
-      
        
-     <iframe width="560" height="315" src="https://www.youtube.com/embed/9ik3zYlgbAI?si=4JNHmws8XQKaNP2s" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-     
+ <iframe width="560" height="315" src="https://www.youtube.com/embed/XTZfnTSCV3E?si=EoZNe2QzZ0vpC9Xh" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
     </div>
 
@@ -426,7 +424,7 @@
 
       <h2>Project Overview</h2>
       <p>
-        In this project, you're going to change the image property of a picturebox, as well as the text property of a label - according to what flag has been clicked.
+        In this project, you're going to add a few controls to tell a joke to the user. You're also going to need to include the new additions of a menustrip and use your <code>Application.Exit()</code> to close the program.
       </p>
       <p>
         
@@ -434,13 +432,15 @@
 
       <h3>Getting Started</h3>
       <p>
-        
+        First, you'll need a joke to tell. If you have one in mind, feel free to use it. Although you can easily google some good programming related jokes (even if you don't understand why they're funny yet!). 
       </p>
 
 
       <p>
-        The only trick here, is when one card is shown, the other is not shown. So make sure you have that included.
+        When the user clicks on the picture of the emoji, you are going to change the image of that emoji, and change the text to show the punchline of the joke. You are also going to play an audio sound of your choice.
       </p>
+
+      <p>You're also going to include a menustrip that when one option is clicked, pops open a messagebox. And a second option that when clicked, closes your program</p>
 
 
       <!--
@@ -475,7 +475,7 @@
         </div>
         <div class="detail-item">
           <span class="detail-key">Difficulty</span>
-          <span class="detail-val">Beginner</span>
+          <span class="detail-val">Medium</span>
         </div>
       </div>
     </div>
@@ -531,22 +531,22 @@
 
         <div class="req-item">
           <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>Form1.cs renamed</span>
+          <span>.Image of piturebox changed</span>
         </div>
 
         <div class="req-item">
           <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>Form icon</span>
+          <span>.Text of labels changed</span>
         </div>
 
         <div class="req-item">
           <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>Correct naming of controls</span>
+          <span>Using SoundPlayer to play audio</span>
         </div>
 
         <div class="req-item">
           <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>Clear button wipes out picturebox image and label text</span>
+          <span>Menustrip that opens a messagebox, and can close the progarm</span>
         </div>
 
   
@@ -563,8 +563,8 @@
 
 <!-- ── BACK BUTTON ── -->
 <div class="back-wrap">
-  <a href="../05 Control Properties/index.html" class="back-btn">← Previous page</a>
-   <a href="../07 Image And Text Properties/index.html" class="back-btn">Next Page →</a>
+  <a href="../16 Application Exit/index.html" class="back-btn">← Previous page</a>
+   <a href="../18 Events/index.html" class="back-btn">Next Page →</a>
 </div>
 
 <footer>

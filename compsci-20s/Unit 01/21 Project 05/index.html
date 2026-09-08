@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Room 212 — Flags Project</title>
+  <title>Room 212 — Project</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -392,17 +392,17 @@
   <span>/</span>
   <a href="../index.html">Unit 01</a>
   <span>/</span>
-  <span class="current">Flags Project</span>
+  <span class="current">Scene Project</span>
 </nav>
 
 <!-- ── LESSON HEADER ── -->
 <div class="lesson-header">
   <div class="lesson-meta">
     <span class="lesson-type-badge">Project</span>
-    <span class="lesson-number">Unit 01 · Project 02</span>
+    <span class="lesson-number">Unit 01 · Project 05</span>
   </div>
-  <h1 class="lesson-title">Flags</h1>
-  <p class="lesson-subtitle">Display the flags of different countries</p>
+  <h1 class="lesson-title">Scene Project</h1>
+  <p class="lesson-subtitle">Create an interactive scene</p>
 </div>
 
 <!-- ── PROJECT LAYOUT ── -->
@@ -416,7 +416,7 @@
     <div class="project-video-wrap">
       
        
-     <iframe width="560" height="315" src="https://www.youtube.com/embed/9ik3zYlgbAI?si=4JNHmws8XQKaNP2s" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/0sEaaS258vk?si=jAJw0olhOndUBMPX" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
      
 
     </div>
@@ -426,7 +426,7 @@
 
       <h2>Project Overview</h2>
       <p>
-        In this project, you're going to change the image property of a picturebox, as well as the text property of a label - according to what flag has been clicked.
+        In this project, you're going to create a "scene" of your choice, making it pretty and interactive for the user
       </p>
       <p>
         
@@ -434,13 +434,15 @@
 
       <h3>Getting Started</h3>
       <p>
-        
+        Include an image for the background of your form. Your form should have its' own <code>BackGroundImage</code> property, and a <code>BackGroundImageLayout</code> property you can set to <code>stretch</code>
       </p>
 
 
       <p>
-        The only trick here, is when one card is shown, the other is not shown. So make sure you have that included.
+        You need three pictureboxes, and three labels that relate to your scene. These pictureboxes need <code>MouseEnter</code> and <code>MouseLeave</code> events
       </p>
+
+      <p>When the user hovers their mouse over the images, labels above them should appear and a sound should play. When the user takes their mouse away from the image, the labels should disappear.</p>
 
 
       <!--
@@ -475,7 +477,7 @@
         </div>
         <div class="detail-item">
           <span class="detail-key">Difficulty</span>
-          <span class="detail-val">Beginner</span>
+          <span class="detail-val">Medium</span>
         </div>
       </div>
     </div>
@@ -487,7 +489,7 @@
 
         <div class="download-item">
           <span class="download-item-label">Executable</span>
-          <a href="Flags.exe" class="download-link" download>
+          <a href="Card Flip.exe" class="download-link" download>
               <span class="dl-icon">⬇</span>
               Sample Program
             </a>
@@ -531,22 +533,17 @@
 
         <div class="req-item">
           <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>Form1.cs renamed</span>
+          <span>Form's Background Image changed</span>
         </div>
 
         <div class="req-item">
           <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>Form icon</span>
+          <span>MouseEnter and MouseLeave Events used on Pictureboxes</span>
         </div>
 
         <div class="req-item">
           <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>Correct naming of controls</span>
-        </div>
-
-        <div class="req-item">
-          <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>Clear button wipes out picturebox image and label text</span>
+          <span>SoundPlayer playing 3 distinct WAV files</span>
         </div>
 
   
@@ -563,8 +560,8 @@
 
 <!-- ── BACK BUTTON ── -->
 <div class="back-wrap">
-  <a href="../05 Control Properties/index.html" class="back-btn">← Previous page</a>
-   <a href="../07 Image And Text Properties/index.html" class="back-btn">Next Page →</a>
+  <a href="../20 Checkpoint/index.html" class="back-btn">← Previous page</a>
+   <a href="../22 Radio Buttons/index.html" class="back-btn">Next Page →</a>
 </div>
 
 <footer>

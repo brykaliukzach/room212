@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Room 212 — Flags Project</title>
+  <title>Room 212 — Song Project</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -392,17 +392,17 @@
   <span>/</span>
   <a href="../index.html">Unit 01</a>
   <span>/</span>
-  <span class="current">Flags Project</span>
+  <span class="current">Song Project</span>
 </nav>
 
 <!-- ── LESSON HEADER ── -->
 <div class="lesson-header">
   <div class="lesson-meta">
     <span class="lesson-type-badge">Project</span>
-    <span class="lesson-number">Unit 01 · Project 02</span>
+    <span class="lesson-number">Unit 01 · Project 03</span>
   </div>
-  <h1 class="lesson-title">Flags</h1>
-  <p class="lesson-subtitle">Display the flags of different countries</p>
+  <h1 class="lesson-title">Song</h1>
+  <p class="lesson-subtitle">Play and stop a song</p>
 </div>
 
 <!-- ── PROJECT LAYOUT ── -->
@@ -416,7 +416,7 @@
     <div class="project-video-wrap">
       
        
-     <iframe width="560" height="315" src="https://www.youtube.com/embed/9ik3zYlgbAI?si=4JNHmws8XQKaNP2s" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+   <iframe width="560" height="315" src="https://www.youtube.com/embed/Y5xsR51EHF0?si=vIJv4nfIRBnV_0sN" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
      
 
     </div>
@@ -426,7 +426,7 @@
 
       <h2>Project Overview</h2>
       <p>
-        In this project, you're going to change the image property of a picturebox, as well as the text property of a label - according to what flag has been clicked.
+        In this project, you're going to play an audio file that you have downloaded. Does't matter what you play, just as long as you've downloaded and converted into a WAV file.
       </p>
       <p>
         
@@ -434,13 +434,15 @@
 
       <h3>Getting Started</h3>
       <p>
-        
+        You will need some controls, such as buttons, picturebox and a label.
       </p>
 
 
       <p>
-        The only trick here, is when one card is shown, the other is not shown. So make sure you have that included.
+        When the play button is pressed, not only does the audio file play, the picturebox appears as well as text labels showing the song name and artist.
       </p>
+
+      <p>When the stop button is pressed, the audio stops and the controls become invisible.</p>
 
 
       <!--
@@ -475,7 +477,7 @@
         </div>
         <div class="detail-item">
           <span class="detail-key">Difficulty</span>
-          <span class="detail-val">Beginner</span>
+          <span class="detail-val">Easy</span>
         </div>
       </div>
     </div>
@@ -541,12 +543,12 @@
 
         <div class="req-item">
           <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>Correct naming of controls</span>
+          <span>Using the .Play() and .Stop() methods</span>
         </div>
 
         <div class="req-item">
           <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>Clear button wipes out picturebox image and label text</span>
+          <span>SoundPlayer to load your WAV file</span>
         </div>
 
   
@@ -563,8 +565,8 @@
 
 <!-- ── BACK BUTTON ── -->
 <div class="back-wrap">
-  <a href="../05 Control Properties/index.html" class="back-btn">← Previous page</a>
-   <a href="../07 Image And Text Properties/index.html" class="back-btn">Next Page →</a>
+  <a href="../13 Checkpoint/index.html" class="back-btn">← Previous page</a>
+   <a href="../15 MenuStrip Messagebox/index.html" class="back-btn">Next Page →</a>
 </div>
 
 <footer>
