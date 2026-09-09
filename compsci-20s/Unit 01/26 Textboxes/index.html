@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Room 212 — Textboxes</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #e8e4de;
+      --paper: #141210;
+      --surface: #1c1a17;
+      --surface2: #242118;
+      --border: rgba(255,255,255,0.07);
+      --accent: #CE92FF;
+      --muted: #6b6560;
+      --video-color: #60a5fa;
+      --quiz-color: #f97316;
+      --project-color: #7cf57a;
+    }
+
+    html { font-size: 16px; scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    /* ── BREADCRUMB ── */
+    .breadcrumb {
+      padding: 20px 64px;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+     background: var(--surface);
+      border-bottom: 1px solid var(--border);
+    }
+    .breadcrumb a {
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .breadcrumb a:hover { color: var(--ink); }
+    .breadcrumb span { color: rgba(255,255,255,0.15); }
+    .breadcrumb .current { color: var(--ink); font-weight: 500; }
+
+    /* ── LESSON HEADER ── */
+    .lesson-header {
+        background: #0a0908;
+      padding: 52px 64px;
+      border-bottom: 3px solid var(--accent);
+    }
+
+    .lesson-meta {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .lesson-type-badge {
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      background: rgba(47,106,200,0.2);
+      color: #7aacf5;
+      border-radius: 2px;
+    }
+
+    .lesson-number {
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+    }
+
+    .lesson-title {
+    font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+    }
+
+    /* ── VIDEO SECTION ── */
+   .video-section {
+  background: #1C1A17;
+  padding: 48px 64px;
+}
+
+.video-outer {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.video-wrap {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  height: 0;
+  overflow: hidden;
+  background: #111;
+}
+.video-wrap iframe {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  border: none;
+}
+
+    /* placeholder when no video is set */
+    .video-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.3);
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      gap: 12px;
+    }
+    .video-placeholder .play-icon {
+      font-size: 3rem;
+      opacity: 0.3;
+    }
+
+    /* ── ARTICLE BODY ── */
+    .article {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 64px 32px 80px;
+    }
+
+    /* Intro paragraph */
+    .article-intro {
+      font-size: 1.15rem;
+      line-height: 1.8;
+      color: #9E9790;
+      font-weight: 300;
+      margin-bottom: 48px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid rgba(0,0,0,0.1);
+    }
+
+    /* Section headings */
+    .article h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #CE92FF;
+      margin-bottom: 16px;
+      margin-top: 48px;
+    }
+
+    .article h3 {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+      margin-top: 36px;
+    }
+
+    /* Body text */
+    .article p {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: #9E9790;
+      font-weight: 300;
+      margin-bottom: 20px;
+    }
+
+    /* Code blocks */
+    .article pre {
+      background:#0A0908;
+      color: #CE92FF;
+      font-family: 'Courier New', monospace;
+      font-size: 0.88rem;
+      line-height: 1.7;
+      padding: 28px 32px;
+      margin: 24px 0;
+      overflow-x: auto;
+      border-left: 3px solid var(--accent);
+    }
+
+    .article code {
+      background: rgba(39,134,32,0.1);
+      color: var(--accent);
+      font-family: 'Courier New', monospace;
+      font-size: 0.88em;
+      padding: 2px 7px;
+      border-radius: 2px;
+    }
+
+    /* Images */
+    .article-img {
+      width: 100%;
+      margin: 32px 0;
+      overflow: hidden;
+    }
+
+    .article-img img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+    }
+
+    .article-img figcaption {
+      font-size: 0.78rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      margin-top: 10px;
+      font-style: italic;
+    }
+
+    /* Callout / key takeaway box */
+    .callout {
+      background: #0A0908;
+      border-left: 4px solid var(--accent);
+      padding: 24px 28px;
+      margin: 32px 0;
+    }
+
+    .callout-label {
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    .callout p {
+      margin-bottom: 0;
+      font-size: 0.95rem;
+      color: var(--ink);
+      font-weight: 400;
+    }
+
+    /* Key takeaways list */
+    .takeaways {
+      background: #0A0908;
+      padding: 36px 40px;
+      margin: 48px 0 0;
+    }
+
+    .takeaways-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 20px;
+    }
+
+    .takeaways ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .takeaways li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.75);
+      font-weight: 300;
+      line-height: 1.5;
+    }
+
+    .takeaways li::before {
+      content: '→';
+      color: #CE92FF;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* ── BACK BUTTON ── */
+    /* ── BACK BUTTON ── */
+  .back-wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 32px 64px;
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      background: var(--surface);
+      border: 1px solid #383633;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink);
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s, color 0.2s;
+    }
+    .back-btn:hover { background: var(--accent); color: #0a0908; transform: translateX(-3px); border-color: var(--accent); }
+    /* ── FOOTER ── */
+    footer {
+      background: #0a0908;
+      color: rgba(255,255,255,0.2);
+      text-align: center;
+      padding: 32px;
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 768px) {
+      .breadcrumb { padding: 16px 20px; }
+      .lesson-header { padding: 36px 24px; }
+      .video-section { padding: 32px 0; }
+      .article { padding: 40px 20px 60px; }
+      .back-wrap { padding: 0 20px 48px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── BREADCRUMB ── -->
+<nav class="breadcrumb">
+  <a href="../../../index.html">Room 212</a>
+  <span>/</span>
+  <a href="../../index.html">20S Comp Sci</a>
+  <span>/</span>
+  <a href="../index.html">Unit 01</a>
+  <span>/</span>
+  <span class="current">Lesson 15</span>
+</nav>
+
+<!-- ── LESSON HEADER ── -->
+<div class="lesson-header">
+  <div class="lesson-meta">
+    <span class="lesson-type-badge">Video Lesson</span>
+    <span class="lesson-number">Unit 01 · Lesson 15</span>
+  </div>
+  <h1 class="lesson-title">Textboxes</h1>
+</div>
+
+<!-- ── VIDEO ── -->
+<div class="video-section">
+  <div class="video-outer">
+    <div class="video-wrap">
+<iframe width="560" height="315" src="https://www.youtube.com/embed/TtmeJza7V7U?si=IuwyjaS28x8A_YnB" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    </div>
+  </div>
+</div>
+
+<!-- ── ARTICLE BODY ── -->
+<article class="article">
+
+  <p class="article-intro">
+  Another super useful control to add to our programs is the Textbox. This is perfect for receiving input from our users.
+  </p>
+
+  <h2>Textboxes</h2>
+  <p>
+   Allow users to type in input into them. We can then use this input they've given us in our programs. Could be something simple lik their name, or some numbers we can do some math with.
+  </p>
+
+  <h2>Naming Textboxes</h2>
+  <p>Textboxes use the <code>txb</code> prefix. So a proper example of a name for a textbox could be <code>txbName</code>, if we were expecting the user to input their name for us</p>
+
+
+<h2>Textbox's .Text</h2>
+
+ <p>So once the user has typed inside the textbox, we need to be able to retrieve that text. To do this, we can use the <code>.Text</code> property of the textbox</p>
+
+ <pre>txbName.Text   // This fetches the text that the user has entered</pre>
+
+ <p>So for example, if I had a label where I wanted to display back to the user their name, I could do something like this</p>
+
+ <pre>lblOutput.Text = "Hello " + txbName.Text + "! Nice to meet you.";</pre>
+
+ <p>This looks a bit confusing, but what I'm doing is just typing in some text for this label and then I'm using the <code>+</code> symbol to ADD on the text from the textbox. This is called <code>string concatenation</code>.</p>
+
+ <p><code>txb.Text</code> will be replaced with whatever text was put inside that textbox when the user sees this line of code execute.</p>
+
+
+     <!-- <div class="callout">
+    <p class="callout-label">NOTE</p>
+    <p>Just like controls, variable names' use camelCase naming</p>
+    <pre>string player;
+string playerName;
+string playerAttackSpeed;
+    </pre>
+  </div> -->
+
+
+  <!-- Key takeaways -->
+  <div class="takeaways">
+    <p class="takeaways-label">Key Takeaways</p>
+    <ul>
+      <li>Textboxes allow users to input text information inside them</li>
+      <li>Textboxes uses the <code>txb</code> prefix for naming</li>
+      <li>Use the textboxes <code>.Text</code> property to fetch that input they gave you</li>
+    </ul>
+  </div>
+  
+
+
+</article>
+
+<!-- ── BACK BUTTON ── -->
+<div class="back-wrap">
+  <a href="../25 Project 06/index.html" class="back-btn">← Previous page</a>
+   <a href="../27 the This keyword/index.html" class="back-btn">Next Page →</a>
+</div>
+
+<footer>
+  &copy; 2026 · Zach Brykaliuk · Computer Science/Mathematics Teacher
+</footer>
+
+</body>
+</html>
