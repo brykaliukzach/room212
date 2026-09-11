@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Room 212 — Hello World Project</title>
+  <title>Room 212 — Age Project</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -394,17 +394,17 @@
   <span>/</span>
   <a href="../index.html">Unit 01</a>
   <span>/</span>
-  <span class="current">Hello World Project</span>
+  <span class="current">Age Project</span>
 </nav>
 
 <!-- ── LESSON HEADER ── -->
 <div class="lesson-header">
   <div class="lesson-meta">
     <span class="lesson-type-badge">Project</span>
-    <span class="lesson-number">Unit 01 · Project 01</span>
+    <span class="lesson-number">Unit 01 · Project 05</span>
   </div>
-  <h1 class="lesson-title">Hello World</h1>
-  <p class="lesson-subtitle">Receive input and output stored infomation</p>
+  <h1 class="lesson-title">Age Project</h1>
+  <p class="lesson-subtitle">Allow the user to enter their age, and respond accordingly with multiple conditions</p>
 </div>
 
 <!-- ── PROJECT LAYOUT ── -->
@@ -418,7 +418,7 @@
     <div class="project-video-wrap">
       
        
-       <iframe width="560" height="315" src="https://www.youtube.com/embed/HyQ0TREgwkc?si=4evZLy4UdH9CuqKF" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/02ZQtwTz-BI?si=VVddcZsFDkgub5Fr" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
      
 
     </div>
@@ -428,20 +428,29 @@
 
       <h2>Project Overview</h2>
       <p>
-        This quick project tests your knowledge on the WriteLine and ReadLine methods, while also asking you to recall how variables work from last course.
+        This project requires 2 <code>if statements</code>. The first one is focused on what age they give you. The second one does some math related to how far they are away from being an adult, or how many years they have been an adult. 
       </p>
-      <p>
-        
-      </p>
+
 
       <h3>Getting Started</h3>
       <p>
-        We need to store three pieces of information from the user, therefore we will need three variables to do so.
+       The first if statement, you must tell them if they are a baby, a child, a teenager, or an adult. The age ranges are as follows:
       </p>
 
-      <h3>What to Program</h3>
+            <pre>baby: 0 - 2
+child: 3 - 12
+teenager: 13 - 17
+adult: 18+</pre>
+
+<p>You will need to use <code>if</code>, <code>else ifs</code> and <code>else</code> You'll also need to use <code>&&</code> to create your number ranges</p>
+
+
+      <h3>What to Program Next</h3>
       <p>
-        Use your new <code>WriteLine()</code> and <code>ReadLine()</code> methods to prompt the user to enter in the information. Make sure you use your variables to correctly store the information when using <code>ReadLine()</code>.
+        Your second if statement block is much simpler. This just checks if they are an adult or not. 
+      </p>
+
+      <p>However, if one of those two above conditions are not met, we must tell them we can't sell them the game. Please just use one constant for this program, for the second if block, <code>ADULT_AGE = 18</code>.
       </p>
 
       <!--
@@ -451,10 +460,7 @@
       </figure>
       -->
 
-      <h3>Hints</h3>
-      <p>
-       Use string concatenation inside the WriteLine() parentheses to correctly format your output.
-      </p>
+  
     </div>
   </div>
 
@@ -479,7 +485,7 @@
         </div>
         <div class="detail-item">
           <span class="detail-key">Difficulty</span>
-          <span class="detail-val">Beginner</span>
+          <span class="detail-val">Hard</span>
         </div>
       </div>
     </div>
@@ -491,7 +497,7 @@
 
         <div class="download-item">
           <span class="download-item-label">Executable</span>
-          <a href="Hello World.exe" class="download-link" download>
+          <a href="Age.exe" class="download-link" download>
               <span class="dl-icon">⬇</span>
               Sample Program
             </a>
@@ -535,22 +541,22 @@
 
         <div class="req-item">
           <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>Write to the console</span>
+          <span>Two if statements</span>
         </div>
 
         <div class="req-item">
           <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>Read from the console</span>
+          <span>Use of one constant for ADULT_AGE</span>
         </div>
 
         <div class="req-item">
           <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>Storing information in variables</span>
+          <span>Use of <code>&&</code></span>
         </div>
 
         <div class="req-item">
           <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>String concatenation to display correct output</span>
+          <span>Use of <code>if</code>, <code>else if</code> and <code>else</code></span>
         </div>
 
         
@@ -563,8 +569,8 @@
 
 <!-- ── BACK BUTTON ── -->
 <div class="back-wrap">
-  <a href="../03 checkpoint/index.html" class="back-btn">← Previous page</a>
-   <a href="../05 Variable Types/index.html" class="back-btn">Next Page →</a>
+  <a href="../18 checkpoint/index.html" class="back-btn">← Previous page</a>
+   <a href="../" class="back-btn">Next Page →</a>
 </div>
 
 <footer>

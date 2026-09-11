@@ -377,10 +377,10 @@
 <div class="lesson-header">
   <div class="lesson-meta">
     <span class="lesson-type-badge">Checkpoint</span>
-    <span class="lesson-number">Unit 01 · Checkpoint 02</span>
+    <span class="lesson-number">Unit 01 · Checkpoint 04</span>
   </div>
   <h1 class="lesson-title">Checkpoint</h1>
-  <p class="lesson-subtitle">A quick review of Parsing and ToString()</p>
+  <p class="lesson-subtitle">A quick review of decision making</p>
 </div>
 
 <!-- ── QUIZ ── -->
@@ -393,133 +393,130 @@
     -->
     <div class="question-card" data-correct="0">
       <p class="question-num">Question 1</p>
-      <p class="question-text"><code>WriteLine()</code> will write any data type</p>
+      <p class="question-text">What will the output(s) to the console be?</p>
+
+      <pre>
+int temperature = 50;
+
+if (temperature >= 40)
+{
+    Console.WriteLine("Really hot");
+}
+if (temperature >= 20)
+{
+    Console.WriteLine("Really nice");
+}
+</pre>
 
       <div class="options">
-        <label class="option"><input type="radio" name="q1" value="0"><div class="option-bubble"></div><span class="option-text">True</span></label>
-        <label class="option"><input type="radio" name="q1" value="1"><div class="option-bubble"></div><span class="option-text">False</span></label>
+
+        <label class="option"><input type="radio" name="q1" value="0"><div class="option-bubble"></div><span class="option-text">Really hot & Really nice</span></label>
+
+        <label class="option"><input type="radio" name="q1" value="1"><div class="option-bubble"></div><span class="option-text">Really hot</span></label>
+
+         <label class="option"><input type="radio" name="q1" value="1"><div class="option-bubble"></div><span class="option-text">Really nice</span></label>
+        <label class="option"><input type="radio" name="q1" value="1"><div class="option-bubble"></div><span class="option-text">nothing</span></label>
    
-       
       </div>
     </div>
 
-    <!-- ═══ QUESTION 2 ═══ -->
-   <div class="question-card" data-correct="0">
+       <div class="question-card" data-correct="0">
       <p class="question-num">Question 2</p>
-      <p class="question-text"><code>ReadLine()</code> will read any data type</code> </p>
+      <p class="question-text">What will the output to the console be?</p>
+
+      <pre>
+int temperature = 50;
+
+if (temperature >= 40)
+{
+    Console.WriteLine("Really hot");
+}
+else if (temperature >= 20)
+{
+    Console.WriteLine("Really nice");
+}
+</pre>
+
       <div class="options">
-        <label class="option"><input type="radio" name="q1" value="0"><div class="option-bubble"></div><span class="option-text">False</span></label>
-        <label class="option"><input type="radio" name="q1" value="1"><div class="option-bubble"></div><span class="option-text">True</span></label>
+
+        <label class="option"><input type="radio" name="q1" value="0"><div class="option-bubble"></div><span class="option-text">Really hot</span></label>
+
+        <label class="option"><input type="radio" name="q1" value="1"><div class="option-bubble"></div><span class="option-text">Really nice</span></label>
+
+        <label class="option"><input type="radio" name="q1" value="1"><div class="option-bubble"></div><span class="option-text">nothing</span></label>
+
+             <label class="option"><input type="radio" name="q1" value="1"><div class="option-bubble"></div><span class="option-text">Really hot & Really nice</span></label>
+   
       </div>
     </div>
 
-    <div class="question-card" data-correct="0">
-    <p class="question-num">Question 3</p>
 
-    <p class="question-text">
-    What will be the output to the console for the below code?
-    <pre>double num = 14.551;
 
-    Console.WriteLine(num.ToString("C"));</pre>
-    </p>
+           <div class="question-card" data-correct="0">
+      <p class="question-num">Question 3</p>
+      <p class="question-text">What will the output to the console be?</p>
 
-    <div class="options">
-    <label class="option">
-      <input type="radio" name="q3" value="0">
-      <div class="option-bubble"></div>
-      <span class="option-text">$14.55</span>
-    </label>
+      <pre>
+int temperature = -50;
 
-    <label class="option">
-      <input type="radio" name="q3" value="1">
-      <div class="option-bubble"></div>
-      <span class="option-text">14.551</span>
-    </label>
+if (temperature >= 40)
+{
+    Console.WriteLine("Really hot");
+}
+else 
+{
+    Console.WriteLine("Really nice");
+}
+</pre>
 
-    <label class="option">
-      <input type="radio" name="q3" value="2">
-      <div class="option-bubble"></div>
-      <span class="option-text">14.55%</span>
-    </label>
+      <div class="options">
+
+        <label class="option"><input type="radio" name="q1" value="0"><div class="option-bubble"></div><span class="option-text">Really nice</span></label>
+
+        <label class="option"><input type="radio" name="q1" value="1"><div class="option-bubble"></div><span class="option-text">Really hot</span></label>
+
+         <label class="option"><input type="radio" name="q1" value="1"><div class="option-bubble"></div><span class="option-text">Nothing</span></label>
+   
+          </div>
+    </div>
+
+
+            <div class="question-card" data-correct="0">
+      <p class="question-num">Question 4</p>
+      <p class="question-text">What will the output to the console be?</p>
+ 
+            <pre>
+int temperature = -50;
+
+if (temperature >= 40)
+{
+    Console.WriteLine("Really hot");
+}
+else if (temperature >= 20)
+{
+    Console.WriteLine("Really nice");
+}
+else if (temperature >= 0)
+{
+    Console.WriteLine("Put a jacket on");
+}
+</pre>
+
+      <div class="options">
+
+        <label class="option"><input type="radio" name="q1" value="0"><div class="option-bubble"></div><span class="option-text">nothing</span></label>
+
+        <label class="option"><input type="radio" name="q1" value="1"><div class="option-bubble"></div><span class="option-text">Put a jacket on</span></label>
+
+         <label class="option"><input type="radio" name="q1" value="1"><div class="option-bubble"></div><span class="option-text">Really nice</span></label>
+      
+            <label class="option"><input type="radio" name="q1" value="1"><div class="option-bubble"></div><span class="option-text">Really hot</span></label>
+
+
     </div>
   </div>
 
-
-
-
-    <div class="question-card" data-correct="0">
-    <p class="question-num">Question 4</p>
-
-    <p class="question-text">
-    What will be the output to the console for the below code?
-    <pre>double num = 1;
-
-    Console.WriteLine(num.ToString("P"));</pre>
-    </p>
-
-    <div class="options">
-    <label class="option">
-      <input type="radio" name="q3" value="0">
-      <div class="option-bubble"></div>
-      <span class="option-text">100.00%</span>
-    </label>
-
-    <label class="option">
-      <input type="radio" name="q3" value="1">
-      <div class="option-bubble"></div>
-      <span class="option-text">1.00%</span>
-    </label>
-
-    <label class="option">
-      <input type="radio" name="q3" value="2">
-      <div class="option-bubble"></div>
-      <span class="option-text">1%</span>
-    </label>
-    </div>
-  </div>
-
-
-
-
-
-      <div class="question-card" data-correct="0">
-    <p class="question-num">Question 5</p>
-
-    <p class="question-text">
-    What will be the output to the console for the below code?
-    <pre>double num = 25.492;
-
-    Console.WriteLine(num.ToString("F1"));</pre>
-    </p>
-
-    <div class="options">
-    <label class="option">
-      <input type="radio" name="q3" value="0">
-      <div class="option-bubble"></div>
-      <span class="option-text">25.5</span>
-    </label>
-
-    <label class="option">
-      <input type="radio" name="q3" value="1">
-      <div class="option-bubble"></div>
-      <span class="option-text">25.4</span>
-    </label>
-
-    <label class="option">
-      <input type="radio" name="q3" value="2">
-      <div class="option-bubble"></div>
-      <span class="option-text">25</span>
-    </label>
-    </div>
-  </div>
-
-
-
-
-
-  
-
-
+          
 
 </div>
 
@@ -539,7 +536,7 @@
  
 
   <div class="submit-wrap">
-   <a class="previous-btn" id="previous-btn" href="../07 toString/index.html">← Previous Page</a>
+   <a class="previous-btn" id="previous-btn" href="../17 Else If/index.html">← Previous Page</a>
     <button class="submit-btn" id="submit-btn">Submit Quiz</button>
    
   </div>
@@ -551,7 +548,7 @@
     <p class="score-message" id="score-message"></p>
     <div class="score-actions">
       <button class="retake-btn" id="retake-btn">↺ Retake Quiz</button>
-      <a href="../09 Project 02/index.html" class="nextpage-btn">Next Page →</a>
+      <a href="../19 Project 05/index.html" class="nextpage-btn">Next Page →</a>
     </div>
   </div>
 

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Room 212 — Hello World Project</title>
+  <title>Room 212 — Shop Project</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -394,17 +394,17 @@
   <span>/</span>
   <a href="../index.html">Unit 01</a>
   <span>/</span>
-  <span class="current">Hello World Project</span>
+  <span class="current">Shop Project</span>
 </nav>
 
 <!-- ── LESSON HEADER ── -->
 <div class="lesson-header">
   <div class="lesson-meta">
     <span class="lesson-type-badge">Project</span>
-    <span class="lesson-number">Unit 01 · Project 01</span>
+    <span class="lesson-number">Unit 01 · Project 04</span>
   </div>
-  <h1 class="lesson-title">Hello World</h1>
-  <p class="lesson-subtitle">Receive input and output stored infomation</p>
+  <h1 class="lesson-title">Shop</h1>
+  <p class="lesson-subtitle">Allow a user to buy a video game if they are of age and have enough money</p>
 </div>
 
 <!-- ── PROJECT LAYOUT ── -->
@@ -418,7 +418,7 @@
     <div class="project-video-wrap">
       
        
-       <iframe width="560" height="315" src="https://www.youtube.com/embed/HyQ0TREgwkc?si=4evZLy4UdH9CuqKF" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+ <iframe width="560" height="315" src="https://www.youtube.com/embed/c54r5cyLUmQ?si=E4K6EJLYNwzEj1hj" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
      
 
     </div>
@@ -428,7 +428,7 @@
 
       <h2>Project Overview</h2>
       <p>
-        This quick project tests your knowledge on the WriteLine and ReadLine methods, while also asking you to recall how variables work from last course.
+        A customer wants to buy a new game. The game costs <code>89.99</code>. The legal age to buy the game is <code>18</code> or above.
       </p>
       <p>
         
@@ -436,12 +436,15 @@
 
       <h3>Getting Started</h3>
       <p>
-        We need to store three pieces of information from the user, therefore we will need three variables to do so.
+        I see some constants needing to be made from the above paragraph. I also see some other variables we will need to keep track of, and obtain from the user. 
       </p>
 
       <h3>What to Program</h3>
       <p>
-        Use your new <code>WriteLine()</code> and <code>ReadLine()</code> methods to prompt the user to enter in the information. Make sure you use your variables to correctly store the information when using <code>ReadLine()</code>.
+        IF the customer is above the legal age, AND they have enough money to buy this game, we are going to sell them the game. That means taking money away from them, and thanking them for their purchase.
+      </p>
+
+      <p>However, if one of those two above conditions are not met, we must tell them we can't sell them the game.
       </p>
 
       <!--
@@ -453,8 +456,9 @@
 
       <h3>Hints</h3>
       <p>
-       Use string concatenation inside the WriteLine() parentheses to correctly format your output.
+       Use .ToString formatting for the currency
       </p>
+      <p>Remember how to decrease a variable value from last course...?</p>
     </div>
   </div>
 
@@ -479,7 +483,7 @@
         </div>
         <div class="detail-item">
           <span class="detail-key">Difficulty</span>
-          <span class="detail-val">Beginner</span>
+          <span class="detail-val">Medium</span>
         </div>
       </div>
     </div>
@@ -491,7 +495,7 @@
 
         <div class="download-item">
           <span class="download-item-label">Executable</span>
-          <a href="Hello World.exe" class="download-link" download>
+          <a href="Shop.exe" class="download-link" download>
               <span class="dl-icon">⬇</span>
               Sample Program
             </a>
@@ -535,22 +539,22 @@
 
         <div class="req-item">
           <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>Write to the console</span>
+          <span>Parsing data from the user</span>
         </div>
 
         <div class="req-item">
           <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>Read from the console</span>
+          <span>Use of constants in your code</span>
         </div>
 
         <div class="req-item">
           <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>Storing information in variables</span>
+          <span>Proper if statement that checks two conditions</span>
         </div>
 
         <div class="req-item">
           <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>String concatenation to display correct output</span>
+          <span>Decreasing their money if they have bought the game</span>
         </div>
 
         
@@ -563,8 +567,8 @@
 
 <!-- ── BACK BUTTON ── -->
 <div class="back-wrap">
-  <a href="../03 checkpoint/index.html" class="back-btn">← Previous page</a>
-   <a href="../05 Variable Types/index.html" class="back-btn">Next Page →</a>
+  <a href="../15 Multiple Conditions/index.html" class="back-btn">← Previous page</a>
+   <a href="../17 Else If/index.html" class="back-btn">Next Page →</a>
 </div>
 
 <footer>

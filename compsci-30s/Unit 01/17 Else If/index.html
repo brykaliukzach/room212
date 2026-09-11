@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Room 212 — Parsing</title>
+  <title>Room 212 — Else If</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -346,23 +346,23 @@
   <span>/</span>
   <a href="../index.html">Unit 01</a>
   <span>/</span>
-  <span class="current">Lesson 04</span>
+  <span class="current">Lesson 09</span>
 </nav>
 
 <!-- ── LESSON HEADER ── -->
 <div class="lesson-header">
   <div class="lesson-meta">
     <span class="lesson-type-badge">Video Lesson</span>
-    <span class="lesson-number">Unit 01 · Lesson 04</span>
+    <span class="lesson-number">Unit 01 · Lesson 09</span>
   </div>
-  <h1 class="lesson-title">Parsing</h1>
+  <h1 class="lesson-title">Else If</h1>
 </div>
 
 <!-- ── VIDEO ── -->
 <div class="video-section">
   <div class="video-outer">
     <div class="video-wrap">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/CY8tqO9156c?si=kQzem0Pk_qf1yJEG" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/4j1rEsWwOjY?si=nGgachuNH7ji-Rbp" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     </div>
   </div>
 </div>
@@ -371,54 +371,73 @@
 <article class="article">
 
   <p class="article-intro">
-   When reading input from the user, <code>ReadLine()</code> is expecting a string. But we aren't always expecting a string, maybe we want to store an integer value. Therefore we need to convert the data into the expected type.
+   We know how to lock in one, or two conditions using if statements. But sometimes we need to check for things using if statements
   </p>
 
-  <h2>Parsing</h2>
+  <h2>Else if</h2>
   <p>
-    As learnt last course, <code>parsing</code> is just a fancy word for converting. When we use the <code>ReadLine()</code> method, it works perfectly for strings. But if we want to store data into something other than a string variable, we have to convert the data first
+    Below we are checking one thing.
   </p>
 
-  <pre>string name = "Bob";</pre>
+  <pre>if (temperature >= 40)
+{
+    Console.WriteLine("It is really hot outside");
+}</pre>
 
-   <h2>.Parse() Method</h2>
-  <p>
-    Let's say the user is entering their age. Age is a number, an integer to be exact. Therefore I want to store it in a proper variable.
+   <p>
+    But what if I want to check for more things than just the temperature being greater or equal to 40? That's where the <code>else if</code> comes in.
   </p>
 
-     <pre>
-int age;
+  <pre>if (temperature >= 40)
+{
+    Console.WriteLine("It is really hot outside");
+}
+else if (temperature >= 20)
+{
+  Console.WriteLine("It is nice outside");
+}
+else if (temperature >= 0)
+{
+  Console.WriteLine("Put a jacket on");
+}
+else
+{
+  Console.WriteLine("It is really cold outside");
+}
 </pre>
 
-  <p>
-    However, I will get an error when I try to retreive the input from the user.
+   <p>
+    You do NOT use <code>if</code> over and over again. That is not good programming. You should use <code>else if</code> when you're checking for more things that are related to the initial first if statement. That makes sure that only one of these if statements ever fires off.
   </p>
 
-     <pre>
-age = Console.ReadLine();   // this doesn't work
-</pre>
 
+
+   <h2>If Statement Formatting</h2>
   <p>
-    <code>age</code> is an integer, <code>ReadLine()</code> is giving us a string. So we need to convert the data to an integer before we can safely store it.
+    And as a side note, NOT IMPORTANT, but if your if statements only have one line of code in them, you do not need the braces. You can get rid of them, and keep your code small and concise.
   </p>
 
-     <pre>
-age = int.Parse(ReadLine());   // this works!
+  <pre>if (temperature >= 40)
+    Console.WriteLine("It is really hot outside");
+else if (temperature >= 20)
+  Console.WriteLine("It is nice outside");
+else if (temperature >= 0)
+  Console.WriteLine("Put a jacket on");
+else
+  Console.WriteLine("It is really cold outside");
 </pre>
 
-<p>A bit messy with the parentheses, but now we are able to store the number the user is giving to us, correctly into the integer variable.</p>
 
-
-
+<p>I would never take off marks for not doing this formatting, just letting you know it's an option if you would like.</p>
 
 
   <!-- Key takeaways -->
   <div class="takeaways">
     <p class="takeaways-label">Key Takeaways</p>
     <ul>
-      <li><code>ReadLine()</code> gives us a string</li>
-      <li>We don't always want to use string variables</li>
-      <li>Use <code>.Parse()</code> to correctly convert the data for the variable type</li>
+      <li>use <code>else if</code> when attaching more checks to your if statement</li>
+      <li><code>else ifs</code> make sure only ONE of those conditions fires off</li>
+      <li>You don't need braces if your if statements only have one line of code</li>
     </ul>
   </div>
 
@@ -427,8 +446,8 @@ age = int.Parse(ReadLine());   // this works!
 
 <!-- ── BACK BUTTON ── -->
 <div class="back-wrap">
-  <a href="../05 Variable Types/index.html" class="back-btn">← Previous page</a>
-   <a href="../07 toString/index.html" class="back-btn">Next Page →</a>
+  <a href="../16 Project 04/index.html" class="back-btn">← Previous page</a>
+   <a href="../18 checkpoint/index.html" class="back-btn">Next Page →</a>
 </div>
 
 <footer>
