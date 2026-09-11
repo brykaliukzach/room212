@@ -678,117 +678,117 @@
   </footer>
 
   <script>
-    // ── Shuffle helper (Fisher-Yates) ──
-    function shuffle(arr) {
-      for (let i = arr.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [arr[i], arr[j]] = [arr[j], arr[i]];
-      }
-      return arr;
+   // ── Shuffle helper (Fisher-Yates) ──
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+// ── Shuffle options within each question ──
+document.querySelectorAll('.question-card').forEach(card => {
+  const container = card.querySelector('.options');
+  if (!container) return;
+  const opts = [...container.querySelectorAll('.option')];
+  shuffle(opts).forEach(opt => container.appendChild(opt));
+});
+
+// ── Option selection ──
+document.querySelectorAll('.option').forEach(opt => {
+  opt.addEventListener('click', () => {
+    const card = opt.closest('.question-card');
+    card.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+    opt.classList.add('selected');
+    opt.querySelector('input[type="radio"]').checked = true;
+  });
+});
+
+// ── Submit ──
+document.getElementById('submit-btn').addEventListener('click', () => {
+  const cards = document.querySelectorAll('.question-card');
+  let answered = 0;
+  const total = cards.length;
+
+  // count answers first, before doing anything
+  cards.forEach(card => {
+    if (card.querySelector('.option.selected')) answered++;
+  });
+
+  if (answered < total) {
+    alert(`Please answer all ${total} questions before submitting.`);
+    return;
+  }
+
+  // only reaches here if all questions are answered
+  let correct = 0;
+
+  document.getElementById('retake-btn').style.display = 'none';
+  document.querySelector('.nextpage-btn').style.display = 'none';
+
+  cards.forEach(card => {
+    const selected    = card.querySelector('.option.selected');
+    const selectedVal = parseInt(selected.querySelector('input').value);
+    const correctVal  = parseInt(card.dataset.correct);
+    const options     = card.querySelectorAll('.option');
+
+    options.forEach(o => {
+      o.style.pointerEvents = 'none';
+      o.classList.remove('selected');
+    });
+
+    if (selectedVal === correctVal) {
+      selected.classList.add('correct');
+      correct++;
+    } else {
+      selected.classList.add('wrong');
     }
+  });
 
-    // ── Shuffle options within each question ──
-    document.querySelectorAll('.question-card').forEach(card => {
-      const container = card.querySelector('.options');
-      if (!container) return;
-      const opts = [...container.querySelectorAll('.option')];
-      shuffle(opts).forEach(opt => container.appendChild(opt));
-    });
+  const pct = Math.round((correct / total) * 100);
+  const scoreEl   = document.getElementById('score-number');
+  const msgEl     = document.getElementById('score-message');
+  const panel     = document.getElementById('score-panel');
+  const submitBtn = document.getElementById('submit-btn');
 
-    // ── Option selection ──
-    document.querySelectorAll('.option').forEach(opt => {
-      opt.addEventListener('click', () => {
-        const card = opt.closest('.question-card');
-        card.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
-        opt.classList.add('selected');
-        opt.querySelector('input[type="radio"]').checked = true;
-      });
-    });
+  scoreEl.textContent = pct + '%';
+  scoreEl.className = 'score-number';
 
-    // ── Submit ──
-    document.getElementById('submit-btn').addEventListener('click', () => {
-      const cards = document.querySelectorAll('.question-card');
-      let answered = 0;
-      const total = cards.length;
+  if (pct === 100) {
+    scoreEl.classList.add('perfect');
+    msgEl.textContent = `Perfect score! ${correct} / ${total} correct. You're ready to move on.`;
+    document.querySelector('.nextpage-btn').style.display = '';
+  } else if (pct >= 60) {
+    scoreEl.classList.add('good');
+    msgEl.textContent = `${correct} / ${total} correct. Good effort — review the highlighted answers and try again for 100%.`;
+    document.getElementById('retake-btn').style.display = '';
+  } else {
+    scoreEl.classList.add('retry');
+    msgEl.textContent = `${correct} / ${total} correct. Review the questions above and give it another shot.`;
+    document.getElementById('retake-btn').style.display = '';
+  }
 
-      // count answers first, before doing anything
-      cards.forEach(card => {
-        if (card.querySelector('.option.selected')) answered++;
-      });
+  panel.classList.add('visible');
+  submitBtn.disabled = true;
+  panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
 
-      if (answered < total) {
-        alert(`Please answer all ${total} questions before submitting.`);
-        return;
-      }
+// ── Retake ──
+document.getElementById('retake-btn').addEventListener('click', () => {
+  document.querySelectorAll('.option').forEach(opt => {
+    opt.classList.remove('selected', 'correct', 'wrong', 'show-correct');
+    opt.style.pointerEvents = '';
+    opt.querySelector('input[type="radio"]').checked = false;
+  });
 
-      // only reaches here if all questions are answered
-      let correct = 0;
-
-      document.getElementById('retake-btn').style.display = 'none';
-      document.querySelector('.nextpage-btn').style.display = 'none';
-
-      cards.forEach(card => {
-        const selected = card.querySelector('.option.selected');
-        const selectedVal = parseInt(selected.querySelector('input').value);
-        const correctVal = parseInt(card.dataset.correct);
-        const options = card.querySelectorAll('.option');
-
-        options.forEach(o => {
-          o.style.pointerEvents = 'none';
-          o.classList.remove('selected');
-        });
-
-        if (selectedVal === correctVal) {
-          options[selectedVal].classList.add('correct');
-          correct++;
-        } else {
-          options[selectedVal].classList.add('wrong');
-        }
-      });
-
-      const pct = Math.round((correct / total) * 100);
-      const scoreEl = document.getElementById('score-number');
-      const msgEl = document.getElementById('score-message');
-      const panel = document.getElementById('score-panel');
-      const submitBtn = document.getElementById('submit-btn');
-
-      scoreEl.textContent = pct + '%';
-      scoreEl.className = 'score-number';
-
-      if (pct === 100) {
-        scoreEl.classList.add('perfect');
-        msgEl.textContent = `Perfect score! ${correct} / ${total} correct. You're ready to move on.`;
-        document.querySelector('.nextpage-btn').style.display = '';
-      } else if (pct >= 60) {
-        scoreEl.classList.add('good');
-        msgEl.textContent = `${correct} / ${total} correct. Good effort — review the highlighted answers and try again for 100%.`;
-        document.getElementById('retake-btn').style.display = '';
-      } else {
-        scoreEl.classList.add('retry');
-        msgEl.textContent = `${correct} / ${total} correct. Review the questions above and give it another shot.`;
-        document.getElementById('retake-btn').style.display = '';
-      }
-
-      panel.classList.add('visible');
-      submitBtn.disabled = true;
-      panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    });
-
-    // ── Retake ──
-    document.getElementById('retake-btn').addEventListener('click', () => {
-      document.querySelectorAll('.option').forEach(opt => {
-        opt.classList.remove('selected', 'correct', 'wrong', 'show-correct');
-        opt.style.pointerEvents = '';
-        opt.querySelector('input[type="radio"]').checked = false;
-      });
-
-      const panel = document.getElementById('score-panel');
-      panel.classList.remove('visible');
-      document.getElementById('submit-btn').disabled = false;
-      document.getElementById('retake-btn').style.display = '';
-      document.querySelector('.nextpage-btn').style.display = 'none';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+  const panel = document.getElementById('score-panel');
+  panel.classList.remove('visible');
+  document.getElementById('submit-btn').disabled = false;
+  document.getElementById('retake-btn').style.display = '';
+  document.querySelector('.nextpage-btn').style.display = 'none';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
   </script>
 
 </body>
