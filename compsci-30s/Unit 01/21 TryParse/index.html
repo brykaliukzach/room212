@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Room 212 — Return Command</title>
+  <title>Room 212 — TryParse</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -346,23 +346,23 @@
   <span>/</span>
   <a href="../index.html">Unit 01</a>
   <span>/</span>
-  <span class="current">Lesson 10</span>
+  <span class="current">Lesson 11</span>
 </nav>
 
 <!-- ── LESSON HEADER ── -->
 <div class="lesson-header">
   <div class="lesson-meta">
     <span class="lesson-type-badge">Video Lesson</span>
-    <span class="lesson-number">Unit 01 · Lesson 10</span>
+    <span class="lesson-number">Unit 01 · Lesson 11</span>
   </div>
-  <h1 class="lesson-title">Return Command</h1>
+  <h1 class="lesson-title">TryParse</h1>
 </div>
 
 <!-- ── VIDEO ── -->
 <div class="video-section">
   <div class="video-outer">
     <div class="video-wrap">
-<iframe width="560" height="315" src="https://www.youtube.com/embed/7-gGGNwrnrs?si=HuYnKwchefhLUkh-" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Nd2HvqyDkfw?si=VzZOqeWNO8qF1v5P" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
     </div>
   </div>
 </div>
@@ -371,42 +371,61 @@
 <article class="article">
 
   <p class="article-intro">
-   An important part of programming is handling user input that is not expected. We can't rely on the user to follow the rules, therefore we need to put up safeguards when we can
+   We've looked at some "light" ways to prevent the user from entering invalid input. But let's take a look back at a way to prevent your program from actually crashing.
   </p>
 
-  <h2>Return Command</h2>
+  <h2>TryParse Method</h2>
   <p>
-    The <code>return</code> command is a powerful word in programming. If the <code>return</code> command is ever execute, the following code within that function or method will not be executed.
+    The <code>TryParse</code> method as the name implies, tries to parse the input. If it can, great. If it can't, your program will NOT CRASH. This is good, we don't ever want our programs to crash.
   </p>
 
-  <pre>static void Main(string[] args)
-{
-      return; 
+  <pre>
+int age;
 
-      this line of code doesn't run
-      ... this line of code doesn't run
-      ...... this line of code doesn't run
-}</pre>
+int.TryParse(Console.ReadLine(), out age);
+</pre>
 
    <p>
-    Now why would you want to stop your program from executing code you have written? 
+    Above, the Tryparse requires two things. The first thing is that actual number we're trying to parse. Since we're getting the number from the user, we can use the <code>Console.ReadLine()</code>. The second thing if where that number is being stored if the TryParse is successful. <code>out age</code> means we're sending that number to a variable named <code>out</code>.
   </p>
 
   <h2>Input Validation</h2>
 
-  <p>Yes we may have a program that does something with the input the user has given us. But we only want that code to execute if they've given us PROPER input to work with.</p>
+  <p>So this is good, but we can take it one step further. We can put this TryParse statement into an if statement</p>
+<pre>int age;
 
-    <p>The easiest form of input validation is creating <code>if statements</code> to check if their input is proper. For example, maybe the user is entering their age. I think it's fair to say that negative ages should be allowed, nor should unrealistic high ages be allowed.</p>
+if (int.TryParse(Console.ReadLine(), out age));
+{
 
-  <pre>if (age < 0 || age > 150)
-      return;
-
-don't execute the rest of the code within this function . . .
+}
 </pre>
 
+
+    <p><code>TryParse</code> actually tells you if it was successful or not. It will give you back a <code>true</code> or <code>false</code>. This means I can use it in an if statement to check IF IT WORKED, or IF IT DID NOT WORK.</p>
+
+    <p>But I don't really care IF IT WORKED. I want to check if it DID NOT WORK. Because that's why I'm doing this in the first place, to catch the user giving me invalid input</p>
+
+    <h2>The ! operator</h2>
+
    <p>
-    Now instead of atually using their invalid input, and continueing on as normal, our program refuses to continue. We have stopped our program from continuing on with their invalid input.
+    The <code>!</code> operator can be used to flip a true or false statement. So instead of checking IF SOMETHING IS TRUE, i can check IF SOMETHING IS NOT TRUE, by using the <code>!</code> operator. Like this:
   </p>
+
+ <pre>if (!int.TryParse(Console.ReadLine(), out age));
+{
+
+}
+</pre>
+
+<p>Now I'm checking IF IT IS NOT TRUE, if it didn't work. And I can put code in there to handle the situation accordingly - telling them their input was invalid, and using the <code>return</code> command to stop the program from continuing.</p>
+
+ <pre>if (!int.TryParse(Console.ReadLine(), out age));
+{
+    Console.WriteLine("That is not valid input.");
+    return;
+}
+</pre>
+
 
 
 
@@ -415,8 +434,10 @@ don't execute the rest of the code within this function . . .
   <div class="takeaways">
     <p class="takeaways-label">Key Takeaways</p>
     <ul>
-      <li><code>return</code> stops the rest of the code within a function from executing</li>
-      <li>Use <code>if statements</code> with a return statement for simple input validation</li>
+      <li>TryParse() tries to parse a value.</li>
+      <li>TryParse is great because in a fail, it won't crash our program.</li>
+      <li>Wrap a TryParse in an If statement to check if the parse worked</li>
+      <li>Use <code>!</code> to check if the parse DID NOT WORK</li>
     </ul>
   </div>
 
@@ -425,8 +446,8 @@ don't execute the rest of the code within this function . . .
 
 <!-- ── BACK BUTTON ── -->
 <div class="back-wrap">
-  <a href="../19 Project 05/index.html" class="back-btn">← Previous page</a>
-   <a href="../21 TryParse/index.html" class="back-btn">Next Page →</a>
+  <a href="../20 Return/index.html" class="back-btn">← Previous page</a>
+   <a href="../22 Checkpoint/index.html" class="back-btn">Next Page →</a>
 </div>
 
 <footer>
