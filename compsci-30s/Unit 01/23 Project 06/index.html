@@ -3,16 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Room 212 — Character Creator Project</title>
+  <title>Room 212 — Checkpoint</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --ink: #e8e4de;
+      --accent: #278620;
+      --muted: #7a7470;
+      --quiz-color: #45D8FF;
+      --correct: #81ff78;
+      --wrong: #c84b2f;
+
+       --ink: #e8e4de;
       --paper: #141210;
       --accent: #45D8FF;
-      --muted: #6b6560;
+     --muted: #6b6560;
       --project-color: #45D8FF;
       --surface: #1c1a17;
       --surface-2: #242118;
@@ -39,7 +45,7 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      background: var(--surface);
+      background: #1C1A17;
       border-bottom: 1px solid var(--border);
     }
     .breadcrumb a { color: var(--muted); text-decoration: none; transition: color 0.2s; }
@@ -49,9 +55,9 @@
 
     /* ── LESSON HEADER ── */
     .lesson-header {
-      background: #0a0908;
+      background: #0A0908;
       padding: 48px 64px;
-      border-bottom: 3px solid var(--project-color);
+      border-bottom: 3px solid var(--quiz-color);
     }
 
     .lesson-meta {
@@ -67,8 +73,8 @@
       letter-spacing: 0.18em;
       text-transform: uppercase;
       padding: 5px 12px;
-      background: rgba(76,175,69,0.15);
-      color: #7cf57a;
+      background: rgba(200,75,47,0.2);
+      color: #f5a07a;
       border-radius: 2px;
     }
 
@@ -76,7 +82,7 @@
       font-size: 0.75rem;
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: rgba(255,255,255,0.25);
+      color: rgba(255,255,255,0.35);
     }
 
     .lesson-title {
@@ -84,99 +90,52 @@
       font-size: clamp(1.8rem, 3.5vw, 2.8rem);
       font-weight: 700;
       color: #fff;
-      line-height: 1.1;
     }
 
     .lesson-subtitle {
       margin-top: 10px;
       font-size: 0.95rem;
-      color: rgba(255,255,255,0.35);
+      color: rgba(255,255,255,0.45);
       font-weight: 300;
     }
 
-    /* ── MAIN LAYOUT ── */
-    .project-layout {
-      max-width: 1100px;
+    /* ── QUIZ WRAP ── */
+    .quiz-wrap {
+      max-width: 720px;
       margin: 52px auto 80px;
       padding: 0 32px;
-      display: grid;
-      grid-template-columns: 1fr 320px;
-      gap: 40px;
-      align-items: start;
     }
 
-    /* ── VIDEO ── */
-    .project-video-wrap {
-      position: relative;
-      padding-bottom: 56.25%;
-      height: 0;
-      overflow: hidden;
-      background: #000;
-      margin-bottom: 36px;
-    }
-
-    .project-video-wrap iframe {
-      position: absolute;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      border: none;
-    }
-
-    .video-placeholder {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      color: rgba(255,255,255,0.2);
-      font-size: 0.82rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      gap: 12px;
-      background: #0d0c0a;
-      border: 1px solid var(--border);
-    }
-    .video-placeholder .play-icon { font-size: 2.5rem; opacity: 0.2; }
-
-    .video-label {
-      font-size: 0.72rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 12px;
-    }
-
-    /* ── DESCRIPTION ── */
-    .project-desc-section h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.5rem;
-      font-weight: 700;
-      color: var(--ink);
-      margin-bottom: 16px;
-    }
-
-    .project-desc-section p {
-      font-size: 1rem;
-      line-height: 1.8;
-      color: #9e9790;
-      font-weight: 300;
+    /* ── QUESTION CARD ── */
+    .question-card {
+      background: #252321;
+      border: 1px solid #5d5852;
+      padding: 36px 40px;
       margin-bottom: 20px;
     }
 
-    .project-desc-section h3 {
-      font-size: 0.78rem;
+    .question-num {
+      font-size: 0.7rem;
       font-weight: 500;
-      letter-spacing: 0.18em;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--accent);
-      margin: 32px 0 12px;
+      color: var(--quiz-color);
+      margin-bottom: 10px;
     }
 
-    /* Code blocks */
-    .project-desc-section pre {
+    .question-text {
+   
+      font-size: 1.15rem;
+      font-weight: 400;
+      color: var(--ink);
+      line-height: 1.4;
+      margin-bottom: 24px;
+    }
+
+        /* Code blocks */
+    pre {
       background: #0a0908;
-      color:#45D8FF;
+      color: #45D8FF;
       font-family: 'Courier New', monospace;
       font-size: 0.88rem;
       line-height: 1.7;
@@ -188,199 +147,216 @@
       border-left: 3px solid var(--accent);
     }
 
-    .project-desc-section code {
-      background: rgba(76,175,69,0.12);
-      color: var(--accent);
-      font-family: 'Courier New', monospace;
-      font-size: 0.88em;
-      padding: 2px 7px;
-      border-radius: 2px;
-    }
+    
 
-    /* Images in description */
-    .project-desc-section figure {
-      margin: 24px 0;
-    }
-    .project-desc-section figure img {
-      width: 100%;
-      display: block;
-    }
-    .project-desc-section figcaption {
-      font-size: 0.78rem;
-      color: var(--muted);
-      margin-top: 8px;
-      font-style: italic;
-    }
+    /* ── OPTIONS ── */
+    .options { display: flex; flex-direction: column; gap: 10px; }
 
-    /* ── SIDEBAR ── */
-    .project-sidebar { display: flex; flex-direction: column; gap: 20px; }
-
-    .sidebar-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      padding: 28px;
-    }
-
-    .sidebar-card-label {
-      font-size: 0.68rem;
-      font-weight: 500;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 16px;
-    }
-
-    /* Requirements checklist */
-    .requirements { display: flex; flex-direction: column; gap: 10px; }
-
-    .req-item {
+    .option {
       display: flex;
-      align-items: flex-start;
-      gap: 12px;
-      font-size: 0.88rem;
-      color: var(--ink);
-      font-weight: 300;
-      line-height: 1.5;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 20px;
+      border: 1.5px solid #5d5852;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+      user-select: none;
     }
 
-    .req-check {
-      width: 18px;
-      height: 18px;
-      border: 1.5px solid rgba(255,255,255,0.15);
+    .option:hover { border-color: var(--accent); background: rgba(0,0,0,0.02); }
+
+    .option input[type="radio"] { display: none; }
+
+    .option-bubble {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      border: 2px solid rgba(0,0,0,0.2);
       flex-shrink: 0;
-      margin-top: 1px;
+      transition: border-color 0.15s, background 0.15s;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.7rem;
-      color: var(--accent);
-      cursor: pointer;
-      transition: border-color 0.15s, background 0.15s;
     }
-    .req-check.checked {
-      border-color: var(--accent);
+
+    .option.selected .option-bubble {
+      border-color: var(--paper);
       background: var(--accent);
-      color: #0a0908;
+    }
+    .option.selected .option-bubble::after {
+      content: '';
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--paper);
     }
 
-    /* Details list */
-    .detail-list { display: flex; flex-direction: column; gap: 12px; }
-
-    .detail-item {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-size: 0.85rem;
-      padding-bottom: 12px;
-      border-bottom: 1px solid var(--border);
-    }
-    .detail-item:last-child { border-bottom: none; padding-bottom: 0; }
-    .detail-item .detail-key { color: var(--muted); font-weight: 300; }
-    .detail-item .detail-val { font-weight: 500; color: var(--ink); }
-
-    /* ── DOWNLOADS CARD ── */
-    .download-list { display: flex; flex-direction: column; gap: 14px; }
-
-    .download-item {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .download-item-label {
-      font-size: 0.72rem;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    .download-link {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 14px;
-      background: var(--surface-2);
-      border: 1px solid var(--border-strong);
+    .option-text {
+      font-size: 0.95rem;
       color: var(--ink);
-      text-decoration: none;
-      font-size: 0.85rem;
-      font-weight: 400;
-      transition: background 0.15s, border-color 0.15s, color 0.15s;
-    }
-    .download-link:hover {
-      background: rgba(76,175,69,0.1);
-      border-color: var(--accent);
-      color: var(--accent);
+      font-weight: 300;
+      line-height: 1.4;
     }
 
-    .download-link .dl-icon {
-      font-size: 1rem;
-      flex-shrink: 0;
-      opacity: 0.6;
+    /* ── RESULT STATES ── */
+    .option.correct {
+      border-color: var(--correct);
+      background: rgba(39,134,32,0.06);
     }
-    .download-link:hover .dl-icon { opacity: 1; }
-
-    .download-none {
-      font-size: 0.85rem;
-      color: var(--muted);
-      font-style: italic;
-      padding: 4px 0;
+    .option.correct .option-bubble {
+      border-color: var(--correct);
+      background: var(--correct);
     }
+    .option.correct .option-text { color: var(--correct); font-weight: 500; }
 
-    .download-divider {
-      border: none;
-      border-top: 1px solid var(--border);
-      margin: 2px 0;
+    .option.wrong {
+      border-color: var(--wrong);
+      background: rgba(200,75,47,0.06);
     }
+    .option.wrong .option-bubble {
+      border-color: var(--wrong);
+      background: var(--wrong);
+    }
+    .option.wrong .option-text { color: var(--wrong); }
 
-    /* ── BACK BUTTON ── */
-  .back-wrap {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 32px 64px;
-    display: flex;
-    justify-content: space-between;
-    gap: 16px;
+    .option.show-correct {
+      border-color: var(--correct);
+      background: rgba(39,134,32,0.04);
+    }
+    .option.show-correct .option-text { color: var(--correct); font-weight: 500; }
+
+    /* ── SUBMIT BUTTON ── */
+   .submit-wrap {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 32px;
 }
 
-    .back-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 14px 28px;
+    .submit-btn {
+      padding: 16px 40px;
       background: var(--surface);
-      border: 1px solid var(--border-strong);
-      font-size: 0.8rem;
+      color: #fff;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
       font-weight: 500;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--ink);
-      text-decoration: none;
-      transition: background 0.2s, transform 0.2s, color 0.2s;
+         border: 1px solid var(--border-strong);
+      cursor: pointer;
+      transition: background 0.2s;
     }
-    .back-btn:hover { background: var(--accent); color: #0a0908; transform: translateX(-3px); border-color: var(--accent); }
+    .submit-btn:hover { background: var(--accent); color: #0A0908; }
+    .submit-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+        .previous-btn {
+      padding: 16px 40px;
+      background: var(--surface);
+      color: #fff;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+         border: 1px solid var(--border-strong);
+      cursor: pointer;
+      transition: background 0.2s;
+      text-decoration: none;
+    }
+    .previous-btn:hover { background: var(--accent); color: #0A0908; }
+    .previous-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    /* ── SCORE PANEL ── */
+    .score-panel {
+      display: none;
+      background: #0A0908;
+      padding: 48px 40px;
+      margin-top: 40px;
+      text-align: center;
+      border: 1px solid var(--accent);
+    }
+
+    .score-panel.visible { display: block; }
+
+    .score-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 16px;
+    }
+
+    .score-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 5rem;
+      font-weight: 900;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .score-number.perfect { color: #7cf57a; }
+    .score-number.good    { color: #f5c97a; }
+    .score-number.retry   { color: #f5a07a; }
+
+    .score-message {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.55);
+      font-weight: 300;
+      margin-bottom: 32px;
+    }
+
+    .score-actions {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .retake-btn {
+      padding: 14px 32px;
+      background: none;
+      border: 1.5px solid rgba(255,255,255,0.3);
+      color: rgba(255,255,255,0.7);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+     .retake-btn:hover { border-color: var(--accent); background-color: var(--accent); color: #0A0908; ; }
+
+   .nextpage-btn {
+      padding: 14px 32px;
+      background: none;
+      border: 1.5px solid rgba(255,255,255,0.3);
+      color: rgba(255,255,255,0.7);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .nextpage-btn:hover { border-color: var(--accent); background-color: var(--accent); color: #0A0908; ; }
 
     /* ── FOOTER ── */
     footer {
-      background: #0a0908;
-      color: rgba(255,255,255,0.2);
+      background: #0A0908;
+      color: rgba(176, 176, 176, 0.35);
       text-align: center;
       padding: 32px;
       font-size: 0.78rem;
       letter-spacing: 0.08em;
-      border-top: 1px solid var(--border);
     }
 
-    @media (max-width: 900px) {
-      .project-layout { grid-template-columns: 1fr; }
-      .project-sidebar { order: -1; }
-    }
     @media (max-width: 768px) {
       .breadcrumb { padding: 16px 20px; }
       .lesson-header { padding: 36px 24px; }
-      .project-layout { padding: 0 16px; margin: 32px auto 60px; }
-      .back-wrap { padding: 0 16px 48px; }
+      .quiz-wrap { padding: 0 16px; margin: 32px auto 60px; }
+      .question-card { padding: 24px 20px; }
     }
   </style>
 </head>
@@ -394,185 +370,169 @@
   <span>/</span>
   <a href="../index.html">Unit 01</a>
   <span>/</span>
-  <span class="current">Character Creator Project</span>
+  <span class="current">Checkpoint</span>
 </nav>
 
 <!-- ── LESSON HEADER ── -->
 <div class="lesson-header">
   <div class="lesson-meta">
-    <span class="lesson-type-badge">Project</span>
-    <span class="lesson-number">Unit 01 · Project 06</span>
+    <span class="lesson-type-badge">Checkpoint</span>
+    <span class="lesson-number">Unit 01 · Checkpoint 04</span>
   </div>
-  <h1 class="lesson-title">Character Creator Project</h1>
-  <p class="lesson-subtitle">Allow the user to create a character, spending points in two character traits</p>
+  <h1 class="lesson-title">Checkpoint</h1>
+  <p class="lesson-subtitle">A quick review of Return & TryParse</p>
 </div>
 
-<!-- ── PROJECT LAYOUT ── -->
-<div class="project-layout">
+<!-- ── QUIZ ── -->
+<div class="quiz-wrap">
+  <div class="questions" id="questions">
 
-  <!-- ── MAIN COLUMN ── -->
-  <div class="project-main">
+    <!-- ═══ QUESTION 1 ═══
+         correct: index of the correct answer (0-based)
+         Change the question text, options, and correct index to match your content.
+    -->
+    <div class="question-card" data-correct="0">
+      <p class="question-num">Question 1</p>
+      <p class="question-text">What does the <code>return</code> command do?</p>
 
-    <!-- Walkthrough video -->
-    <p class="video-label">Project Walkthrough</p>
-    <div class="project-video-wrap">
-      
-       
-<iframe width="560" height="315" src="https://www.youtube.com/embed/YSgzPXFWfHY?si=6cQEPpNfCiyyqjA8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-     
 
+      <div class="options">
+
+        <label class="option"><input type="radio" name="q1" value="0"><div class="option-bubble"></div><span class="option-text">Stops the rest of the code in that function/method from executing</span></label>
+
+        <label class="option"><input type="radio" name="q1" value="1"><div class="option-bubble"></div><span class="option-text">Repeats the code from the beginning of the function/method</span></label>
+
+         <label class="option"><input type="radio" name="q1" value="1"><div class="option-bubble"></div><span class="option-text">Converts text into a number</span></label>
+        <label class="option"><input type="radio" name="q1" value="1"><div class="option-bubble"></div><span class="option-text">Skips the next line of code</span></label>
+   
+      </div>
     </div>
 
-    <!-- Description -->
-    <div class="project-desc-section">
+       <div class="question-card" data-correct="0">
+      <p class="question-num">Question 2</p>
+      <p class="question-text">What will the output to the console be?</p>
 
-      <h2>Project Overview</h2>
-      <p>
-        This project requires working with three variables, and using <code>TryParse</code> and <code>Input validation</code> to make sure the user follows the rules.
-      </p>
+      <pre>
+{
+    return;
 
-
-      <h3>Getting Started</h3>
-      <p>
-       You need three variables for this program
-      </p>
-
-            <pre>int strengthPoints = 0;
-int defencePoints = 0;
-int pointsLeft = 100;
+    Console.WriteLine("Hello World");
+}
 </pre>
 
+      <div class="options">
 
-      <h3>What to program</h3>
-      <p>
-        Start with <code>strengthPoints. First you need an if statement to check if you can parse their number. Straight forward.</code> 
-      </p>
+        <label class="option"><input type="radio" name="q1" value="0"><div class="option-bubble"></div><span class="option-text">nothing</span></label>
 
-       <p>
-        Then create another if statement to check for two possible errors. They entered a negative number, or they've spent more points then they're allowed to at this time. This is the tricky part. 
-      </p>
+        <label class="option"><input type="radio" name="q1" value="1"><div class="option-bubble"></div><span class="option-text">Hello World</span></label>
 
-      <p>If both verifications pass, adjust the variable accordingly, and basically repeat the same thing for the <code>defence points</code>
-      </p>
+   
+      </div>
+    </div>
 
-      <!--
-      <figure>
-        <img src="images/project-example-output.png" alt="Example output"/>
-        <figcaption>An example of what the finished program's console output might look like.</figcaption>
-      </figure>
-      -->
 
-  
+
+           <div class="question-card" data-correct="0">
+      <p class="question-num">Question 3</p>
+      <p class="question-text">What will the output to the console be?</p>
+
+      <pre>
+int age = 10;
+
+if (age <= 18)
+    return;
+else 
+    Console.WriteLine("Welcome");
+</pre>
+
+      <div class="options">
+
+        <label class="option"><input type="radio" name="q1" value="0"><div class="option-bubble"></div><span class="option-text">nothing</span></label>
+
+        <label class="option"><input type="radio" name="q1" value="1"><div class="option-bubble"></div><span class="option-text">Welcome</span></label>
+   
+          </div>
+    </div>
+
+
+            <div class="question-card" data-correct="0">
+      <p class="question-num">Question 4</p>
+      <p class="question-text">What does <code>!</code> do in programming?</p>
+ 
+
+      <div class="options">
+
+        <label class="option"><input type="radio" name="q1" value="0"><div class="option-bubble"></div><span class="option-text">Reverses a boolean value</span></label>
+
+        <label class="option"><input type="radio" name="q1" value="1"><div class="option-bubble"></div><span class="option-text">Makes a number negative</span></label>
+
+         <label class="option"><input type="radio" name="q1" value="1"><div class="option-bubble"></div><span class="option-text">Ends the program</span></label>
     </div>
   </div>
 
-  <!-- ── SIDEBAR ── -->
-  <aside class="project-sidebar">
+     <div class="question-card" data-correct="0">
+      <p class="question-num">Question 5</p>
+      <p class="question-text">the TryParse() method gives us either a true or false</p>
+ 
 
-    <!-- Project details -->
-    <div class="sidebar-card">
-      <p class="sidebar-card-label">Project Details</p>
-      <div class="detail-list">
-        <div class="detail-item">
-          <span class="detail-key">Unit</span>
-          <span class="detail-val">Unit 01</span>
-        </div>
-        <div class="detail-item">
-          <span class="detail-key">Language</span>
-          <span class="detail-val">C#</span>
-        </div>
-        <div class="detail-item">
-          <span class="detail-key">Type</span>
-          <span class="detail-val">Console App</span>
-        </div>
-        <div class="detail-item">
-          <span class="detail-key">Difficulty</span>
-          <span class="detail-val">Hard</span>
-        </div>
-      </div>
+      <div class="options">
+
+        <label class="option"><input type="radio" name="q1" value="0"><div class="option-bubble"></div><span class="option-text">Correct</span></label>
+
+        <label class="option"><input type="radio" name="q1" value="1"><div class="option-bubble"></div><span class="option-text">Incorrect</span></label>
+
     </div>
+  </div>
 
-    <!-- Downloads card -->
-    <div class="sidebar-card">
-      <p class="sidebar-card-label">Downloads</p>
-      <div class="download-list">
+       <div class="question-card" data-correct="0">
+      <p class="question-num">Question 6</p>
+      <p class="question-text">Using TryParse() prevents our program from crashing, moreso than just Parse()</p>
+ 
+      <div class="options">
 
-        <div class="download-item">
-          <span class="download-item-label">Executable</span>
-          <a href="Character Creator.exe" class="download-link" download>
-              <span class="dl-icon">⬇</span>
-              Sample Program
-            </a>
-          <!--
-            OPTION A — link to a file:
-            <a href="downloads/my-tool.exe" class="download-link" download>
-              <span class="dl-icon">⬇</span>
-              my-tool.exe
-            </a>
+        <label class="option"><input type="radio" name="q1" value="0"><div class="option-bubble"></div><span class="option-text">True</span></label>
 
-            OPTION B — no file this project:
-            <span class="download-none">None</span>
-          -->
-         
-        </div>
+        <label class="option"><input type="radio" name="q1" value="1"><div class="option-bubble"></div><span class="option-text">False</span></label>
 
-        <hr class="download-divider"/>
-
-        <div class="download-item">
-          <!-- <span class="download-item-label">Resources</span> -->
-          <!--
-            OPTION A — link to a zip:
-            <a href="downloads/project-resources.zip" class="download-link" download>
-              <span class="dl-icon">⬇</span>
-              project-resources.zip
-            </a>
-
-            OPTION B — no file this project:
-            <span class="download-none">None</span>
-          -->
-          <!-- <span class="download-none">None</span> -->
-        </div>
-
-      </div>
     </div>
+  </div>
 
-    <!-- Requirements checklist — students can check off as they go -->
-    <div class="sidebar-card">
-      <p class="sidebar-card-label">Requirements</p>
-      <div class="requirements">
+          
 
-        <div class="req-item">
-          <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>Two if statements for each variable.</span>
-        </div>
-
-        <div class="req-item">
-          <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>Using the <code>||</code> operator in the second if statement</span>
-        </div>
-
-        <div class="req-item">
-          <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>No magic numbers, only variable names.</span>
-        </div>
-
-        <div class="req-item">
-          <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>Program never crashes.</span>
-        </div>
-
-        
-        
-      </div>
-    </div>
-
-  </aside>
 </div>
 
-<!-- ── BACK BUTTON ── -->
-<div class="back-wrap">
-  <a href="../18 checkpoint/index.html" class="back-btn">← Previous page</a>
-   <a href="../20 Return/index.html" class="back-btn">Next Page →</a>
+
+
+
+
+
+    <!--
+      ═══ ADD MORE QUESTIONS ═══
+      Copy and paste a question-card block above.
+      - Change data-correct="N" to the index of the correct answer (0, 1, 2, or 3)
+      - Change the name="qN" on each radio to the next number (q6, q7, etc.)
+      - Change each value="0/1/2/3" to match the option's position
+    -->
+
+ 
+
+  <div class="submit-wrap">
+   <a class="previous-btn" id="previous-btn" href="../21 TryParse/index.html">← Previous Page</a>
+    <button class="submit-btn" id="submit-btn">Submit Quiz</button>
+   
+  </div>
+
+  <!-- ── SCORE PANEL ── -->
+  <div class="score-panel" id="score-panel">
+    <p class="score-label">Your Score</p>
+    <div class="score-number" id="score-number"></div>
+    <p class="score-message" id="score-message"></p>
+    <div class="score-actions">
+      <button class="retake-btn" id="retake-btn">↺ Retake Quiz</button>
+      <a href="../23 Project 06/index.html" class="nextpage-btn">Next Page →</a>
+    </div>
+  </div>
+
 </div>
 
 <footer>
@@ -580,10 +540,119 @@ int pointsLeft = 100;
 </footer>
 
 <script>
-  function toggleCheck(el) {
-    el.classList.toggle('checked');
+   // ── Shuffle helper (Fisher-Yates) ──
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
   }
+  return arr;
+}
+
+// ── Shuffle options within each question ──
+document.querySelectorAll('.question-card').forEach(card => {
+  const container = card.querySelector('.options');
+  if (!container) return;
+  const opts = [...container.querySelectorAll('.option')];
+  shuffle(opts).forEach(opt => container.appendChild(opt));
+});
+
+// ── Option selection ──
+document.querySelectorAll('.option').forEach(opt => {
+  opt.addEventListener('click', () => {
+    const card = opt.closest('.question-card');
+    card.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+    opt.classList.add('selected');
+    opt.querySelector('input[type="radio"]').checked = true;
+  });
+});
+
+// ── Submit ──
+document.getElementById('submit-btn').addEventListener('click', () => {
+  const cards = document.querySelectorAll('.question-card');
+  let answered = 0;
+  const total = cards.length;
+
+  // count answers first, before doing anything
+  cards.forEach(card => {
+    if (card.querySelector('.option.selected')) answered++;
+  });
+
+  if (answered < total) {
+    alert(`Please answer all ${total} questions before submitting.`);
+    return;
+  }
+
+  // only reaches here if all questions are answered
+  let correct = 0;
+
+  document.getElementById('retake-btn').style.display = 'none';
+  document.querySelector('.nextpage-btn').style.display = 'none';
+
+  cards.forEach(card => {
+    const selected    = card.querySelector('.option.selected');
+    const selectedVal = parseInt(selected.querySelector('input').value);
+    const correctVal  = parseInt(card.dataset.correct);
+    const options     = card.querySelectorAll('.option');
+
+    options.forEach(o => {
+      o.style.pointerEvents = 'none';
+      o.classList.remove('selected');
+    });
+
+    if (selectedVal === correctVal) {
+      selected.classList.add('correct');
+      correct++;
+    } else {
+      selected.classList.add('wrong');
+    }
+  });
+
+  const pct = Math.round((correct / total) * 100);
+  const scoreEl   = document.getElementById('score-number');
+  const msgEl     = document.getElementById('score-message');
+  const panel     = document.getElementById('score-panel');
+  const submitBtn = document.getElementById('submit-btn');
+
+  scoreEl.textContent = pct + '%';
+  scoreEl.className = 'score-number';
+
+  if (pct === 100) {
+    scoreEl.classList.add('perfect');
+    msgEl.textContent = `Perfect score! ${correct} / ${total} correct. You're ready to move on.`;
+    document.querySelector('.nextpage-btn').style.display = '';
+  } else if (pct >= 60) {
+    scoreEl.classList.add('good');
+    msgEl.textContent = `${correct} / ${total} correct. Good effort — review the highlighted answers and try again for 100%.`;
+    document.getElementById('retake-btn').style.display = '';
+  } else {
+    scoreEl.classList.add('retry');
+    msgEl.textContent = `${correct} / ${total} correct. Review the questions above and give it another shot.`;
+    document.getElementById('retake-btn').style.display = '';
+  }
+
+  panel.classList.add('visible');
+  submitBtn.disabled = true;
+  panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+});
+
+// ── Retake ──
+document.getElementById('retake-btn').addEventListener('click', () => {
+  document.querySelectorAll('.option').forEach(opt => {
+    opt.classList.remove('selected', 'correct', 'wrong', 'show-correct');
+    opt.style.pointerEvents = '';
+    opt.querySelector('input[type="radio"]').checked = false;
+  });
+
+  const panel = document.getElementById('score-panel');
+  panel.classList.remove('visible');
+  document.getElementById('submit-btn').disabled = false;
+  document.getElementById('retake-btn').style.display = '';
+  document.querySelector('.nextpage-btn').style.display = 'none';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+});
 </script>
 
+ fds
 </body>
 </html>
