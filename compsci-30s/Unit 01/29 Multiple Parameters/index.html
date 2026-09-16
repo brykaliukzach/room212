@@ -371,68 +371,55 @@
 <article class="article">
 
   <p class="article-intro">
-   At a base level functions are pretty easy to use. But they lose their usefulness quick if you don't learn how to create interesting function definitions
+   Functions can receive information as we just saw. But we can send more than just piece of information to our functions.
   </p>
 
-  <h2>Parameters</h2>
+  <h2>Multiple Parameters</h2>
   <p>
-    We can send information (variables) to functions. For example, let's say I wrote a <code>Greeting()</code> function.
+    We know how to send information to functions. But know that you can send as much information as you want.
   </p>
 
-  <pre>static void Greeting()
+  <pre>static void Add(int num1, int num2)
 {
-    Console.WriteLine("Hello!");         
+    int sum = num1 + num2;         
 }</pre>
 
-<p>The above function will just always say <code>"Hello!</code>. It doesn't say hello to anyone or anything specific, just "Hello". That's not that useful. I want this function to say "Hello" to a specific thing.</p>
+<p>The above function has two paramenters. It is expecting two integers to be sent to it.</p>
+
+   <h2>Function Calls</h2>
+
+  <p>If you want to call the above function, you must send it two pieces of information. As we seen, we must send it two integers. </p>
+
+    <pre>int x = 5;
+int y = 10;
+
+Add();               // won't work
+Add(x, y);           // will work
+Add(1, 2);           // will work</pre>
+
+
+    <p>Note that the order does matter. For example, the first argument gets sent to the first parameter. The second argument gets sent to the second parameter</p>
 
  
+    <pre>double x = 10;
+double y = 2;
 
-  <p>In the function parentheses <code>()</code>, I can create a function that expects more information - such as the name of the thing I want to greet. </p>
-
-    <pre>static void Greeting(string name)
+static void Divide(double num1, double num2);
 {
-    Console.WriteLine("Hello! " + name);          
-}</pre>
+    double result = num1 / num2;
+}
 
-
-    <p>Now my function is <code>EXPECTING SOME INFORMATION</code> before it executes. In this case, it's expecting the name of the thing it's supposed to greet. This is called a <code>parameter</code>. A <code>parameter</code> is something the function is expecting to receive. In this case, a string variable</p>
-
-     <h2>Arguments</h2>
-
-    <p>If your function has a <code>parameter</code>, if it is expecting information, when we call the function we have to send it the information that it wants. This is called an <code>Argument</code></p>
-
-<pre>
-  Greeting();  // this won't work anymore
-</pre>
-
-    <p>When you call the function, you put the information to send inside the empty parentheses. This is called an <code>argument</code> </p>
-
-<pre>
-  string name = "Bob";
-
-  Greeting(name);
-  Greeting("John");</pre>
-
-  <p>The above function calls work, because in each case I am sending the function information. I am sending the function a string, which is exactly what the function is expecting.</p>
-
-  <p>The string gets sent to the function, and the function uses that string in it's code.</p>
-
-  <pre>
-  "Hello Bob!"
-  "Hello John!""
-  </pre>
-
-  <p>This is great because I can now use the same function for all the greetings in game. I just have to send the write information for who I want greeted</p>
+Divide(x, y);     result equals 5
+Divide(y, x);     result equals 0.2;
+    </pre>
  
 
   <!-- Key takeaways -->
   <div class="takeaways">
     <p class="takeaways-label">Key Takeaways</p>
     <ul>
-      <li><code>Parameters</code> are "information" a function requires</li>
-      <li><code>Arguments</code> are the "information" you send to a function</li>
-      <li>This allows our functions to be re-used much easier</li>
+      <li>functions can have as many parameters as you want</li>
+      <li>the order of the arguments in the function call match up with the order of the parameters</li>
     </ul>
   </div>
 
