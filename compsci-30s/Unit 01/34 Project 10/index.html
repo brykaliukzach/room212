@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Room 212 — Shopping Cart</title>
+  <title>Room 212 — Square Return</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -361,6 +361,26 @@
     }
     .back-btn:hover { background: var(--accent); color: #0a0908; transform: translateX(-3px); border-color: var(--accent); }
 
+        .lesson-type-badge {
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      background: rgba(76,175,69,0.15);
+      color: #ffd900;
+      border-radius: 2px;
+       animation: enrichment-glow 2s ease-in-out infinite;
+    }
+
+       
+
+
+@keyframes enrichment-glow {
+    0%, 100% { box-shadow: 0 0 4px rgba(255, 251, 0, 0.2); }
+    50%       { box-shadow: 0 0 10px rgba(255, 251, 0, 0.6); }
+}
+
     /* ── FOOTER ── */
     footer {
       background: #0a0908;
@@ -394,17 +414,17 @@
   <span>/</span>
   <a href="../index.html">Unit 01</a>
   <span>/</span>
-  <span class="current">Shopping Cart Project</span>
+  <span class="current">Duel Project</span>
 </nav>
 
 <!-- ── LESSON HEADER ── -->
 <div class="lesson-header">
   <div class="lesson-meta">
-    <span class="lesson-type-badge">Project</span>
-    <span class="lesson-number">Unit 01 · Project 08</span>
+    <span class="lesson-type-badge">Enrichment</span>
+    <span class="lesson-number">Unit 01 · Project 10</span>
   </div>
-  <h1 class="lesson-title">Shopping Cart Project</h1>
-  <p class="lesson-subtitle">Use a function to calculate the total for a customer's shopping cart</p>
+  <h1 class="lesson-title">Duel Project</h1>
+  <p class="lesson-subtitle">Create a function that allows both an enemy and a player to attack each other</p>
 </div>
 
 <!-- ── PROJECT LAYOUT ── -->
@@ -418,7 +438,7 @@
     <div class="project-video-wrap">
       
        
-<iframe width="560" height="315" src="https://www.youtube.com/embed/RQ6OksLiavw?si=mAbd_OvP9Y2HW9Xg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/B5SbMb29B5E?si=lG0LJGy2-0yQDsa7" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
      
 
     </div>
@@ -428,24 +448,25 @@
 
       <h2>Project Overview</h2>
       <p>
-        This project takes three pieces of information from the user. It then sends those three pieces of information to a function that takes three parameters.
+        This project is TOUGH. We're gonna create a duel situation between a player and an enemy.
       </p>
 
 
       <h3>Getting Started</h3>
       <p>
-      Get three pieces of information from the user. Need the item name they're buying, the price of the item, and the quantity or how much of the item they're buying. Use <code>TryParse</code> and input validations to make sure they don't give you a number that doesn't make "sense".
+      Hard code your enemy's attributes - their name, their health to 100, and their max possible damage to whatever. For your player, give them a starting health of 100, but also the user to input their name, and input their maximum possible damage. Use input validations.
       </p>
 
 
       <h3>What to program</h3>
       <p>
-        If their input is valid, send the three inputs to a three parameter function. Create variables inside this function to help you calculate the total of their purchase, as well as the total with a 12% tax applied.
+        This project requires one function. Think of all the information this function requires. This function does have a return type, which means it must ALWAYS RETURN SOMETHING. This function also has two if statements that return values and end execution, based on if the person getting attacked has died, or if the person attacking can even attack to begin with.
       </p>
 
 
 
-      <p>Once you're done, write one more line of code that calls the function again. Except just input any numbers or strings into the function call. You don't need to fetch these inputs from the user, just hard code them into the function call.
+      <p>
+        DO NOT CREATE A RANDOM TOOL INSIDE THE FUNCTION. Instead, create a random tool at the top of your program, and send it to the function to use. We should only ever have one random tool created in our programs, and we can pass it along as an argument to functions that need it.
       </p>
 
       <!--
@@ -480,7 +501,7 @@
         </div>
         <div class="detail-item">
           <span class="detail-key">Difficulty</span>
-          <span class="detail-val">Hard</span>
+          <span class="detail-val">Very Hard</span>
         </div>
       </div>
     </div>
@@ -492,7 +513,7 @@
 
         <div class="download-item">
           <span class="download-item-label">Executable</span>
-          <a href="Shopping Cart.exe" class="download-link" download>
+          <a href="Duel.exe" class="download-link" download>
               <span class="dl-icon">⬇</span>
               Sample Program
             </a>
@@ -536,22 +557,22 @@
 
         <div class="req-item">
           <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>3 inputs passing proper input validation</span>
+          <span>One function with many parameters</span>
         </div>
 
         <div class="req-item">
           <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>function call with 3 parameters</span>
+          <span>Function used for both the enemy and the player</span>
         </div>
 
         <div class="req-item">
           <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>function uses variables to help calculate total and total with 12% tax</span>
+          <span>Passing the random tool as an argument</span>
         </div>
 
          <div class="req-item">
           <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>Another one line function call at the end, using hard coded values</span>
+          <span>Function has two if statements to check if the defender has died, or if the attacker is alread dead</span>
         </div>
         
         
@@ -563,8 +584,8 @@
 
 <!-- ── BACK BUTTON ── -->
 <div class="back-wrap">
-  <a href="../29 Multiple Parameters/index.html" class="back-btn">← Previous page</a>
-   <a href="../" class="back-btn">Next Page →</a>
+  <a href="../33 Project 09/index.html" class="back-btn">← Previous page</a>
+   <a href="../index.html" class="back-btn">Next Page →</a>
 </div>
 
 <footer>

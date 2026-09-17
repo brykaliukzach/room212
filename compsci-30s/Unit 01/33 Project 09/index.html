@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Room 212 — Shopping Cart</title>
+  <title>Room 212 — Square Return</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -394,17 +394,17 @@
   <span>/</span>
   <a href="../index.html">Unit 01</a>
   <span>/</span>
-  <span class="current">Shopping Cart Project</span>
+  <span class="current">Square Return Project</span>
 </nav>
 
 <!-- ── LESSON HEADER ── -->
 <div class="lesson-header">
   <div class="lesson-meta">
     <span class="lesson-type-badge">Project</span>
-    <span class="lesson-number">Unit 01 · Project 08</span>
+    <span class="lesson-number">Unit 01 · Project 09</span>
   </div>
-  <h1 class="lesson-title">Shopping Cart Project</h1>
-  <p class="lesson-subtitle">Use a function to calculate the total for a customer's shopping cart</p>
+  <h1 class="lesson-title">Square Return Project</h1>
+  <p class="lesson-subtitle">Create two functions to caluclate and return the area of a square, and the volume of a cube.</p>
 </div>
 
 <!-- ── PROJECT LAYOUT ── -->
@@ -418,7 +418,7 @@
     <div class="project-video-wrap">
       
        
-<iframe width="560" height="315" src="https://www.youtube.com/embed/RQ6OksLiavw?si=mAbd_OvP9Y2HW9Xg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/jTofo3GZ2SM?si=JTVHDGwMMXqN-THO" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
      
 
     </div>
@@ -428,24 +428,24 @@
 
       <h2>Project Overview</h2>
       <p>
-        This project takes three pieces of information from the user. It then sends those three pieces of information to a function that takes three parameters.
+        This project takes a side length input from the user. It then uses two functions to calculate the area of a square with that side length, and the volume of a cube with that side length.
       </p>
 
 
       <h3>Getting Started</h3>
       <p>
-      Get three pieces of information from the user. Need the item name they're buying, the price of the item, and the quantity or how much of the item they're buying. Use <code>TryParse</code> and input validations to make sure they don't give you a number that doesn't make "sense".
+      Get the side length from the user. Use appropriate input validation techniques. 
       </p>
 
 
       <h3>What to program</h3>
       <p>
-        If their input is valid, send the three inputs to a three parameter function. Create variables inside this function to help you calculate the total of their purchase, as well as the total with a 12% tax applied.
+        Create functions called <code>CalculateSquareArea()</code> and <code>CalculateCubeVolume()</code>. These functions take one argument, the side length of the square. They then <code>return</code> the correct calculation.
       </p>
 
 
 
-      <p>Once you're done, write one more line of code that calls the function again. Except just input any numbers or strings into the function call. You don't need to fetch these inputs from the user, just hard code them into the function call.
+      <p>You need to make variables that are <code>=</code> to these functions. Because they are returning a value, and we need to keep that value in our <code>area</code> and <code>volume</code> variables.
       </p>
 
       <!--
@@ -492,7 +492,7 @@
 
         <div class="download-item">
           <span class="download-item-label">Executable</span>
-          <a href="Shopping Cart.exe" class="download-link" download>
+          <a href="SquareReturn.exe" class="download-link" download>
               <span class="dl-icon">⬇</span>
               Sample Program
             </a>
@@ -536,22 +536,22 @@
 
         <div class="req-item">
           <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>3 inputs passing proper input validation</span>
+          <span>1 input passing proper input validation</span>
         </div>
 
         <div class="req-item">
           <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>function call with 3 parameters</span>
+          <span>2 functions with parameters</span>
         </div>
 
         <div class="req-item">
           <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>function uses variables to help calculate total and total with 12% tax</span>
+          <span>2 functions that return correct calculations</span>
         </div>
 
          <div class="req-item">
           <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>Another one line function call at the end, using hard coded values</span>
+          <span>variables that are set equal to these functions</span>
         </div>
         
         
@@ -563,8 +563,8 @@
 
 <!-- ── BACK BUTTON ── -->
 <div class="back-wrap">
-  <a href="../29 Multiple Parameters/index.html" class="back-btn">← Previous page</a>
-   <a href="../" class="back-btn">Next Page →</a>
+  <a href="../32 Checkpopint/index.html" class="back-btn">← Previous page</a>
+   <a href="../34 Project 10/index.html" class="back-btn">Next Page →</a>
 </div>
 
 <footer>
