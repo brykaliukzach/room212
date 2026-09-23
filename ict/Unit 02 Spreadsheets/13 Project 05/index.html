@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Room 212 — Video Games Project</title>
+  <title>Room 212 — Pass Fail</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -401,17 +401,17 @@
   <span>/</span>
   <a href="../index.html">Unit 02</a>
   <span>/</span>
-  <span class="current">Video Games Project</span>
+  <span class="current">Pass Fail Project</span>
 </nav>
 
 <!-- ── LESSON HEADER ── -->
 <div class="lesson-header">
   <div class="lesson-meta">
     <span class="lesson-type-badge">Project</span>
-    <span class="lesson-number">Unit 02 · Project 04</span>
+    <span class="lesson-number">Unit 02 · Project 05</span>
   </div>
-  <h1 class="lesson-title">Video Games</h1>
-  <p class="lesson-subtitle">Use the data provided to answer questions then format and filter the data</p>
+  <h1 class="lesson-title">Pass Fail</h1>
+  <p class="lesson-subtitle">Use the data provided to find out the required information</p>
 </div>
 
 <!-- ── PROJECT LAYOUT ── -->
@@ -425,7 +425,7 @@
     <div class="project-video-wrap">
       
         
-<iframe width="560" height="315" src="https://www.youtube.com/embed/d6isx53F8fs?si=Fqvg6Z2VPE1QBCqh" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/9-uMA7Rl5AE?si=oiixNAfwElWkP0tW" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
      
     </div>
 
@@ -439,19 +439,26 @@
 
       <h3>Getting Started</h3>
 
-      <p>Use your new knowledge of <code>SORTING</code> to answer the 6 questions at the bottom of the spreadsheet. You'll also have to use the <code>=SUM()</code> formula for one of them.</p>
+      <p>Your job is to turn your spreadsheet into one that looks like mine:</p>
+
+           <figure>
+  <img src="1.png">
+  <figcaption>Examplar project</figcaption>
+</figure>
 
       <h3>What To Create</h3>
 
-      <p>Once you have answered the questions, format your data to look like the below examplar. I have used a <code>Column Chart</code> as well.</p>
+      <p>You'll need to add two columns to your chart - one for <code>Grade</code> and one for <code>Pass or Fail</code>. The Grade column just averages the students 3 test scores. The Pass or Fail column uses an <code>=IF()</code> to determine if their grade is <code>70 or above</code>. If it is, they pass, if it isn't they fail.</p>
 
+      <p>You'll also need to add some cells to the bottom of your table:</p>
       <figure>
-  <img src="example.png">
+  <img src="2.png">
   <figcaption>Examplar project</figcaption>
 </figure>
-      <p> Notice I have <code>filtered</code> my data to only show the 2026 Games. I have <code>sorted</code> my data to show the highest rated games first. I have use <code>conditional formatting</code> to show colours for the ratings. I of course have used borders, and colours, and number formatting.
-        
-      </p>
+
+      <p> You need to calculate the average of each three test scores across the whole class. You'll need to use <code>=COUNTIF</code> to determine the total number of students who have passed and failed. </p>
+
+      <p>Lastly, create a pie chart based on the number of students passing and failing.</p>
 
  
 
@@ -506,7 +513,7 @@
 
         <div class="download-item">
        <span class="download-item-label">Spreadsheet File</span>
-        <a href="project 04 template.xlsx" class="download-link" download>
+        <a href="project 05 template.xlsx" class="download-link" download>
               <span class="dl-icon">⬇</span>
               Starting Spreadsheet
             </a> 
@@ -550,27 +557,37 @@
 
         <div class="req-item">
           <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>6 Questions answered correctly</span>
+          <span>Data Sorted Alphabetically by Name</span>
         </div>
 
         <div class="req-item">
           <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>Filtered data to show only 2026 games</span>
+          <span>Used If statements to determine a "Pass" or "Fail" (70% or higher)</span>
         </div>
 
         <div class="req-item">
           <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>Sorted based on rating, and used conditional formatting to colour the cells</span>
+          <span>Used <code>COUNTIF</code> to determine total passes and fails</span>
         </div>
 
         <div class="req-item">
           <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>Created a Column Graph based on video games and total sales</span>
+          <span>Used <code>AVERAGE</code> to calculate required averages</span>
         </div>
 
          <div class="req-item">
           <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>Print Preview set up properly</span>
+          <span>Pie Chart on total passes and fails for class</span>
+        </div>
+
+        <div class="req-item">
+          <div class="req-check" onclick="toggleCheck(this)">✓</div>
+          <span>Conditional formatting used on the total mark column</span>
+        </div>
+
+          <div class="req-item">
+          <div class="req-check" onclick="toggleCheck(this)">✓</div>
+          <span>Table formatting including colours, one decimal place, borders, alignments</span>
         </div>
       </div>
     </div>
@@ -580,8 +597,8 @@
 
 <!-- ── BACK BUTTON ── -->
 <div class="back-wrap">
-  <a href="../10 Filtering/index.html" class="back-btn">← Previous page</a>
-   <a href="../12 If Statements/index.html" class="back-btn">Next Page →</a>
+  <a href="../12 If Statements/index.html" class="back-btn">← Previous page</a>
+   <a href="../index.html" class="back-btn">Next Page →</a>
 </div>
 
 <footer>
