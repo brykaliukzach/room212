@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Room 212 — Number Guess Project</title>
+  <title>Room 212 — Account Project</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -392,19 +392,19 @@
   <span>/</span>
   <a href="../../index.html">30S Comp Sci</a>
   <span>/</span>
-  <a href="../index.html">Unit 03</a>
+  <a href="../index.html">Unit 02</a>
   <span>/</span>
-  <span class="current">Number Guess Project</span>
+  <span class="current">Account Project</span>
 </nav>
 
 <!-- ── LESSON HEADER ── -->
 <div class="lesson-header">
   <div class="lesson-meta">
     <span class="lesson-type-badge">Project</span>
-    <span class="lesson-number">Unit 02 · Project 03</span>
+    <span class="lesson-number">Unit 02 · Project 04</span>
   </div>
-  <h1 class="lesson-title">Number Guess</h1>
-  <p class="lesson-subtitle">The user sets up a Number Guess game and gets to play it</p>
+  <h1 class="lesson-title">Account Creator</h1>
+  <p class="lesson-subtitle">The user creates an account and tries to log in</p>
 </div>
 
 <!-- ── PROJECT LAYOUT ── -->
@@ -418,7 +418,7 @@
     <div class="project-video-wrap">
       
        
-<iframe width="560" height="315" src="https://www.youtube.com/embed/R7eFQfliNwI?si=pw6vILWjYy-Q8RIn" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ZxbvX3UEHbE?si=cXcUJc7b7u2PxvnU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
      
 
     </div>
@@ -428,7 +428,7 @@
 
       <h2>Project Overview</h2>
       <p>
-        This project asks the user to setup a number guess game. They get to pick the lowest possible number, the highest possile number and then how many tries they want. 
+        This project asks the user to create an account by entering a username and password. Don't need any input validation on here.
       </p>
       <p>
         
@@ -436,14 +436,16 @@
 
       <h3>What to Program</h3>
       <p>
-        Perform correct input validation for the inputs and then play the game. To play the game, call a function and send it the appropriate information. 
+        Once you have their username and password, create a Login function. This function when called will use a for loop inside it to give the user <code>3 ATTEMPTS</code> to successfully log in to their account.
       </p>
 
        <p>
-        Inside the function is where the game is played. Use random, for loops and if statements to make the game function as it should.
+        Tell the user how many attemps they have left when they fail to login correctly. 
       </p>
 
-      <p>You don't need input validation when the user is actually playing the game, we'll look at that later.</p>
+      <p>Do not tell the user how many attemps they have left if they login successfully.</p>
+
+      <p>This project should only have 1 for loop, and an if/else statement. You should <code>NOT HAVE AN ATTEMPTS LEFT VARIABLE</code></p>
 
   
 
@@ -490,7 +492,7 @@
 
         <div class="download-item">
           <span class="download-item-label">Executable</span>
-          <a href="Number Guess.exe" class="download-link" download>
+          <a href="Account Creator.exe" class="download-link" download>
               <span class="dl-icon">⬇</span>
               Sample Program
             </a>
@@ -534,34 +536,24 @@
 
         <div class="req-item">
           <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>Input validation - espeically on the highest possible number</span>
+          <span>Function with parameters</span>
         </div>
 
         <div class="req-item">
           <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>1 function with parameters, 1 for loop</span>
+          <span>1 for loop, 1 if/else statement</span>
         </div>
 
         <div class="req-item">
           <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>use of <code>break</code> or <code>return</code> to stop the game from continuing on a win</span>
+          <span>Tells user how many attempts left using the counter of the loop</span>
         </div>      
         
-          <div class="req-item">
+           <div class="req-item">
           <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>Telling the user if their guess is too high or to low</span>
+          <span>Utilizes either break, continue, or return</span>
         </div>  
 
-         
-          <div class="req-item">
-          <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>Console outputs which attempt its on</span>
-        </div>  
-
-          <div class="req-item">
-          <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>CORRECT random number generation, be careful here . . . </span>
-        </div>  
 
       </div>
     </div>
@@ -571,8 +563,8 @@
 
 <!-- ── BACK BUTTON ── -->
 <div class="back-wrap">
-  <a href="../09 Checkpoint/index.html" class="back-btn">← Previous page</a>
-   <a href="../11 Continue/index.html" class="back-btn">Next Page →</a>
+  <a href="../12 Checkpoint/index.html" class="back-btn">← Previous page</a>
+   <a href="../14 Nested For Loops/index.html" class="back-btn">Next Page →</a>
 </div>
 
 <footer>
