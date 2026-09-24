@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Room 212 — Pass Fail</title>
+  <title>Room 212 — Business</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -389,6 +389,26 @@
       .project-layout { padding: 0 16px; margin: 32px auto 60px; }
       .back-wrap { padding: 0 16px 48px; }
     }
+
+        .lesson-type-badge {
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      background: rgba(76,175,69,0.15);
+      color: #ffd900;
+      border-radius: 2px;
+       animation: enrichment-glow 2s ease-in-out infinite;
+    }
+
+       
+
+
+@keyframes enrichment-glow {
+    0%, 100% { box-shadow: 0 0 4px rgba(255, 251, 0, 0.2); }
+    50%       { box-shadow: 0 0 10px rgba(255, 251, 0, 0.6); }
+}
   </style>
 </head>
 <body>
@@ -407,10 +427,10 @@
 <!-- ── LESSON HEADER ── -->
 <div class="lesson-header">
   <div class="lesson-meta">
-    <span class="lesson-type-badge">Project</span>
-    <span class="lesson-number">Unit 02 · Project 05</span>
+    <span class="lesson-type-badge">Enrichment</span>
+    <span class="lesson-number">Unit 02 · Project 06</span>
   </div>
-  <h1 class="lesson-title">Pass Fail</h1>
+  <h1 class="lesson-title">Business</h1>
   <p class="lesson-subtitle">Use the data provided to find out the required information</p>
 </div>
 
@@ -425,7 +445,7 @@
     <div class="project-video-wrap">
       
         
-<iframe width="560" height="315" src="https://www.youtube.com/embed/9-uMA7Rl5AE?si=oiixNAfwElWkP0tW" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/wDhqxewES9U?si=vLDxcswJJ1tH5dJK" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
      
     </div>
 
@@ -448,10 +468,23 @@
 
       <h3>What To Create</h3>
 
-      <p>You'll need to add two columns to your chart - one for <code>Grade</code> and one for <code>Pass or Fail</code>. The Grade column just averages the students 3 test scores. The Pass or Fail column uses an <code>=IF()</code> to determine if their grade is <code>70 or above</code>. If it is, they pass, if it isn't they fail.</p>
+      <p>First you need to add 5 more columns of data - <code>Revenue Per Item</code>, <code>Total Possible Revenue</code>, <code>Week 1 Revenue</code>, <code>Remaining Quantity</code> and <code>Order More?</code>. Use formulas to calculate the values for these columns, and use an <code>If Statement</code> for the Order More column. We are checking IF the quantity is 30 or less, and if it is, "YES" we need to order more.
 
-      <p>You'll also need to add some cells to the bottom of your table:</p>
+     <p>You'll need to use multiplcation for some of these formula calculations. Use the asterisk <code>*</code> to perform multiplication. (SHIFT 8)</p>
+     
+
+     <pre>For example, 
+=A1 * AB</pre>
+
+
+<h3>Formatting</h3>
+
+<p>Once you have your values calculated, <code>SORT</code> your table based on the highest revenue making items in week 1. Also use <code>Conditional Formatting</code> to highlight the items that are the most Revenue per Item</p>
       <figure>
+
+        <h3>Charting</h3>
+
+        <p>Finally, create a chart showing the items and how much revenue each item generated in week 1.</p>
   <img src="2.png">
   <figcaption>Examplar project</figcaption>
 </figure>
@@ -513,7 +546,7 @@
 
         <div class="download-item">
        <span class="download-item-label">Spreadsheet File</span>
-        <a href="project 05 template.xlsx" class="download-link" download>
+        <a href="project 06 template.xlsx" class="download-link" download>
               <span class="dl-icon">⬇</span>
               Starting Spreadsheet
             </a> 
@@ -557,37 +590,28 @@
 
         <div class="req-item">
           <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>Data Sorted Alphabetically by Name</span>
+          <span>5 columns added</span>
         </div>
 
         <div class="req-item">
           <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>Used If statements to determine a "Pass" or "Fail" (70% or higher)</span>
+          <span>Conditional formatting on revenue per item</span>
         </div>
 
         <div class="req-item">
           <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>Used <code>COUNTIF</code> to determine total passes and fails</span>
+          <span>Sorting based on highest revenue makers in week 1</span>
         </div>
 
         <div class="req-item">
           <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>Used <code>AVERAGE</code> to calculate required averages</span>
+          <span><code>=IF</code> used to see if we need to order more items (If remaining stock is less than or equal to 30)</span>
         </div>
 
          <div class="req-item">
           <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>Pie Chart on total passes and fails for class</span>
+          <span>Bar Graph</span>
         </div>
-
-        <div class="req-item">
-          <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>Conditional formatting used on the total mark column</span>
-        </div>
-
-          <div class="req-item">
-          <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>Table formatting including colours, one decimal place, borders, alignments</span>
         </div>
       </div>
     </div>
@@ -597,8 +621,8 @@
 
 <!-- ── BACK BUTTON ── -->
 <div class="back-wrap">
-  <a href="../12 If Statements/index.html" class="back-btn">← Previous page</a>
-   <a href="../14 Project 06/index.html" class="back-btn">Next Page →</a>
+  <a href="../13 Project 05/index.html" class="back-btn">← Previous page</a>
+   <a href="../index.html" class="back-btn">Next Page →</a>
 </div>
 
 <footer>
