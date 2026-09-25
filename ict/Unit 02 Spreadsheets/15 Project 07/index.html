@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Room 212 — Business</title>
+  <title>Room 212 — Stock Portfolio</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -421,17 +421,17 @@
   <span>/</span>
   <a href="../index.html">Unit 02</a>
   <span>/</span>
-  <span class="current">Pass Fail Project</span>
+  <span class="current">Stock Portfolio Project</span>
 </nav>
 
 <!-- ── LESSON HEADER ── -->
 <div class="lesson-header">
   <div class="lesson-meta">
     <span class="lesson-type-badge">Enrichment</span>
-    <span class="lesson-number">Unit 02 · Project 06</span>
+    <span class="lesson-number">Unit 02 · Project 07</span>
   </div>
-  <h1 class="lesson-title">Business</h1>
-  <p class="lesson-subtitle">Use the data provided to find out the required information</p>
+  <h1 class="lesson-title">Stock Portfolio</h1>
+  <p class="lesson-subtitle">Try to make some money off some stock investments</p>
 </div>
 
 <!-- ── PROJECT LAYOUT ── -->
@@ -445,7 +445,7 @@
     <div class="project-video-wrap">
       
         
-<iframe width="560" height="315" src="https://www.youtube.com/embed/wDhqxewES9U?si=vLDxcswJJ1tH5dJK" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/NNrwixp1mEQ?si=AV1r6fS1j6rCsxtB" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
      
     </div>
 
@@ -454,44 +454,28 @@
 
       <h2>Project Overview</h2>
       <p>
-        For this project, first download the provided data in the <code>DOWNLOADS</code> section on this website. 
+        We are going to invest some fake money into REAL companies, and see how our money changes in real time. 
       </p>
 
       <h3>Getting Started</h3>
 
-      <p>Your job is to turn your spreadsheet into one that looks like mine:</p>
+      <p>First, watch the video to set up your spreadsheet and get a brief run down on what "Investing in Stocks" means, and how it can make you money (or lose if you're not careful).</p>
 
-           <figure>
+  
+
+      <h3>What To Create</h3>
+
+      <p>You have <code>$10,000</code> for your investments. A good stock portfolio is well diversified. That means investing in companies across multiple sectors. Your goal is to make as much money as possible.</p>
+
+      <p>When you're done, your excel spreadsheet should be set up such that it will automatically update the stock prices, thus allowing you to see the +/- change of your investments in real time.</p>
+     
+
+              <figure>
   <img src="1.png">
   <figcaption>Examplar project</figcaption>
 </figure>
 
-      <h3>What To Create</h3>
 
-      <p>First you need to add 5 more columns of data - <code>Revenue Per Item</code>, <code>Total Possible Revenue</code>, <code>Week 1 Revenue</code>, <code>Remaining Quantity</code> and <code>Order More?</code>. Use formulas to calculate the values for these columns, and use an <code>If Statement</code> for the Order More column. We are checking IF the quantity is 30 or less, and if it is, "YES" we need to order more.
-
-     <p>You'll need to use multiplcation for some of these formula calculations. Use the asterisk <code>*</code> to perform multiplication. (SHIFT 8)</p>
-     
-
-     <pre>For example, 
-=A1 * AB</pre>
-
-
-<h3>Formatting</h3>
-
-<p>Once you have your values calculated, <code>SORT</code> your table based on the highest revenue making items in week 1. Also use <code>Conditional Formatting</code> to highlight the items that are the most Revenue per Item</p>
-      <figure>
-
-        <h3>Charting</h3>
-
-        <p>Finally, create a chart showing the items and how much revenue each item generated in week 1.</p>
-  <img src="2.png">
-  <figcaption>Examplar project</figcaption>
-</figure>
-
-      <p> You need to calculate the average of each three test scores across the whole class. You'll need to use <code>=COUNTIF</code> to determine the total number of students who have passed and failed. </p>
-
-      <p>Lastly, create a pie chart based on the number of students passing and failing.</p>
 
  
 
@@ -545,11 +529,11 @@
       <div class="download-list">
 
         <div class="download-item">
-       <span class="download-item-label">Spreadsheet File</span>
-        <a href="project 06 template.xlsx" class="download-link" download>
+       <span class="download-item-label"></span>
+      <!--   <a href="project 06 template.xlsx" class="download-link" download>
               <span class="dl-icon">⬇</span>
               Starting Spreadsheet
-            </a> 
+            </a>  -->
           <!--
             OPTION A — link to a file:
             <a href="downloads/my-tool.exe" class="download-link" download>
@@ -590,27 +574,18 @@
 
         <div class="req-item">
           <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>5 columns added</span>
+          <span>Companies invested in and linked to excel</span>
         </div>
 
         <div class="req-item">
           <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>Conditional formatting on revenue per item</span>
+          <span>Correct calculations for the requires categories</span>
         </div>
 
         <div class="req-item">
           <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>Sorting based on highest revenue makers in week 1</span>
+          <span>Conditional Formatting to show red for negative numbers, an green for positive numbers</span>
         </div>
-
-        <div class="req-item">
-          <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span><code>=IF</code> used to see if we need to order more items (If remaining stock is less than or equal to 30)</span>
-        </div>
-
-         <div class="req-item">
-          <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>Bar Graph</span>
         </div>
         </div>
       </div>
@@ -621,8 +596,8 @@
 
 <!-- ── BACK BUTTON ── -->
 <div class="back-wrap">
-  <a href="../13 Project 05/index.html" class="back-btn">← Previous page</a>
-   <a href="../15 Project 07/index.html" class="back-btn">Next Page →</a>
+  <a href="../14 Project 06/index.html" class="back-btn">← Previous page</a>
+   <a href="../index.html" class="back-btn">Next Page →</a>
 </div>
 
 <footer>
