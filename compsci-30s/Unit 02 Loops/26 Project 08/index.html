@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Room 212 — Trivia Project</title>
+  <title>Room 212 — RuneScape Project</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -394,17 +394,17 @@
   <span>/</span>
   <a href="../index.html">Unit 02</a>
   <span>/</span>
-  <span class="current">Trivia Project</span>
+  <span class="current">RuneScape Project</span>
 </nav>
 
 <!-- ── LESSON HEADER ── -->
 <div class="lesson-header">
   <div class="lesson-meta">
     <span class="lesson-type-badge">Project</span>
-    <span class="lesson-number">Unit 02 · Project 07</span>
+    <span class="lesson-number">Unit 02 · Project 08</span>
   </div>
-  <h1 class="lesson-title">Trivia</h1>
-  <p class="lesson-subtitle">Create a trivia game for your user</p>
+  <h1 class="lesson-title">RuneScape</h1>
+  <p class="lesson-subtitle">Create a simple MMORPG game loop</p>
 </div>
 
 <!-- ── PROJECT LAYOUT ── -->
@@ -418,7 +418,7 @@
     <div class="project-video-wrap">
       
        
-<iframe width="560" height="315" src="https://www.youtube.com/embed/C6DuZgOZ01k?si=X_1PFBBnp9Oy7tcc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/C6DuZ01k?si=X_1PFBBnp9Oy7tcc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
      
 
     </div>
@@ -428,27 +428,28 @@
 
       <h2>Project Overview</h2>
       <p>
-        This project let's the user play a trivia game that you have created. Keep track of their <code>score</code>.
+        This project uses <code>while (true)</code> to create a simple MMORPG game loop
       </p>
       <p>
         
       </p>
 
+      <h3>Getting Started</h3>
+      <p>The player has <code>health</code> equalling 10. The player has <code>logs</code> equalling 0 to start.</p>
+
       <h3>What to Program</h3>
       <p>
-        This project uses some simple input validation with a <code>while loop</code> to start. We're looking to see if the user hasn't pressed a <code>1</code> or a <code>2</code> to start.
+        In your main method, you're going to use a big <code>while (true)</code> to loop this game. Inside this loop, you are going to ask the user what actvitiy they would like to do, receive their input, and then call the neccesary functions based on what they entered.
       </p>
 
-       <p>
-        This program uses one function for all of your questions. This function takes many parameters to setup each question.
-      </p>
+      <h3>The Functions</h3>
+      <p>Each "activity" has its' own function. Some functions require <code>parameters</code>, others do not. Some functions <code>return</code> values, others do not</p>
       
-      <pre>FunctionName("Sending this string", "and this string", "and this string" . . .);</pre>
+      <h3>ChopTree Function</h3>
+      <p>This function uses a loop to repeatedly chop a tree. Each tree starts with <code>3</code> total logs to chop. So you're going to need to break out of this loop if there are no more logs left to chop, or the user has typed in <code>quit</code></p>
 
-      <p>Inside the Question function, you have to setup the question with each of the options. Then you have to use input validation to make sure the user has entered a valid option. Then once you have valid input, check to see if they got the question right</p>
-
-      <p>This function must return the points they received for either getting a question correct or incorrect. Therefore, your inital score variable should be increasaing by these return values when you call the function.</p>
-
+      <h3>AttackGoblin Function</h3>
+      <p>This function uses a loop to simulate combat. First you do damage to the goblin within a range of a minimum hit of <code>0</code> and a maximum hit of <code>5</code>. But the goblin will attack you after, doing damage between the same minimum and maximum. Think of when this combat loop might need to <code>break</code></p>
 
       <!--
       <figure>
@@ -493,7 +494,7 @@
 
         <div class="download-item">
           <span class="download-item-label">Executable</span>
-          <a href="Trivia.exe" class="download-link" download>
+          <a href="RuneScape.exe" class="download-link" download>
               <span class="dl-icon">⬇</span>
               Sample Program
             </a>
@@ -537,18 +538,23 @@
 
         <div class="req-item">
           <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>1 Function with many parameters and a return type</span>
+          <span><code>while (true)</code> loops used</span>
         </div>
 
         <div class="req-item">
           <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>score is updating by the return value of the function</span>
+          <span>Functions have parameters when needed</span>
         </div>
 
         <div class="req-item">
           <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>Input validation that repeats when invalid</span>
-        </div>      
+          <span>Functions return logs and health when needed</span>
+        </div>     
+        
+          <div class="req-item">
+          <div class="req-check" onclick="toggleCheck(this)">✓</div>
+          <span>Game does stop if the player has died</span>
+        </div>   
         
       </div>
     </div>
@@ -558,8 +564,8 @@
 
 <!-- ── BACK BUTTON ── -->
 <div class="back-wrap">
-  <a href="../22 Checkpoint/index.html" class="back-btn">← Previous page</a>
-   <a href="../24 Do While/index.html" class="back-btn">Next Page →</a>
+  <a href="../25 While True/index.html" class="back-btn">← Previous page</a>
+   <a href="../index.html" class="back-btn">Next Page →</a>
 </div>
 
 <footer>
