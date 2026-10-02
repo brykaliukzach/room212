@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Room 212 — Fish Project</title>
+  <title>Room 212 — Square Return</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -361,6 +361,26 @@
     }
     .back-btn:hover { background: var(--accent); color: #0a0908; transform: translateX(-3px); border-color: var(--accent); }
 
+        .lesson-type-badge {
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      background: rgba(76,175,69,0.15);
+      color: #ffd900;
+      border-radius: 2px;
+       animation: enrichment-glow 2s ease-in-out infinite;
+    }
+
+       
+
+
+@keyframes enrichment-glow {
+    0%, 100% { box-shadow: 0 0 4px rgba(255, 251, 0, 0.2); }
+    50%       { box-shadow: 0 0 10px rgba(255, 251, 0, 0.6); }
+}
+
     /* ── FOOTER ── */
     footer {
       background: #0a0908;
@@ -394,17 +414,17 @@
   <span>/</span>
   <a href="../index.html">Unit 02</a>
   <span>/</span>
-  <span class="current">Fish Project</span>
+  <span class="current">Mini Game Project</span>
 </nav>
 
 <!-- ── LESSON HEADER ── -->
 <div class="lesson-header">
   <div class="lesson-meta">
-    <span class="lesson-type-badge">Project</span>
-    <span class="lesson-number">Unit 02 · Project 09</span>
+    <span class="lesson-type-badge">Enrichment</span>
+    <span class="lesson-number">Unit 02 · Project 10</span>
   </div>
-  <h1 class="lesson-title">Fish</h1>
-  <p class="lesson-subtitle">Create a mini fishing game</p>
+  <h1 class="lesson-title">Mini Game Project</h1>
+  <p class="lesson-subtitle">Create a mini game loop</p>
 </div>
 
 <!-- ── PROJECT LAYOUT ── -->
@@ -413,52 +433,23 @@
   <!-- ── MAIN COLUMN ── -->
   <div class="project-main">
 
-    <!-- Walkthrough video -->
-    <p class="video-label">Project Walkthrough</p>
-    <div class="project-video-wrap">
-      
-       
-<iframe width="560" height="315" src="https://www.youtube.com/embed/qjNBWH38UXI?si=QOVspXrMlexfB2RJ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-     
 
-    </div>
 
     <!-- Description -->
     <div class="project-desc-section">
 
       <h2>Project Overview</h2>
       <p>
-        This project uses while loops to create a simple game loop for fishing.
+        Just as we have done together, create your own little "Mini Game". 
       </p>
-      <p>
-        
-      </p>
+
 
       <h3>Getting Started</h3>
-      <p>The two main variables are <code>rawFish</code> and <code>cookedFish</code>. The point of the game is so fish for some fish, cook your raw fish, and then eat your cooked fish. Exciting I know!</p>
-
-      <h3>What to Program</h3>
       <p>
-        <code>NO WHILE (TRUE) LOOPS ALLOWED.</code> In your main method you're going to have a big while loop that's looping for different inputs from the user.
+      Create a game of some sorts that uses your knowledge of looping, and console commands to spice it up. The game can be simple, its how you apply your knowledge of looping to create a "Game Loop" of some sorts.
       </p>
 
-      <h3>ShowInventory Function</h3>
-      <p>This function is the easiest. To show the inventory, you are going to need to send it your two informations - <code>cookedFish</code> and <code>rawFish</code> Use a while loop to repeated ask the user when they want to return out of this inventory function</p>
-      
-      <h3>CatchFish Function</h3>
-      <p>You need to send this function the random tool, because we are going to catch fish with a 50% chance of success. Use a while loop to repeated "fish", and each time the user fishes, they have a 50% chance to successfully catch a fish. Put this all inside a <code>while loop</code> and once the user has exited the while loop by pressing "4", we can return the numer of caught fish</p>
 
-      <h3>CookFish Function</h3>
-      <p>This one's hard. This function requires how many rawfish the user has, and uses that as a <code>guard clause</code>. This function then uses a <code>FOR LOOP</code> based on how many rawfish there are to cook. Create a variable to keep track of how many cooked fish they have, and return the cookedfish when done.</p>
-
-      <p>When you return the cookedFish value, you have to then change the initial cookedfish and rawFish values, either increasing them or decreasing accordingly.</p>
-
-      <pre>int fishThatWereJustCooked = CookFish(rawFish);
-// do something with cookedFish
-// do something with rawFish</pre>
-
-      <h3>EatFish Function</h3>
-      <p>This function requires how many cookedfish there are to eat. Use a <code>FOR LOOP</code> to loop the number of cookedFish there are. Create a new variable named <code>startingFish</code> and use that as your condition in the for loop. Return the new number of cookedFish</p>
 
       <!--
       <figure>
@@ -467,6 +458,7 @@
       </figure>
       -->
 
+  
     </div>
   </div>
 
@@ -491,7 +483,7 @@
         </div>
         <div class="detail-item">
           <span class="detail-key">Difficulty</span>
-          <span class="detail-val">Very Hard</span>
+          <span class="detail-val">Fun</span>
         </div>
       </div>
     </div>
@@ -502,11 +494,7 @@
       <div class="download-list">
 
         <div class="download-item">
-          <span class="download-item-label">Executable</span>
-          <a href="Fish.exe" class="download-link" download>
-              <span class="dl-icon">⬇</span>
-              Sample Program
-            </a>
+    
           <!--
             OPTION A — link to a file:
             <a href="downloads/my-tool.exe" class="download-link" download>
@@ -547,33 +535,19 @@
 
         <div class="req-item">
           <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>NO <code>while (true)</code> loops used</span>
+          <span>Use Functions</span>
         </div>
 
         <div class="req-item">
           <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>Only for loops used in CookFish and EatFish function</span>
+          <span>Use Loops</span>
         </div>
 
         <div class="req-item">
           <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>50% of successfully catching a fish in the CatchFish function</span>
-        </div>     
+          <span>Use Colours and Thread.Sleep()</span>
+        </div>
         
-          <div class="req-item">
-          <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>Console colours and Console.Clear used to simulate this game better.</span>
-        </div>   
-
-           <div class="req-item">
-          <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>All functions (except showInventory) are returning values</span>
-        </div>   
-
-           <div class="req-item">
-          <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>Guard Clauses used in Functions when neccesary</span>
-        </div>  
         
       </div>
     </div>
@@ -583,8 +557,8 @@
 
 <!-- ── BACK BUTTON ── -->
 <div class="back-wrap">
-  <a href="../29 Guard Clauses/index.html" class="back-btn">← Previous page</a>
-   <a href="../31 Project 10/index.html" class="back-btn">Next Page →</a>
+  <a href="../30 Project 09/index.html" class="back-btn">← Previous page</a>
+   <a href="../index.html" class="back-btn">Next Page →</a>
 </div>
 
 <footer>
