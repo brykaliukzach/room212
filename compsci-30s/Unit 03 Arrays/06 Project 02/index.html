@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Room 212 — Inventory Search Project</title>
+  <title>Room 212 — Inventory Manager Project</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -394,17 +394,17 @@
   <span>/</span>
   <a href="../index.html">Unit 03</a>
   <span>/</span>
-  <span class="current">Inventory Search Project</span>
+  <span class="current">Inventory Manager Project</span>
 </nav>
 
 <!-- ── LESSON HEADER ── -->
 <div class="lesson-header">
   <div class="lesson-meta">
     <span class="lesson-type-badge">Project</span>
-    <span class="lesson-number">Unit 03 · Project 01</span>
+    <span class="lesson-number">Unit 03 · Project 02</span>
   </div>
   <h1 class="lesson-title">Inventory Search</h1>
-  <p class="lesson-subtitle">Try to find a specific item in an array</p>
+  <p class="lesson-subtitle">Add and remove items from an array</p>
 </div>
 
 <!-- ── PROJECT LAYOUT ── -->
@@ -418,7 +418,7 @@
     <div class="project-video-wrap">
       
        
-<iframe width="560" height="315" src="https://www.youtube.com/embed/pgBfnP0YzcU?si=SmQUpcetzFtKdnEB" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/gwSxp6WRGlc?si=May8OL7I-AHJYfJ1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
      
 
     </div>
@@ -428,18 +428,25 @@
 
       <h2>Project Overview</h2>
       <p>
-        This quick project asks the user to enter an item in an inventory to search for
+        This quick project manages an inventory array, allowing the user to enter items to store, or to remove items from the array.
       </p>
   
       <h3>What to Program</h3>
       <p>
-        The program requires you to send the item the user is searching for, and the array itself to a function.
+        The program requires a big while loop in the main method for fetching user input. Based on what input the user has given you, call the according function. Start by creating an empty string array of size <code>5</code>.
       </p>
 
-      <p>This function should use a loop to traverse the entire array. But on each traversal, you're looking to see if you found a match between the item to search for and whatever index you're currently on.
-      </p>
+      <h3>ViewInventory Function</h3>
 
-      <p>If you find a match, tell the user and stop looping. If you went through the whole loop without a match, tell the user you could not find it.</p>
+      <p>This function has an array parameter. It then uses a loop to loop through each index of your array, displaying what item is there at the specific index.</p>
+
+            <h3>AddItemToInventory Function</h3>
+
+      <p>This function has an array parameter. It asks the user for input on what item they would like to add. It then uses a loop to loop through each index of your array, finding the first available empty index of you array. If it finds this empty index, add this item to that index of your array. If it finds no empty empty indexes, (the array is full) tell the user that and don't add anything to the array.</p>
+
+            <h3>RemoveItemFromInventory Function</h3>
+
+      <p>This function has an array parameter. It then uses a loop to continually ask the user what index of their array they would like to remove an item from. This loop using input validation to make sure the user enters a valid index. Once you have that valid index, simply remove the item (if any) from that index of the array.</p>
 
   
 
@@ -474,7 +481,7 @@
         </div>
         <div class="detail-item">
           <span class="detail-key">Difficulty</span>
-          <span class="detail-val">Easy</span>
+          <span class="detail-val">Medium</span>
         </div>
       </div>
     </div>
@@ -486,7 +493,7 @@
 
         <div class="download-item">
           <span class="download-item-label">Executable</span>
-          <a href="Inventory Search.exe" class="download-link" download>
+          <a href="Inventory Manager.exe" class="download-link" download>
               <span class="dl-icon">⬇</span>
               Sample Program
             </a>
@@ -530,18 +537,28 @@
 
         <div class="req-item">
           <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>A function that takes two arguments</span>
+          <span>Loop in the main method repeatedly asking for input</span>
         </div>
 
         <div class="req-item">
           <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>Function exits if a match is found</span>
+          <span>3 Functions with a single array parameter</span>
         </div>
 
         <div class="req-item">
           <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>Use of a loop and <code>.Length</code></span>
-        </div>      
+          <span>While loops, for loops, (possibly do while if you want) used</span>
+        </div>    
+        
+        <div class="req-item">
+          <div class="req-check" onclick="toggleCheck(this)">✓</div>
+          <span>No magic numbers in that RemoveFromInventory function</span>
+        </div> 
+        
+          <div class="req-item">
+          <div class="req-check" onclick="toggleCheck(this)">✓</div>
+          <span>Program works for any size of array</span>
+        </div>  
       
       </div>
     </div>
@@ -551,8 +568,8 @@
 
 <!-- ── BACK BUTTON ── -->
 <div class="back-wrap">
-  <a href="../03 checkpoint/index.html" class="back-btn">← Previous page</a>
-   <a href="../05 Null Indexes/index.html" class="back-btn">Next Page →</a>
+  <a href="../05 Null Indexes/index.html" class="back-btn">← Previous page</a>
+   <a href="../07 Integer Arrays/index.html" class="back-btn">Next Page →</a>
 </div>
 
 <footer>

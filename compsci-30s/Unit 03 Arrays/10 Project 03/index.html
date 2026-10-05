@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Room 212 — Inventory Search Project</title>
+  <title>Room 212 — Score Calculator Project</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -394,17 +394,17 @@
   <span>/</span>
   <a href="../index.html">Unit 03</a>
   <span>/</span>
-  <span class="current">Inventory Search Project</span>
+  <span class="current">Score Calculator Project</span>
 </nav>
 
 <!-- ── LESSON HEADER ── -->
 <div class="lesson-header">
   <div class="lesson-meta">
     <span class="lesson-type-badge">Project</span>
-    <span class="lesson-number">Unit 03 · Project 01</span>
+    <span class="lesson-number">Unit 03 · Project 03</span>
   </div>
-  <h1 class="lesson-title">Inventory Search</h1>
-  <p class="lesson-subtitle">Try to find a specific item in an array</p>
+  <h1 class="lesson-title">Score Calculator Project</h1>
+  <p class="lesson-subtitle">User enters 5 valid scores, and we find some statistics about them</p>
 </div>
 
 <!-- ── PROJECT LAYOUT ── -->
@@ -418,7 +418,7 @@
     <div class="project-video-wrap">
       
        
-<iframe width="560" height="315" src="https://www.youtube.com/embed/pgBfnP0YzcU?si=SmQUpcetzFtKdnEB" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/iTKQXjVxg9Q?si=gS3N0p7-QLYDvDrh" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
      
 
     </div>
@@ -428,18 +428,34 @@
 
       <h2>Project Overview</h2>
       <p>
-        This quick project asks the user to enter an item in an inventory to search for
+        This project allows the user to enter 5 integer scores into an array. We will then find some statistics about these particular scores
       </p>
   
       <h3>What to Program</h3>
       <p>
-        The program requires you to send the item the user is searching for, and the array itself to a function.
+        Start with an empty size 5 integer array. In the main method still, use a for loop and a while loop inside to get 5 integer inputs from the user.
       </p>
 
-      <p>This function should use a loop to traverse the entire array. But on each traversal, you're looking to see if you found a match between the item to search for and whatever index you're currently on.
-      </p>
+      <p>Once you have that information from the user, create 3 functions that all take an int array as a parameter, and all have return types.</p>
 
-      <p>If you find a match, tell the user and stop looping. If you went through the whole loop without a match, tell the user you could not find it.</p>
+      <h3>TotalScore Function</h3>
+
+      <p>Easy, use a loop to go through the array, and keep a running total of these numbers. return this number once done.</p>
+
+            <h3>AverageScore Function</h3>
+
+      <p>Make it easy. The average requires the total, so just call the previous TotalScore function from this function. Then calculate the average and return that number back.</p>
+
+      <p>Careful, as average's can have decimals. So you may need to cast your totalscore to a double . . .</p>
+      <pre>_________ = (double)total / ______________</pre>
+
+            <h3>HighestScore Function</h3>
+
+      <p>Assume the first score in the array is the highest. Then loop through and see if you can find a higher score. Return this number</p>
+
+      <h3>Back in the Main</h3>
+
+      <p>Now that you have called all three functions and stored the return values in variables, display them for the user to see. <code>DISPLAY THE AVERAGE SCORE TO 1 DECIMAL PLACE</code></p>
 
   
 
@@ -474,7 +490,7 @@
         </div>
         <div class="detail-item">
           <span class="detail-key">Difficulty</span>
-          <span class="detail-val">Easy</span>
+          <span class="detail-val">Medium</span>
         </div>
       </div>
     </div>
@@ -486,7 +502,7 @@
 
         <div class="download-item">
           <span class="download-item-label">Executable</span>
-          <a href="Inventory Search.exe" class="download-link" download>
+          <a href="Score Calculator.exe" class="download-link" download>
               <span class="dl-icon">⬇</span>
               Sample Program
             </a>
@@ -530,18 +546,28 @@
 
         <div class="req-item">
           <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>A function that takes two arguments</span>
+          <span>Receive 5 integer inputs with input validation, scores can't be negative</span>
         </div>
 
         <div class="req-item">
           <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>Function exits if a match is found</span>
+          <span>3 Functions that all return a value</span>
         </div>
 
         <div class="req-item">
           <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>Use of a loop and <code>.Length</code></span>
-        </div>      
+          <span>AverageScore function calls the TotalScore function</span>
+        </div>    
+        
+        <div class="req-item">
+          <div class="req-check" onclick="toggleCheck(this)">✓</div>
+          <span>averageScore is displayed to one decimal place at the end</span>
+        </div> 
+        
+          <div class="req-item">
+          <div class="req-check" onclick="toggleCheck(this)">✓</div>
+          <span>Program works for any size of array</span>
+        </div>  
       
       </div>
     </div>
@@ -551,8 +577,8 @@
 
 <!-- ── BACK BUTTON ── -->
 <div class="back-wrap">
-  <a href="../03 checkpoint/index.html" class="back-btn">← Previous page</a>
-   <a href="../05 Null Indexes/index.html" class="back-btn">Next Page →</a>
+  <a href="../05 Null Indexes/index.html" class="back-btn">← Previous page</a>
+   <a href="../07 Integer Arrays/index.html" class="back-btn">Next Page →</a>
 </div>
 
 <footer>
