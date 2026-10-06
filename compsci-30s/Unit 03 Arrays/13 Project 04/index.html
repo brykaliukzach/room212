@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Room 212 — Score Calculator Project</title>
+  <title>Room 212 — Character Database</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -382,6 +382,13 @@
       .project-layout { padding: 0 16px; margin: 32px auto 60px; }
       .back-wrap { padding: 0 16px 48px; }
     }
+
+.project-main pre {
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    max-width: 100%;
+    box-sizing: border-box;
+}
   </style>
 </head>
 <body>
@@ -394,17 +401,17 @@
   <span>/</span>
   <a href="../index.html">Unit 03</a>
   <span>/</span>
-  <span class="current">Score Calculator Project</span>
+  <span class="current">Character Database Project</span>
 </nav>
 
 <!-- ── LESSON HEADER ── -->
 <div class="lesson-header">
   <div class="lesson-meta">
     <span class="lesson-type-badge">Project</span>
-    <span class="lesson-number">Unit 03 · Project 03</span>
+    <span class="lesson-number">Unit 03 · Project 04</span>
   </div>
-  <h1 class="lesson-title">Score Calculator Project</h1>
-  <p class="lesson-subtitle">User enters 5 valid scores, and we find some statistics about them</p>
+  <h1 class="lesson-title">Character Database Project</h1>
+  <p class="lesson-subtitle">Given a database of information, log in to an account and display information</p>
 </div>
 
 <!-- ── PROJECT LAYOUT ── -->
@@ -418,7 +425,7 @@
     <div class="project-video-wrap">
       
        
-<iframe width="560" height="315" src="https://www.youtube.com/embed/iTKQXjVxg9Q?si=gS3N0p7-QLYDvDrh" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/pg07d0ufi3Q?si=ewzpPf0VqcLnlMs9" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
      
 
     </div>
@@ -428,35 +435,209 @@
 
       <h2>Project Overview</h2>
       <p>
-        This project allows the user to enter 5 integer scores into an array. We will then find some statistics about these particular scores
+        This project allows the user to try to login to an account we have stored in our database. If they can, we will display the stats of that account's character.
       </p>
+
+      <h3>Getting Started</h3>
+      <p>First you need the database. Copy and paste the below data into your main method:</p>
+
+      <pre>            string[] usernames =
+{
+    "DragonSlayer01", "ShadowWolf02", "RuneKnight03", "FireMage04", "IronFang05",
+    "DarkRanger06", "StormBorn07", "FrostBlade08", "NightHawk09", "GoldHunter10",
+    "WolfPack11", "MysticSoul12", "BattleAxe13", "FlameLord14", "OakShield15",
+    "SilverArrow16", "DeathWish17", "RuneLord18", "IceQueen19", "DragonHeart20",
+    "GhostWalker21", "WarChief22", "MagicMan23", "DarkKnight24", "SwiftArrow25",
+    "FireWalker26", "StoneGuard27", "MoonMage28", "BloodFang29", "SkyHunter30",
+    "VoidWalker31", "IronLord32", "FrostMage33", "ShadowFox34", "GoldKnight35",
+    "RuneMaster36", "StormWolf37", "FlameSword38", "NightBlade39", "DragonFire40",
+    "WolfKnight41", "MysticMage42", "BattleBorn43", "FireDragon44", "OakWarrior45",
+    "SilverWolf46", "DeathKnight47", "RuneHunter48", "IceWarrior49", "DragonKing50",
+    "GhostMage51", "WarriorX52", "MagicArrow53", "DarkLord54", "SwiftBlade55",
+    "FireMage56", "StoneKnight57", "MoonHunter58", "BloodKnight59", "SkyMage60",
+    "VoidKnight61", "IronFist62", "FrostWolf63", "ShadowMage64", "GoldHunter65",
+    "RuneWarrior66", "StormMage67", "FlameKnight68", "NightHunter69", "DragonLord70",
+    "WolfMage71", "MysticKnight72", "BattleMage73", "FireKnight74", "OakGuardian75",
+    "SilverKnight76", "DeathMage77", "RuneWarrior78", "IceMage79", "DragonSlayer80",
+    "GhostKnight81", "WarMage82", "MagicKnight83", "DarkWarrior84", "SwiftHunter85",
+    "FireWarrior86", "StoneMage87", "MoonKnight88", "BloodMage89", "SkyWarrior90",
+    "VoidMage91", "IronKnight92", "FrostKnight93", "ShadowWarrior94", "GoldMage95",
+    "RuneKnight96", "StormKnight97", "FlameMage98", "NightWarrior99", "DragonMage100",
+    "WolfWarrior101", "MysticMage102", "BattleKnight103", "FireHunter104", "OakKnight105",
+    "SilverMage106", "DeathWarrior107", "RuneMage108", "IceKnight109", "DragonWarrior110",
+    "GhostMage111", "WarKnight112", "MagicWarrior113", "DarkMage114", "SwiftKnight115",
+    "FireMage116", "StoneWarrior117", "MoonMage118", "BloodWarrior119", "SkyKnight120",
+    "VoidWarrior121", "IronMage122", "FrostWarrior123", "ShadowKnight124", "GoldWarrior125",
+    "RuneMage126", "StormWarrior127", "FlameKnight128", "NightMage129", "DragonKnight130",
+    "WolfMage131", "MysticWarrior132", "BattleMage133", "FireKnight134", "OakMage135",
+    "SilverWarrior136", "DeathKnight137", "RuneWarrior138", "IceMage139", "DragonKnight140",
+    "GhostWarrior141", "WarMage142", "MagicKnight143", "DarkWarrior144", "SwiftMage145",
+    "FireWarrior146", "StoneKnight147", "MoonWarrior148", "BloodMage149", "SkyWarrior150",
+    "VoidKnight151", "IronWarrior152", "FrostMage153", "ShadowWarrior154", "GoldKnight155",
+    "RuneWarrior156", "StormMage157", "FlameWarrior158", "NightKnight159", "DragonMage160",
+    "WolfWarrior161", "MysticKnight162", "BattleWarrior163", "FireMage164", "OakWarrior165",
+    "SilverKnight166", "DeathMage167", "RuneWarrior168", "IceKnight169", "DragonMage170",
+    "GhostWarrior171", "WarKnight172", "MagicMage173", "DarkKnight174", "SwiftWarrior175",
+    "FireKnight176", "StoneMage177", "MoonWarrior178", "BloodKnight179", "SkyMage180",
+    "VoidWarrior181", "IronKnight182", "FrostWarrior183", "ShadowMage184", "GoldWarrior185",
+    "RuneKnight186", "StormWarrior187", "FlameMage188", "NightWarrior189", "DragonKnight190",
+    "WolfMage191", "MysticWarrior192", "BattleKnight193", "FireWarrior194", "OakMage195",
+    "SilverWarrior196", "DeathKnight197", "RuneMage198", "IceWarrior199", "DragonLord200"
+};
+
+            string[] passwords =
+ {
+    "cat123", "dog456", "dragon99", "fire123", "wolf789",
+    "pizza12", "apple45", "hello99", "gamer22", "sword77",
+    "tiger12", "horse88", "magic55", "water34", "cookie21",
+    "house66", "green12", "blue99", "red123", "fish77",
+    "mouse44", "pizza88", "apple12", "banana34", "chicken56",
+    "coffee99", "school12", "summer77", "winter45", "spring88",
+    "thunder12", "lightning34", "storm99", "rain123", "snow456",
+    "river77", "forest22", "mountain88", "ocean33", "island55",
+    "castle12", "knight99", "king123", "queen456", "prince77",
+    "warrior22", "ranger88", "wizard33", "rogue55", "paladin66",
+    "dragon12", "phoenix99", "griffin123", "wolf456", "bear77",
+    "lion22", "tiger88", "eagle33", "shark55", "snake66",
+    "hammer12", "sword99", "shield123", "arrow456", "bow77",
+    "axe22", "spear88", "staff33", "dagger55", "mace66",
+    "gold12", "silver99", "copper123", "iron456", "bronze77",
+    "diamond22", "ruby88", "emerald33", "sapphire55", "crystal66",
+    "fireball12", "ice123", "lightning99", "shadow456", "flame77",
+    "frost22", "storm88", "earth33", "wind55", "water66",
+    "level12", "level99", "level123", "level456", "level77",
+    "quest22", "quest88", "quest33", "quest55", "quest66",
+    "monster12", "monster99", "goblin123", "orc456", "troll77",
+    "dragon22", "demon88", "giant33", "ghost55", "skeleton66",
+    "runescape12", "adventure99", "hero123", "legend456", "champion77",
+    "gaming22", "player88", "winner33", "victory55", "boss66",
+    "computer12", "keyboard99", "mouse123", "screen456", "gaming77",
+    "school22", "coding88", "program33", "console55", "array66",
+    "loop12", "method99", "class123", "string456", "integer77",
+    "teacher22", "student88", "homework33", "project55", "test66",
+    "brandon12", "manitoba99", "canada123", "winter456", "summer77",
+    "morning22", "evening88", "night33", "sunset55", "sunrise66",
+    "happy12", "smile99", "fun123", "awesome456", "cool77",
+    "friend22", "buddy88", "team33", "party55", "game66",
+    "dragonfire12", "icewolf99", "shadow123", "darkknight456", "firemage77",
+    "stormwolf22", "frostmage88", "goldknight33", "ranger55", "warrior66",
+    "secret12", "password99", "mypassword123", "login456", "welcome77",
+    "hello22", "goodbye88", "testing33", "test123", "abc123",
+    "qwerty12", "gaming99", "player123", "password456", "admin77",
+    "final22", "project88", "school123", "coding456", "arrays77",
+    "unit22", "computer88", "game123", "character456", "profile77"
+};
+
+            int[] characterLevels =
+            {
+    87, 42, 105, 23, 76, 54, 91, 38, 67, 12,
+    73, 49, 116, 31, 84, 62, 97, 45, 28, 109,
+    56, 71, 34, 88, 19, 63, 102, 47, 81, 25,
+    94, 52, 37, 115, 68, 43, 79, 21, 99, 58,
+    64, 36, 83, 27, 112, 51, 74, 46, 89, 17,
+    61, 108, 32, 77, 53, 95, 41, 69, 24, 86,
+    103, 35, 57, 118, 72, 48, 92, 26, 65, 101,
+    39, 82, 55, 110, 18, 70, 44, 98, 29, 85,
+    59, 107, 33, 75, 49, 93, 22, 66, 114, 52,
+    78, 40, 87, 30, 96, 63, 111, 35, 58, 80,
+    47, 104, 25, 73, 91, 42, 67, 113, 36, 82,
+    54, 99, 28, 76, 61, 106, 45, 88, 32, 79,
+    52, 117, 23, 68, 94, 39, 83, 57, 101, 31,
+    74, 48, 109, 27, 86, 63, 116, 41, 72, 55,
+    98, 34, 81, 26, 105, 67, 43, 90, 59, 112,
+    37, 77, 53, 96, 21, 69, 84, 46, 108, 33,
+    71, 58, 100, 24, 89, 62, 115, 38, 75, 51,
+    93, 29, 107, 44, 80, 56, 97, 35, 66, 102
+};
+
+            string[] characterNames =
+            {
+    "Arin", "Bobby", "Kael", "Luna", "Thorne",
+    "Mira", "Darius", "Elara", "Finn", "Rowan",
+    "Gareth", "Nyx", "Alden", "Seraphina", "Bran",
+    "Lyra", "Corvin", "Talia", "Draven", "Selene",
+    "Orin", "Freya", "Magnus", "Vera", "Ronan",
+    "Astrid", "Cedric", "Nora", "Lucian", "Maeve",
+    "Gideon", "Iris", "Kellan", "Sabrina", "Brennan",
+    "Elise", "Torin", "Amara", "Duncan", "Rhea",
+    "Alaric", "Nadia", "Griffin", "Sylvia", "Borin",
+    "Evelyn", "Kaelen", "Mara", "Theron", "Celine",
+    "Aeron", "Freya", "Dorian", "Lyanna", "Garrick",
+    "Isla", "Roland", "Elena", "Varek", "Mira",
+    "Jareth", "Selma", "Orion", "Brienne", "Kane",
+    "Liora", "Tavian", "Nessa", "Rurik", "Alina",
+    "Corwin", "Faye", "Baldric", "Soren", "Mina",
+    "Eamon", "Thalia", "Cedric", "Raven", "Galen",
+    "Seren", "Darian", "Lyric", "Merek", "Nyla",
+    "Torin", "Elara", "Bren", "Sable", "Kira",
+    "Gavin", "Maris", "Dane", "Ayla", "Roderick",
+    "Vera", "Kieran", "Elowen", "Drake", "Mira",
+    "Lucan", "Freya", "Corbin", "Tessa", "Ronan",
+    "Ari", "Selene", "Gareth", "Nadia", "Kael",
+    "Brina", "Dorian", "Lyra", "Magnus", "Eira",
+    "Orin", "Sylvie", "Theron", "Maeve", "Alden",
+    "Rhea", "Gideon", "Isla", "Kellan", "Nora",
+    "Lucian", "Astrid", "Duncan", "Elise", "Ronan",
+    "Amara", "Torin", "Celine", "Borin", "Evelyn",
+    "Kaelen", "Mara", "Alaric", "Nessa", "Griffin",
+    "Sylvia", "Jareth", "Iris", "Varek", "Liora",
+    "Tavian", "Rurik", "Alina", "Corwin", "Faye",
+    "Baldric", "Soren", "Mina", "Eamon", "Thalia",
+    "Raven", "Galen", "Seren", "Darian", "Lyric",
+    "Merek", "Nyla", "Bren", "Sable", "Kira",
+    "Gavin", "Maris", "Dane", "Ayla", "Roderick",
+    "Kieran", "Elowen", "Drake", "Lucan", "Corbin",
+    "Tessa", "Ari", "Brina", "Eira", "Sylvie",
+    "Ronan", "Maeve", "Gideon", "Nora", "Kael"
+};
+
+            string[] characterClasses =
+            {
+    "Warrior", "Ranger", "Mage", "Rogue", "Paladin",
+    "Druid", "Berserker", "Cleric", "Monk", "Necromancer",
+    "Warrior", "Mage", "Ranger", "Paladin", "Rogue",
+    "Druid", "Warrior", "Cleric", "Berserker", "Mage",
+    "Ranger", "Rogue", "Paladin", "Warrior", "Necromancer",
+    "Druid", "Mage", "Cleric", "Ranger", "Berserker",
+    "Paladin", "Rogue", "Warrior", "Mage", "Druid",
+    "Cleric", "Ranger", "Necromancer", "Paladin", "Warrior",
+    "Berserker", "Mage", "Rogue", "Druid", "Ranger",
+    "Cleric", "Paladin", "Warrior", "Necromancer", "Mage",
+    "Rogue", "Ranger", "Druid", "Berserker", "Cleric",
+    "Warrior", "Paladin", "Mage", "Ranger", "Rogue",
+    "Necromancer", "Druid", "Warrior", "Cleric", "Berserker",
+    "Mage", "Paladin", "Ranger", "Rogue", "Warrior",
+    "Druid", "Necromancer", "Cleric", "Mage", "Ranger",
+    "Paladin", "Berserker", "Rogue", "Warrior", "Druid",
+    "Mage", "Cleric", "Ranger", "Necromancer", "Paladin",
+    "Warrior", "Rogue", "Berserker", "Mage", "Druid",
+    "Cleric", "Ranger", "Paladin", "Warrior", "Necromancer",
+    "Mage", "Rogue", "Druid", "Berserker", "Cleric",
+    "Ranger", "Warrior", "Paladin", "Mage", "Rogue",
+    "Necromancer", "Druid", "Cleric", "Berserker", "Ranger",
+    "Warrior", "Mage", "Paladin", "Rogue", "Druid",
+    "Cleric", "Necromancer", "Ranger", "Berserker", "Warrior",
+    "Mage", "Rogue", "Paladin", "Druid", "Cleric",
+    "Ranger", "Warrior", "Necromancer", "Mage", "Berserker",
+    "Paladin", "Rogue", "Druid", "Cleric", "Ranger",
+    "Warrior", "Mage", "Necromancer", "Paladin", "Rogue",
+    "Druid", "Berserker", "Cleric", "Ranger", "Warrior",
+    "Mage", "Paladin", "Rogue", "Druid", "Necromancer",
+    "Cleric", "Ranger", "Berserker", "Warrior", "Mage",
+    "Paladin", "Rogue", "Druid", "Cleric", "Ranger",
+    "Necromancer", "Warrior", "Berserker", "Mage", "Paladin",
+    "Rogue", "Druid", "Cleric", "Ranger", "Warrior",
+    "Necromancer", "Mage", "Berserker", "Paladin", "Rogue",
+    "Druid", "Cleric", "Ranger", "Warrior", "Mage",
+    "Paladin", "Necromancer", "Rogue", "Druid", "Berserker"
+};</pre>
   
       <h3>What to Program</h3>
       <p>
-        Start with an empty size 5 integer array. In the main method still, use a for loop and a while loop inside to get 5 integer inputs from the user.
+        First we need the Login Function. This function loops, continually asking the user to enter a username and a password. Once you have these inputs, loop through the appropriate array trying to find a match for the usernames. Then check if the password matches too. If both pass, <code>return</code> the index where this match occured.
       </p>
 
-      <p>Once you have that information from the user, create 3 functions that all take an int array as a parameter, and all have return types.</p>
-
-      <h3>TotalScore Function</h3>
-
-      <p>Easy, use a loop to go through the array, and keep a running total of these numbers. return this number once done.</p>
-
-            <h3>AverageScore Function</h3>
-
-      <p>Make it easy. The average requires the total, so just call the previous TotalScore function from this function. Then calculate the average and return that number back.</p>
-
-      <p>Careful, as average's can have decimals. So you may need to cast your totalscore to a double . . .</p>
-      <pre>_________ = (double)total / ______________</pre>
-
-            <h3>HighestScore Function</h3>
-
-      <p>Assume the first score in the array is the highest. Then loop through and see if you can find a higher score. Return this number</p>
-
-      <h3>Back in the Main</h3>
-
-      <p>Now that you have called all three functions and stored the return values in variables, display them for the user to see. <code>DISPLAY THE AVERAGE SCORE TO 1 DECIMAL PLACE</code></p>
-
+      <p>Then call the <code>DisplayStats()</code> function. This function does need need to loop through any arrays, because you are sending it the correct index and the arrays with the information you need. Simply display the stats of the correct index, and you're good to go!</p>
   
 
       <!--
@@ -502,7 +683,7 @@
 
         <div class="download-item">
           <span class="download-item-label">Executable</span>
-          <a href="Score Calculator.exe" class="download-link" download>
+          <a href="Character Database.exe" class="download-link" download>
               <span class="dl-icon">⬇</span>
               Sample Program
             </a>
@@ -546,27 +727,27 @@
 
         <div class="req-item">
           <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>Receive 5 integer inputs with input validation, scores can't be negative</span>
+          <span>2 Functions</span>
         </div>
 
         <div class="req-item">
           <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>3 Functions that all return a value</span>
+          <span>Login function returns the correct index</span>
         </div>
 
         <div class="req-item">
           <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>AverageScore function calls the TotalScore function</span>
+          <span>Login function loops until a correct username and password is entered</span>
         </div>    
         
         <div class="req-item">
           <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>averageScore is displayed to one decimal place at the end</span>
+          <span>DisplayStats function uses the index to quickly display the correct information</span>
         </div> 
         
           <div class="req-item">
           <div class="req-check" onclick="toggleCheck(this)">✓</div>
-          <span>Program works for any size of array</span>
+          <span>Use of .ToLower() and .ToTrim() for usernames</span>
         </div>  
       
       </div>
@@ -577,8 +758,8 @@
 
 <!-- ── BACK BUTTON ── -->
 <div class="back-wrap">
-  <a href="../09 Integer Input Into Arrays/index.html" class="back-btn">← Previous page</a>
-   <a href="../11 Parallel Arrays/index.html" class="back-btn">Next Page →</a>
+  <a href="../12 ToLower/index.html" class="back-btn">← Previous page</a>
+   <a href="../index.html" class="back-btn">Next Page →</a>
 </div>
 
 <footer>
