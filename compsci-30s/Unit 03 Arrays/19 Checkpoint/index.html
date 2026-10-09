@@ -377,10 +377,10 @@
 <div class="lesson-header">
   <div class="lesson-meta">
     <span class="lesson-type-badge">Checkpoint</span>
-    <span class="lesson-number">Unit 03 · Checkpoint 02</span>
+    <span class="lesson-number">Unit 03 · Checkpoint 03</span>
   </div>
   <h1 class="lesson-title">Checkpoint</h1>
-  <p class="lesson-subtitle">A quick review of different data type arrays</p>
+  <p class="lesson-subtitle">A quick review of functions with boolean returns</p>
 </div>
 
 <!-- ── QUIZ ── -->
@@ -393,11 +393,21 @@
     -->
     <div class="question-card" data-correct="0">
       <p class="question-num">Question 1</p>
-      <p class="question-text">Integer arrays can only store integers</p>
+      <p class="question-text">What will you see in the console?</p>
+
+      <pre>if (HasItem())
+        Console.ReadLine("Yes");
+
+static bool HasItem()
+{
+    return true;
+}</pre>
+      </p>
 
       <div class="options">
-        <label class="option"><input type="radio" name="q1" value="0"><div class="option-bubble"></div><span class="option-text">True</span></label>
-        <label class="option"><input type="radio" name="q1" value="1"><div class="option-bubble"></div><span class="option-text">False</span></label>
+        <label class="option"><input type="radio" name="q1" value="0"><div class="option-bubble"></div><span class="option-text">Yes</span></label>
+        <label class="option"><input type="radio" name="q1" value="1"><div class="option-bubble"></div><span class="option-text">No</span></label>
+         <label class="option"><input type="radio" name="q1" value="1"><div class="option-bubble"></div><span class="option-text">Nothing</span></label>
       </div>
     </div>
 
@@ -407,57 +417,52 @@
       <p class="question-num">Question 2</p>
       <p class="question-text">What will you see in the console?</p>
 
-<pre>int[] scores = {50, 60, 70, 80, 90};
+     <pre>string item = "partyhat";
 
-Console.WriteLine(scores[1] + scores[2]);</pre>
+if (HasItem(item))
+    Console.ReadLine("Yes");
+
+static bool HasItem(string item)
+{
+    if (item == "3rd age pickaxe")
+      return true;
+    else
+      return false;
+}</pre>
 
       <div class="options">
-        <label class="option"><input type="radio" name="q1" value="0"><div class="option-bubble"></div><span class="option-text">130</span></label>
-        <label class="option"><input type="radio" name="q1" value="1"><div class="option-bubble"></div><span class="option-text">110</span></label>
-        <label class="option"><input type="radio" name="q1" value="2"><div class="option-bubble"></div><span class="option-text">150</span></label>
-          <label class="option"><input type="radio" name="q1" value="2"><div class="option-bubble"></div><span class="option-text">error</span></label>
-       
+        <label class="option"><input type="radio" name="q1" value="0"><div class="option-bubble"></div><span class="option-text">Nothing</span></label>
+        <label class="option"><input type="radio" name="q1" value="1"><div class="option-bubble"></div><span class="option-text">Yes</span></label>
+        <label class="option"><input type="radio" name="q1" value="2"><div class="option-bubble"></div><span class="option-text">No</span></label>
       </div>
     </div>
 
 
 
-     <!-- ═══ QUESTION 3 ═══ -->
-    <div class="question-card" data-correct="0">
-      <p class="question-num">Question 3</p>
-       <p class="question-text">What will you see in the console?</p>
-
-<pre>string[] scores = {"50", "60", "70", "80", "90"};
-
-Console.WriteLine(scores[2] + scores[3]);</pre>
-      <div class="options">
-         <label class="option"><input type="radio" name="q1" value="0"><div class="option-bubble"></div><span class="option-text">7080</span></label>
-        <label class="option"><input type="radio" name="q1" value="1"><div class="option-bubble"></div><span class="option-text">150</span></label>
-        <label class="option"><input type="radio" name="q1" value="2"><div class="option-bubble"></div><span class="option-text">6070</span></label>
-          <label class="option"><input type="radio" name="q1" value="2"><div class="option-bubble"></div><span class="option-text">110</span></label>
-      </div>
-    </div>
-
-       <!-- ═══ QUESTION 4 ═══ -->
+       <!-- ═══ QUESTION 3 ═══ -->
    <div class="question-card" data-correct="0">
-      <p class="question-num">Question 4</p>
+      <p class="question-num">Question 3</p>
       <p class="question-text">What will you see in the console?</p>
 
-<pre>int[] scores = {1, 2, 3, 4, 5};
-int total;
+     <pre>string item = "partyhat";
+string requiredItem = "3rd age pickaxe";
 
-for (int i = 0; i < scores.Length; i++)
+if (HasItem(item))
+      Console.ReadLine("Yes");
+else
+      Console.ReadLine("No");
+
+static bool HasItem(string item, string requiredItem)
 {
-    total += scores[i]
-}
-
-Console.WriteLine(total);
-</pre>
+    if (item == requiredItem)
+      return true;
+    else
+      return false;
+}</pre>
       <div class="options">
-        <label class="option"><input type="radio" name="q1" value="0"><div class="option-bubble"></div><span class="option-text">15</span></label>
-        <label class="option"><input type="radio" name="q1" value="1"><div class="option-bubble"></div><span class="option-text">error</span></label>
-        <label class="option"><input type="radio" name="q1" value="2"><div class="option-bubble"></div><span class="option-text">5</span></label>
-        <label class="option"><input type="radio" name="q1" value="2"><div class="option-bubble"></div><span class="option-text">20</span></label>
+        <label class="option"><input type="radio" name="q1" value="0"><div class="option-bubble"></div><span class="option-text">No</span></label>
+        <label class="option"><input type="radio" name="q1" value="1"><div class="option-bubble"></div><span class="option-text">Yes</span></label>
+        <label class="option"><input type="radio" name="q1" value="2"><div class="option-bubble"></div><span class="option-text">Nothing</span></label>
       </div>
     </div>
 
@@ -492,7 +497,7 @@ Console.WriteLine(total);
     <p class="score-message" id="score-message"></p>
     <div class="score-actions">
       <button class="retake-btn" id="retake-btn">↺ Retake Quiz</button>
-      <a href="../20 Project 06/index.html class="nextpage-btn">Next Page →</a>
+      <a href="../20 Project 06/index.html" class="nextpage-btn">Next Page →</a>
     </div>
   </div>
 
