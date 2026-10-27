@@ -255,6 +255,58 @@
       color: var(--accent);
     }
 
+    .edu-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-width: 620px;
+}
+
+.edu-row {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: 24px;
+  align-items: center;
+  padding: 16px 20px;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 6px;
+}
+
+.edu-abbr {
+  display: block;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1.1;
+}
+
+.edu-name {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+.edu-detail {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: var(--ink);
+}
+
+.edu-label {
+  display: inline-block;
+  min-width: 56px;
+  margin-right: 8px;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
     footer {
       background: #111111;
       color: rgba(255, 255, 255, 0.634);
@@ -265,6 +317,34 @@
       border-top: 1px solid var(--border);
     }
 
+.about-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;   /* add this */
+  gap: 72px;
+  padding: 72px;
+  min-height: 52vh;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+
+.about-photo {
+  flex-shrink: 0;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--accent);
+  box-shadow: 0 0 0 8px rgba(255,255,255,0.04);
+}
+
+.about-text .work-desc {
+  max-width: 620px;
+}
+.about-text .work-desc + .work-desc {
+  margin-top: 16px;
+}
+
     @media (max-width: 768px) {
       .site-header { height: 340px; padding: 36px 28px; }
       .tab { padding: 0 14px; font-size: 0.74rem; }
@@ -274,6 +354,9 @@
       .work-block:nth-child(even) .work-text { order: 2; }
       .work-text { padding: 40px 28px; }
       .course-hero { padding: 36px 28px; }
+      .about-card { flex-direction: column; text-align: center; gap: 36px; padding: 40px 28px; }
+.about-photo { width: 200px; height: 200px; }
+.edu-row { grid-template-columns: 1fr; gap: 8px; text-align: left; }
     }
   </style>
 </head>
@@ -300,6 +383,7 @@
 <button class="tab" data-panel="gamedev" data-color="#EA7600" role="tab">3D Game Development</button>
 <button class="tab" data-panel="web" data-color="#F7DF1D" role="tab">Web Design</button>
 <button class="tab" data-panel="ict" data-color="#00c60d" role="tab">ICT</button>
+<button class="tab" data-panel="aboutme" data-color="white-space" role="tab">About Me</button>
 
 </div>
 </div>
@@ -637,26 +721,58 @@ Take your websites to the next level with JavaScript! Learn the basics of progra
       </div>
     </article>
 
-    <article class="work-block">
-      <div class="work-img">
-        <img src="images/ict2.png" alt="C# Windows Forms Game Project"/>
-        <div class="work-img-overlay"></div>
-      </div>
-      <div class="work-text">
-        <p class="work-tag">Building Digital Skills</p>
-        <h2 class="work-title"></h2>
-       <p class="work-desc">
- This course is focused on learning by doing. You’ll create documents, organize and analyze information, design graphics, build presentations, work with multimedia, and explore how technology can be used responsibly. By the end of the course, you’ll have a stronger understanding of the tools and skills needed to work confidently in a digital world.
-</p>
-        <div class="work-meta">
-          <span class="work-date">No pre-requisites required for this course</span>
-        
-        </div>
+    </div>
+    </div>
+
+  
+
+<div class="panel" id="panel-aboutme">
+  <div class="course-hero">
+    <p class="course-hero-label">Meet the Teacher</p>
+    <h2 class="course-hero-title">About <em>Me</em></h2>
+  </div>
+  <div class="showcase">
+
+    <article class="about-card">
+      <img class="about-photo" src="images/me.png" alt="Zach Brykaliuk"/>
+      <div class="about-text">
+        <h2 class="work-title">Zach Brykaliuk</h2>
+
+        <p class="work-desc">
+           A Canadian high school classroom teacher. Room 212 serves as an online classroom where students can follow structured, step-by-step guides, access learning resources, and work through lessons at their own pace. The website is designed to support classroom instruction, with additional activities and projects that give students opportunities to apply what they learn.
+        </p><br>
+
+
+<div class="edu-list">
+
+  <div class="edu-row">
+    <div class="edu-degree">
+      <span class="edu-abbr">B.Sc.</span>
+      <span class="edu-name">Bachelor of Science</span>
+    </div>
+    <div class="edu-detail">
+      <div><span class="edu-label">Major</span> Mathematics</div>
+      <div><span class="edu-label">Minors</span> Computer Science, Chemistry</div>
+    </div>
+  </div>
+
+  <div class="edu-row">
+    <div class="edu-degree">
+      <span class="edu-abbr">B.Ed.</span>
+      <span class="edu-name">Bachelor of Education</span>
+    </div>
+    <div class="edu-detail">
+      <div><span class="edu-label">Focus</span> Senior Years Education</div>
+    </div>
+  </div>
+
+</div>
       </div>
     </article>
 
   </div>
 </div>
+
 
 <footer>
   &copy; 2026 · Zach Brykaliuk · Computer Science/Mathematics Teacher
@@ -675,7 +791,8 @@ Take your websites to the next level with JavaScript! Learn the basics of progra
     compsci42s: 'panel-compsci42s',
     gamedev: 'panel-gamedev',
     web: 'panel-web',
-    ict: 'panel-ict'
+    ict: 'panel-ict',
+    aboutme: 'panel-aboutme'
   };
 
 tabs.forEach(tab => {
