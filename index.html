@@ -345,6 +345,56 @@
   margin-top: 16px;
 }
 
+.contact-box {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(128, 128, 128, 0.35);
+}
+
+.contact-label {
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.7;
+}
+
+.contact-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1px solid currentColor;
+  color: inherit;
+  text-decoration: none;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.contact-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
+  background: rgba(128, 128, 128, 0.15);
+}
+
+.contact-copy {
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  font: inherit;
+  background: rgba(128, 128, 128, 0.25);
+  color: inherit;
+  transition: background 0.2s ease;
+}
+
+.contact-copy:hover {
+  background: rgba(128, 128, 128, 0.4);
+}
+
     @media (max-width: 768px) {
       .site-header { height: 340px; padding: 36px 28px; }
       .tab { padding: 0 14px; font-size: 0.74rem; }
@@ -525,13 +575,13 @@
 
     <article class="work-block">
       <div class="work-img">
-        <img src="https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=900&q=80" alt="30S Comp Sci"/>
+        <img src="images/grade_11_card.png" alt="40S Comp Sci"/>
         <div class="work-img-overlay"></div>
       </div>
       <div class="work-text">
-        <p class="work-tag">Under Construction</p>
-        <h2 class="work-title">Under Construction</h2>
-        <p class="work-desc">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugit nemo ex praesentium culpa debitis a totam non ipsum tempora quas, animi, vitae tenetur consequuntur velit. Dolores nemo minima non quisquam.</p>
+        <p class="work-tag">Design Develop Solve</p>
+        <h2 class="work-title">Object-Oriented Design</h2>
+        <p class="work-desc">Computer Science 40S builds on 30S programming skills through Java, object-oriented programming, data structures, and algorithms. Students develop their problem-solving skills by designing and building increasingly complex programs.</p>
         <div class="work-meta">
           <span class="work-date">2026</span>
           <a href="#" class="work-btn">Begin Course →</a>
@@ -741,6 +791,7 @@ Take your websites to the next level with JavaScript! Learn the basics of progra
         <p class="work-desc">
            A Canadian high school classroom teacher. Room 212 serves as an online classroom where students can follow structured, step-by-step guides, access learning resources, and work through lessons at their own pace. The website is designed to support classroom instruction, with additional activities and projects that give students opportunities to apply what they learn.
         </p><br>
+ 
 
 
 <div class="edu-list">
@@ -765,6 +816,19 @@ Take your websites to the next level with JavaScript! Learn the basics of progra
       <div><span class="edu-label">Focus</span> Senior Years Education</div>
     </div>
   </div>
+
+         <div class="contact-box">
+  <span class="contact-label">Contact</span>
+  <a class="contact-link" href="mailto:zbrykaliuk@gmail.com">
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor"
+         stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <rect x="3" y="5" width="18" height="14" rx="2"></rect>
+      <polyline points="3,7 12,13 21,7"></polyline>
+    </svg>
+    zbrykaliuk@gmail.com
+  </a>
+  <button class="contact-copy" type="button" onclick="copyEmail(this)">Copy</button>
+</div>
 
 </div>
       </div>
@@ -812,6 +876,14 @@ document.querySelectorAll('.tab').forEach(tab => {
     window.scrollTo({ top: 450, behavior: 'smooth' });
   });
 });
+
+  function copyEmail(btn) {
+    navigator.clipboard.writeText("zbrykaliuk@gmail.com").then(() => {
+      const original = btn.textContent;
+      btn.textContent = "Copied!";
+      setTimeout(() => (btn.textContent = original), 1500);
+    });
+  }
 </script>
 </body>
 </html>
