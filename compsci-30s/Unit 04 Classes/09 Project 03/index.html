@@ -372,6 +372,52 @@
       border-top: 1px solid var(--border);
     }
 
+       .pokemon-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    background-color: #101d2b;
+    color: #eaf6ff;
+    border-radius: 10px;
+    overflow: hidden;
+    font-size: 16px;
+}
+
+.pokemon-table th {
+    background-color: #168acb;
+    color: white;
+    padding: 14px;
+    text-align: left;
+    font-weight: 600;
+}
+
+.pokemon-table td {
+    padding: 13px 14px;
+    border-bottom: 1px solid #263e52;
+}
+
+.pokemon-table tbody tr:nth-child(even) {
+    background-color: #192c3d;
+}
+
+.pokemon-table tbody tr:hover {
+    background-color: #23445e;
+    transition: background-color 0.2s ease;
+}
+
+.pokemon-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+        .project-preview {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto 25px auto;
+    border-radius: 10px;
+}
+
     @media (max-width: 900px) {
       .project-layout { grid-template-columns: 1fr; }
       .project-sidebar { order: -1; }
@@ -426,6 +472,10 @@
     <!-- Description -->
     <div class="project-desc-section">
 
+
+         <img src="1.png" 
+       alt="Pokemon Class Preview" 
+       class="project-preview">
       <h2>Project Overview</h2>
       <p>
         This project allows the user to drink different potions to increase their health. The 3 potions affect your health in the same manner with different values
@@ -436,7 +486,34 @@
         First Create a <code>Player.cs</code> class. This class should have 2 fields - <code>name</code> and <code>health</code> starting at 10. Create a <code>Potion.cs</code> class This class should have four fields - <code>name</code>, <code>healthPerSip</code>, <code>timePerSip</code>, and <code>sipsLeft</code> starting at 4.
       </p>
 
-      <p>These two classes shoould have <code>constructors</code> so you can create a Player object and 3 different potion objects quickly.</p>
+      <p>These two classes should have <code>constructors</code> so you can create a Player object and 3 different potion objects quickly. These are the potions I created:</p>
+
+      <table class="pokemon-table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>healthPerSip</th>
+            <th>sipTime</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Normal Potion</td>
+            <td>3</td>
+            <td>2000</td>
+        </tr>
+        <tr>
+            <td>Quick Potion</td>
+            <td>2</td>
+            <td>1000</td>
+        </tr>
+        <tr>
+            <td>Big Potion</td>
+            <td>5</td>
+            <td>3000</td>
+        </tr>
+    </tbody>
+</table>
 
       <h3>Main Method</h3>
 
@@ -571,8 +648,8 @@
 
 <!-- ── BACK BUTTON ── -->
 <div class="back-wrap">
-  <a href="../04 Static/index.html" class="back-btn">← Previous page</a>
-   <a href="../06 Constructors/index.html" class="back-btn">Next Page →</a>
+  <a href="../08 Checkpoint/index.html" class="back-btn">← Previous page</a>
+   <a href="../10 Lists of Objects/index.html" class="back-btn">Next Page →</a>
 </div>
 
 <footer>
